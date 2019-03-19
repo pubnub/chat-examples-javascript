@@ -4,6 +4,11 @@ require 'uri'
 require 'json'
 
 
+puts "Branch from ENV: #{ENV['TRAVIS_BRANCH']}"
+puts "Commit message from ENV: #{ENV['TRAVIS_COMMIT_MESSAGE']}"
+puts "Event type from ENV: #{ENV['TRAVIS_EVENT_TYPE']}"
+puts "Is push event type from ENV: #{ENV['TRAVIS_EVENT_TYPE'] == 'push'}"
+
 # Configure script launch options.
 options = {}
 OptionParser.new do |parser|
