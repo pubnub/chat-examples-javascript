@@ -1,40 +1,26 @@
 require 'net/http'
-require 'optparse'
 require 'uri'
 require 'json'
 
 
-puts "Should build docs ENV: #{ENV['SHOULD_BUILDS_DOCS']}"
-puts "API token ENV: #{ENV['TRAVIS_API_TOKEN']}"
-puts "Branch from ENV: #{ENV['TRAVIS_BRANCH']}"
-puts "Commit message from ENV: #{ENV['TRAVIS_COMMIT_MESSAGE']}"
-puts "Event type from ENV: #{ENV['TRAVIS_EVENT_TYPE']}"
-puts "Is push event type from ENV: #{ENV['TRAVIS_EVENT_TYPE'] == 'push'}"
+# Get environment variables
+should_build_docs = %w[1 true].include? ENV['SHOULD_BUILDS_DOCS']
+commit_message = ENV['TRAVIS_COMMIT_MESSAGE']
+has_token = ENV.key? 'TRAVIS_API_TOKEN'
+is_push = ENV['TRAVIS_EVENT_TYPE'] == 'push'
+token = ENV['TRAVIS_API_TOKEN']
+branch = ENV['TRAVIS_BRANCH']
 
-
-# Configure script launch options.
-options = {}
-OptionParser.new do |parser|
-  parser.banner = 'Usage: .travis.docs.rb [options]'
-
-  parser.on('-d', '--docs [FLAG]', 'Enable docs generation.') do |v|
-    options[:docs] = %w[1 true].include? v
-  end
-
-  parser.on('-t', '--token TOKEN', 'Travis REST API access token.') do |v|
-    options[:token] = v
-  end
-end.parse!
 
 # Check whether script able and should trigger docs build if possible.
-is_able_to_create_docs = ENV['SHOULD_BUILDS_DOCS'] == '1' && ENV['TRAVIS_EVENT_TYPE'] == 'push'
+is_able_to_create_docs = should_build_docs && has_token
 
 # Gather information about repository and last commit.
 has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
-should_skip_docs = `\""#{ENV['TRAVIS_COMMIT_MESSAGE']}"\" | grep -F '[skip docs]' -c`.to_i > 0
-is_master = ENV['TRAVIS_BRANCH'] == 'master'
+should_skip_docs = `'#{commit_message}'" | grep -F '[skip docs]' -c`.to_i > 0
+is_master = branch == 'master'
 
-puts "Branch name: #{`\""#{ENV['TRAVIS_COMMIT_MESSAGE']}"\" | grep -F '[skip docs]' -c`.to_i}"
+puts "Has skip docs tag? #{`'"#{commit_message}"' | grep -F '[skip docs]' -c`.to_i}"
 puts "Has changes? #{has_changes}"
 
 # Skip documents generation in case if one of following requests not met:
@@ -43,12 +29,14 @@ puts "Has changes? #{has_changes}"
 #   - Script called from master branch
 #   - There is no '[skip docs]' in last commit message
 #   - There is changes in folders which tracked for docs update.
-if !is_able_to_create_docs || !is_master || should_skip_docs || !has_changes
+if !is_able_to_create_docs || !is_push || !is_master ||
+   should_skip_docs || !has_changes
   puts 'Skip docs generation'
   exit 0
 end
 
 puts 'Push docs build job'
+exit 0
 
 # Compose request to create new build for 'chat-resource-center' repository.
 uri = URI.parse('https://api.travis-ci.org/repo/pubnub%2Fchat-resource-center/requests')
@@ -56,7 +44,7 @@ request_data = { request: { branch: 'master' } }
 headers = {
   'Content-Type': 'application/json',
   'Travis-API-Version': '3',
-  'Authorization': "token #{ENV['TRAVIS_API_TOKEN']}"
+  'Authorization': "token #{token}"
 }
 
 http = Net::HTTP.new(uri.host)
