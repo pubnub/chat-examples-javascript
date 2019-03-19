@@ -51,16 +51,5 @@ http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 request = Net::HTTP::Post.new(uri.request_uri, headers)
 request.body = JSON.dump(request_data)
 
-puts "Request uri: #{uri}"
-puts "Request headers: #{headers}"
-puts "Request body: #{request.body}"
-
 # Make call to Travis REST API to push new build for 'chat-resource-center'.
-response = http.request(request)
-
-puts "Code: #{response.code}"
-puts 'Headers'
-response.each_header do |header, values|
-  puts "\t#{header}: #{values.inspect}"
-end
-puts "Body: #{response.body}"
+http.request(request)
