@@ -17,4 +17,4 @@ script:
   - gulp "${TASK}"
 
 after_success:
-  - ruby .travis.docs.rb"
+  - ruby .travis.docs.rb
