@@ -27,15 +27,14 @@ OptionParser.new do |parser|
 end.parse!
 
 # Check whether script able and should trigger docs build if possible.
-is_able_to_create_docs = options[:docs] == true && (options.key? :token)
+is_able_to_create_docs = ENV['SHOULD_BUILDS_DOCS'] == '1' && ENV['TRAVIS_EVENT_TYPE'] == 'push'
 
 # Gather information about repository and last commit.
 has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
-should_skip_docs = `git log -1 --pretty=%B | grep -F '[skip docs]' -c`.to_i > 0
-is_master = `git branch | grep -F '*' | cut -d ' ' -f2 | grep '^master' -c`.to_i > 0
-branch_name = `git branch | grep -F '*' | cut -d ' ' -f2`
+should_skip_docs = `"#{ENV['TRAVIS_COMMIT_MESSAGE']}" | grep -F '[skip docs]' -c`.to_i > 0
+is_master = ENV['TRAVIS_BRANCH'] == 'master'
 
-puts "Branch name: #{branch_name}. Is master? #{is_master}"
+puts "Branch name: #{`"#{ENV['TRAVIS_COMMIT_MESSAGE']}" | grep -F '[skip docs]' -c`.to_i}"
 puts "Has changes? #{has_changes}"
 
 # Skip documents generation in case if one of following requests not met:
@@ -57,7 +56,7 @@ request_data = { request: { branch: 'master' } }
 headers = {
   'Content-Type': 'application/json',
   'Travis-API-Version': '3',
-  'Authorization': "token #{options[:token]}"
+  'Authorization': "token #{ENV['TRAVIS_API_TOKEN']}"
 }
 
 http = Net::HTTP.new(uri.host)
