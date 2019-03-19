@@ -53,4 +53,9 @@ puts "Request body: #{request.body}"
 # Make call to Travis REST API to push new build for 'chat-resource-center'.
 response = http.request(request)
 
-puts "Service response: #{response}"
+puts "Code: #{response.code}"
+puts 'Headers'
+response.each_header do |header, values|
+  puts "\t#{header}: #{values.inspect}"
+end
+puts "Body: #{response.body}"
