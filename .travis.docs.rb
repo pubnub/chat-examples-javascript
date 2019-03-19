@@ -46,5 +46,11 @@ http = Net::HTTP.new(uri.host)
 request = Net::HTTP::Post.new(uri.request_uri, headers)
 request.body = request_data.to_json
 
+puts "Request uri: #{uri}"
+puts "Request headers: #{headers}"
+puts "Request body: #{request.body}"
+
 # Make call to Travis REST API to push new build for 'chat-resource-center'.
-http.request(request)
+response = http.request(request)
+
+puts "Service response: #{response}"
