@@ -3,6 +3,8 @@ require 'uri'
 require 'json'
 
 
+travis_domain = 'api.travis-ci.com'
+
 # Get environment variables
 should_build_docs = %w[1 true].include? ENV['SHOULD_BUILDS_DOCS']
 commit_message = ENV['TRAVIS_COMMIT_MESSAGE']
@@ -34,7 +36,7 @@ if !is_able_to_create_docs || !is_push || !is_master ||
 end
 
 # Compose request to create new build for 'chat-resource-center' repository.
-uri = URI.parse('https://api.travis-ci.org/repo/pubnub%2Fchat-resource-center/requests')
+uri = URI.parse("https://#{travis_domain}/repo/pubnub%2Fchat-resource-center/requests")
 request_data = { request: { branch: 'master' } }
 headers = {
   'Content-Type': 'application/json',
