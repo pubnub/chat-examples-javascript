@@ -4,6 +4,7 @@ require 'uri'
 require 'json'
 
 
+puts "API token ENV: #{ENV['TRAVIS_API_TOKEN']}"
 puts "Branch from ENV: #{ENV['TRAVIS_BRANCH']}"
 puts "Commit message from ENV: #{ENV['TRAVIS_COMMIT_MESSAGE']}"
 puts "Event type from ENV: #{ENV['TRAVIS_EVENT_TYPE']}"
