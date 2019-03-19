@@ -22,7 +22,7 @@ end.parse!
 is_able_to_create_docs = options[:docs] == true && (options.key? :token)
 
 # Gather information about repository and last commit.
-has_changes = `git diff --name-only HEAD HEAD | grep '^snippets/' -c`.to_i > 0
+has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
 should_skip_docs = `git log -1 --pretty=%B | grep -F '[skip docs]' -c`.to_i > 0
 is_master = `git rev-parse --abbrev-ref HEAD | grep '^master' -c`.to_i > 0
 
