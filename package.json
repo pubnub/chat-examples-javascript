@@ -15,7 +15,7 @@
   "main": "",
   "scripts": {
     "test": "jest --ci --forceExit",
-    "test-examples": "jest --ci --forceExit --config=examples/jest-config.json",
+    "test-examples": "jest --ci --forceExit --passWithNoTests --config=examples/jest-config.json",
     "test-snippets": "jest --ci --forceExit --config=snippets/jest-config.json"
   },
   "devDependencies": {

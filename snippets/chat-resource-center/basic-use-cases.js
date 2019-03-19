@@ -2,6 +2,8 @@
 import PubNub from 'pubnub';
 
 describe('Basic use cases', () => {
+
+
     test('Should initialize PubNub client', () => {
         // tag::pubnub-init[]
         let pubnub = new PubNub({
