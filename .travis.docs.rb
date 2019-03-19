@@ -1,3 +1,4 @@
+require 'net/https'
 require 'net/http'
 require 'uri'
 require 'json'
@@ -44,9 +45,11 @@ headers = {
   'Authorization': "token #{token}"
 }
 
-http = Net::HTTP.new(uri.host)
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 request = Net::HTTP::Post.new(uri.request_uri, headers)
-request.body = request_data.to_json
+request.body = JSON.dump(request_data)
 
 puts "Request uri: #{uri}"
 puts "Request headers: #{headers}"
