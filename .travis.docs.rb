@@ -7,7 +7,7 @@ require 'json'
 travis_domain = 'api.travis-ci.com'
 
 # Get environment variables
-should_build_docs = %w[1 true].include? ENV['SHOULD_BUILDS_DOCS']
+should_build_docs = %w[1 true].include? ENV['SHOULD_BUILD_DOCS']
 commit_message = ENV['TRAVIS_COMMIT_MESSAGE']
 has_token = ENV.key? 'TRAVIS_API_TOKEN'
 is_push = ENV['TRAVIS_EVENT_TYPE'] == 'push'
@@ -27,7 +27,7 @@ is_master = branch == 'master'
 # Skip documents generation in case if one of following requests not met:
 #   - TRAVIS_EVENT_TYPE environment variable is set to 'push'.
 #   - TRAVIS_API_TOKEN environment variable specified.
-#   - SHOULD_BUILDS_DOCS environment variable is set to '1'.
+#   - SHOULD_BUILD_DOCS environment variable is set to '1'.
 #   - TRAVIS_BRANCH environment variable is set to 'master'.
 #   - TRAVIS_COMMIT_MESSAGE environment variable doesn't contain '[skip docs]' in it.
 #   - There is changes in folders which tracked for docs update.
