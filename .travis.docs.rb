@@ -4,11 +4,13 @@ require 'uri'
 require 'json'
 
 
+puts "Should build docs ENV: #{ENV['TRAVIS_API_TOKEN']}"
 puts "API token ENV: #{ENV['TRAVIS_API_TOKEN']}"
 puts "Branch from ENV: #{ENV['TRAVIS_BRANCH']}"
 puts "Commit message from ENV: #{ENV['TRAVIS_COMMIT_MESSAGE']}"
 puts "Event type from ENV: #{ENV['TRAVIS_EVENT_TYPE']}"
 puts "Is push event type from ENV: #{ENV['TRAVIS_EVENT_TYPE'] == 'push'}"
+
 
 # Configure script launch options.
 options = {}
