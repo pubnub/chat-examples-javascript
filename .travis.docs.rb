@@ -25,11 +25,11 @@ is_master = branch == 'master'
 
 
 # Skip documents generation in case if one of following requests not met:
-#   - Job has been triggered by push.
-#   - Script has been launched with '--token TOKEN'
-#   - Script has been launched with '--docs 1'
-#   - Script called from master branch
-#   - There is no '[skip docs]' in last commit message
+#   - TRAVIS_EVENT_TYPE environment variable is set to 'push'.
+#   - TRAVIS_API_TOKEN environment variable specified.
+#   - SHOULD_BUILDS_DOCS environment variable is set to '1'.
+#   - TRAVIS_BRANCH environment variable is set to 'master'.
+#   - TRAVIS_COMMIT_MESSAGE environment variable doesn't contain '[skip docs]' in it.
 #   - There is changes in folders which tracked for docs update.
 if !is_able_to_create_docs || !is_push || !is_master ||
    should_skip_docs || !has_changes
