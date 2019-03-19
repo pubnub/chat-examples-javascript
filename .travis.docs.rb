@@ -20,10 +20,9 @@ has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
 should_skip_docs = commit_message.include? '[skip docs]'
 is_master = branch == 'master'
 
-puts "Has skip docs tag? #{should_skip_docs}"
-puts "Has changes? #{has_changes}"
 
 # Skip documents generation in case if one of following requests not met:
+#   - Job has been triggered by push.
 #   - Script has been launched with '--token TOKEN'
 #   - Script has been launched with '--docs 1'
 #   - Script called from master branch
@@ -31,12 +30,8 @@ puts "Has changes? #{has_changes}"
 #   - There is changes in folders which tracked for docs update.
 if !is_able_to_create_docs || !is_push || !is_master ||
    should_skip_docs || !has_changes
-  puts 'Skip docs generation'
   exit 0
 end
-
-puts 'Push docs build job'
-exit 0
 
 # Compose request to create new build for 'chat-resource-center' repository.
 uri = URI.parse('https://api.travis-ci.org/repo/pubnub%2Fchat-resource-center/requests')
