@@ -6,8 +6,8 @@ cache: yarn
 
 matrix:
   include:
-    - env: NAME='Examples test' TASK='examples_full_test' SHOULD_BUILDS_DOCS=0
-    - env: NAME='Snippets test' TASK='snippets_full_test' SHOULD_BUILDS_DOCS=1
+    - env: NAME='Examples test' TASK='examples_full_test' SHOULD_BUILD_DOCS=0
+    - env: NAME='Snippets test' TASK='snippets_full_test' SHOULD_BUILD_DOCS=1
 
 install:
   - npm i pubnub
