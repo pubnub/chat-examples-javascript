@@ -4,7 +4,7 @@ require 'uri'
 require 'json'
 
 
-puts "Should build docs ENV: #{ENV['TRAVIS_API_TOKEN']}"
+puts "Should build docs ENV: #{ENV['SHOULD_BUILDS_DOCS']}"
 puts "API token ENV: #{ENV['TRAVIS_API_TOKEN']}"
 puts "Branch from ENV: #{ENV['TRAVIS_BRANCH']}"
 puts "Commit message from ENV: #{ENV['TRAVIS_COMMIT_MESSAGE']}"
