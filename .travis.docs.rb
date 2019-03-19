@@ -31,10 +31,10 @@ is_able_to_create_docs = ENV['SHOULD_BUILDS_DOCS'] == '1' && ENV['TRAVIS_EVENT_T
 
 # Gather information about repository and last commit.
 has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
-should_skip_docs = `"#{ENV['TRAVIS_COMMIT_MESSAGE']}" | grep -F '[skip docs]' -c`.to_i > 0
+should_skip_docs = `""#{ENV['TRAVIS_COMMIT_MESSAGE']}"" | grep -F '[skip docs]' -c`.to_i > 0
 is_master = ENV['TRAVIS_BRANCH'] == 'master'
 
-puts "Branch name: #{`"#{ENV['TRAVIS_COMMIT_MESSAGE']}" | grep -F '[skip docs]' -c`.to_i}"
+puts "Branch name: #{`""#{ENV['TRAVIS_COMMIT_MESSAGE']}"" | grep -F '[skip docs]' -c`.to_i}"
 puts "Has changes? #{has_changes}"
 
 # Skip documents generation in case if one of following requests not met:
