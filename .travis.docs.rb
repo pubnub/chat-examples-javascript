@@ -17,10 +17,10 @@ is_able_to_create_docs = should_build_docs && has_token
 
 # Gather information about repository and last commit.
 has_changes = `git diff --name-only HEAD~1 HEAD | grep '^snippets/' -c`.to_i > 0
-should_skip_docs = `'#{commit_message}'" | grep -F '[skip docs]' -c`.to_i > 0
+should_skip_docs = commit_message.include? '[skip docs]'
 is_master = branch == 'master'
 
-puts "Has skip docs tag? #{`'"#{commit_message}"' | grep -F '[skip docs]' -c`.to_i}"
+puts "Has skip docs tag? #{should_skip_docs}"
 puts "Has changes? #{has_changes}"
 
 # Skip documents generation in case if one of following requests not met:
