@@ -1,0 +1,21 @@
+language: node_js
+sudo: false
+node_js:
+  - '9'
+  - '10'
+cache: yarn
+
+matrix:
+  include:
+    - env: NAME='Examples test' TASK='examples_full_test' SHOULD_BUILDS_DOCS=0
+    - env: NAME='Snippets test' TASK='snippets_full_test' SHOULD_BUILDS_DOCS=1
+
+install:
+  - npm i pubnub
+  - npm i
+
+script:
+  - gulp "${TASK}"
+
+after_success:
+  - ruby .travis.docs.rb --token "${TRAVIS_API_TOKEN}" --docs "${SHOULD_BUILDS_DOCS}"

@@ -1,0 +1,69 @@
+{
+  "name": "chat-resource-center-javascript-materials",
+  "description": "Materials which is used with Chat Resource Center to explain PubNub JS SDK usage.",
+  "homepage": "https://github.com/pubnub/chat-examples-javascript#readme",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Serhii Mamontov <sergey@pubnub.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pubnub/chat-examples-javascript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pubnub/chat-examples-javascript/issues"
+  },
+  "main": "",
+  "scripts": {
+    "test": "jest --ci --forceExit",
+    "test-examples": "jest --ci --forceExit --config=examples/jest-config.json",
+    "test-snippets": "jest --ci --forceExit --config=snippets/jest-config.json"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.3.4",
+    "babel-jest": "^24.5.0",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "eslint": "^5.15.2",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-shell": "^0.7.0",
+    "jest": "^24.5.0",
+    "jest-cli": "^24.5.0",
+    "metro-react-native-babel-preset": "^0.53.1"
+  },
+  "peerDependencies": {
+    "pubnub": "^4.22.0"
+  },
+  "jest": {
+    "collectCoverage": false,
+    "modulePathIgnorePatterns": [
+      "<rootDir>/examples/",
+      "<rootDir>/node_modules/(?!core-js|promise)/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.idea",
+      "<rootDir>/examples/",
+      "<rootDir>/node_modules/",
+      "/node_modules/"
+    ],
+    "testMatch": [
+      "<rootDir>/{snippets,examples}/**/*.{js,jsx,mjs}"
+    ],
+    "notify": true
+  },
+  "keywords": [
+    "chat",
+    "resource",
+    "center",
+    "javascript",
+    "pubnub"
+  ]
+}
