@@ -2,14 +2,29 @@ import eslint from 'gulp-eslint';
 import shell from 'gulp-shell';
 import gulp from 'gulp';
 
+const handleResults = (results) => {
+    let errorMessage = null;
+
+    if (results.warningCount) {
+        errorMessage = `Too much warnings (${results.warningCount})`;
+    } else if (results.errorCount) {
+        errorMessage = `Too much warnings (${results.warningCount})`;
+    }
+
+    if (errorMessage !== null) {
+        throw errorMessage;
+    }
+};
 
 gulp.task('lint_examples', () => gulp.src(['examples/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
+    .pipe(eslint.results(handleResults))
     .pipe(eslint.failAfterError()));
 gulp.task('lint_snippets', () => gulp.src(['snippets/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
+    .pipe(eslint.results(handleResults))
     .pipe(eslint.failAfterError()));
 
 gulp.task('examples_tests', shell.task('npm run test-examples'));

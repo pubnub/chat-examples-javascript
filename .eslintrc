@@ -1,6 +1,8 @@
 extends: airbnb/base
 globals:
   describe: true
+  expect: true
+  jasmine: true
   it: true
   beforeEach: true
   afterEach: true
