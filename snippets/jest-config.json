@@ -1,0 +1,17 @@
+{
+  "collectCoverage": false,
+  "modulePathIgnorePatterns": [
+    "<rootDir>/examples/",
+    "<rootDir>/node_modules/(?!core-js|promise)/"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/.idea",
+    "<rootDir>/examples/",
+    "<rootDir>/node_modules/",
+    "/node_modules/"
+  ],
+  "testMatch": [
+    "**/*.{js,jsx,mjs}"
+  ],
+  "notify": true
+}
