@@ -12,7 +12,7 @@ stages:
 matrix:
   include:
     - stage: examples
-    - name: "Code lint"
+      name: "Code lint"
       install: npm install
       script: gulp lint_examples
     - name: "Integration tests"
@@ -20,7 +20,7 @@ matrix:
       script: gulp examples_tests
 
     - stage: snippets
-    - name: "Code lint"
+      name: "Code lint"
       install: npm install
       script: gulp lint_snippets
     - name: "Integration tests"
@@ -28,7 +28,7 @@ matrix:
       script: gulp snippets_tests
 
     - stage: submodule
-    - name: "Update reference"
+      name: "Update reference"
       install: npm init --force && npm install chalk fancy-log simple-git
       before_script:
         - git config --global user.name "${GH_NAME}"
