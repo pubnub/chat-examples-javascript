@@ -7,5 +7,6 @@
   },
   "extends" : "airbnb-base",
   "rules" : {
+    "no-console": "off"
   }
 }

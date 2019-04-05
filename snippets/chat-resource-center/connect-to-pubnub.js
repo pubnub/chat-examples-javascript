@@ -1,5 +1,6 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
+import https from 'https';
 
 const subscribeKey = 'demo-36';
 const publishKey = 'demo-36';
@@ -19,10 +20,38 @@ describe('Connect to PubNub', () => {
 
     pubNubClient.removeAllListeners();
     pubNubClient.unsubscribeAll();
+    pubNubClient.stop();
   });
 
-  test('Setting a unique ID for each user', () => {
+  test('Setup', (done) => {
+    /**
     // tag::CON-1[]
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.js"></script>
+    // end::CON-1[]
+    */
+    https.get('https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.js', (response) => {
+      expect(response.statusCode)
+        .toEqual(200);
+      expect(parseInt(response.headers['content-length'], 10))
+        .toBeGreaterThan(0);
+      done();
+    });
+  });
+
+  test('Initializing PubNub', () => {
+    // tag::CON-2[]
+    const pubnub = new PubNub({
+      subscribeKey,
+      publishKey,
+    });
+    // end::CON-2[]
+
+    expect(pubnub).toBeDefined();
+    expect(pubnub.getUUID()).toBeDefined();
+  });
+
+  test('Setting a UUID for each user', () => {
+    // tag::CON-3[]
     const uuid = PubNub.generateUUID();
 
     const pubnub = new PubNub({
@@ -30,41 +59,18 @@ describe('Connect to PubNub', () => {
       publishKey,
       uuid,
     });
-    // end::CON-1[]
+    // end::CON-3[]
 
     expect(uuid).toBeDefined();
     expect(pubnub).toBeDefined();
     expect(pubnub.getUUID()).toEqual(uuid);
   });
 
-  test.skip('Connecting with a user', () => {
-    // tag::CON-2[]
-    /**
-     * There is actually no thing like 'Connect to PubNub'.
-     *
-     * Connection in ChatEngine was a set of actions:
-     *   - grant access
-     *   - add channels to groups
-     *   - subscribe on channel groups.
-     *
-     * Should we explain all this here, or remove this case,
-     * since we have 'Manage Channels' where explained how to
-     * subscribe / unsubscribe?
-     */
-    // end::CON-2[]
-  });
-
-  test('Set metadata for a user', (done) => {
+  test('Setting state for a user', (done) => {
     const pubnub = pubNubClient;
     const expectedState = { mood: 'grumpy' };
 
-    // tag::CON-3[]
-    /**
-     * There is no thing like 'Meta' for particular user or
-     * channel. Should we rename this test case to
-     * 'Set state for a user' or it is expected to get some new
-     * API?
-     */
+    // tag::CON-4[]
     pubnub.setState({
       state: {
         mood: 'grumpy',
@@ -76,60 +82,69 @@ describe('Connect to PubNub', () => {
       expect(status).toBeDefined();
       expect(status.error).toBeFalsy();
       expect(response.state).toEqual(expectedState);
-      done();
       // end::ignore[]
     });
-    // end::CON-3[]
-  });
-
-  test('Disconnecting from PubNub', () => {
-    const pubnub = pubNubClient;
-
-    // tag::CON-4[]
-    /**
-     * There is actually no thing like 'Disconnect from PubNub'.
-     *
-     * Should we remove this case, since we have 'Manage Channels'
-     * where explained how to subscribe / unsubscribe?
-     * Or is it unsubscribe from all?
-     */
-    pubnub.unsubscribeAll();
     // end::CON-4[]
+
+    setTimeout(() => {
+      // tag::CON-5[]
+      pubnub.getState({
+        channels: ['room-1'],
+      }, (status, response) => {
+        // handle state setting response
+        // tag::ignore[]
+        expect(status).toBeDefined();
+        expect(status.error).toBeFalsy();
+        expect(response.channels['room-1'].mood).toEqual(expectedState.mood);
+        done();
+        // end::ignore[]
+      });
+      // end::CON-5[]
+    }, 2000);
   });
 
-  test('Reconnecting to PubNub', (done) => {
+  test('Disconnecting from PubNub', (done) => {
+    const uuid = PubNub.generateUUID();
+    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
     const pubnub = pubNubClient;
-    const expectedChannels = ['room-1'];
 
-    // tag::CON-5[]
-    /**
-     * There is actually no thing like 'Reconnect from PubNub'.
-     *
-     * Should it be shown as sequence of unsubscribe -> subscribe
-     * calls here or we better to move it to 'Manage Channels' as
-     * new use case?
-     */
-    pubnub.subscribe({
+    observerClient.subscribe({
       channels: ['room-1'],
+      withPresence: true,
     });
 
-    // tag::ignore[]
-    pubnub.addListener({
+    observerClient.addListener({
       status: (status) => {
-        expect(status.affectedChannels).toEqual(expectedChannels);
-
         if (status.operation === 'PNSubscribeOperation') {
-          // end::ignore[]
-          pubnub.unsubscribe({
+          pubnub.subscribe({
             channels: ['room-1'],
           });
-          // tag::ignore[]
-        } else if (status.operation === 'PNUnsubscribeOperation') {
+        }
+      },
+      presence: (presenceEvent) => {
+        if (presenceEvent.action === 'leave'
+          && presenceEvent.uuid === pubnub.getUUID()) {
           done();
         }
       },
     });
-    // end::ignore[]
-    // end::CON-5[]
+
+    pubnub.addListener({
+      status: (status) => {
+        if (status.operation === 'PNSubscribeOperation') {
+          // tag::CON-6[]
+          pubnub.unsubscribeAll();
+          // end::CON-6[]
+        }
+      },
+    });
+  });
+
+  test('Reconnecting Manually', () => {
+    const pubnub = pubNubClient;
+
+    // tag::CON-7[]
+    pubnub.reconnect();
+    // end::CON-7[]
   });
 });
