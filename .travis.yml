@@ -9,7 +9,7 @@ stages:
   - name: submodule
     if: branch = master AND (type IN (api, cron, push))
 
-matrix:
+jobs:
   include:
     - stage: examples
       name: "Code lint"
