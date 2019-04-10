@@ -5,11 +5,15 @@ const subscribeKey = 'demo-36';
 const publishKey = 'demo-36';
 
 describe('Manage channels', () => {
+  let observerPubNubClient = null;
   let pubNubClient = null;
 
   beforeEach(() => {
-    const uuid = PubNub.generateUUID();
+    let uuid = PubNub.generateUUID();
     pubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
+
+    uuid = PubNub.generateUUID();
+    observerPubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   });
@@ -17,27 +21,35 @@ describe('Manage channels', () => {
   afterEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
+    observerPubNubClient.removeAllListeners();
+    observerPubNubClient.unsubscribeAll();
     pubNubClient.removeAllListeners();
     pubNubClient.unsubscribeAll();
     pubNubClient.stop();
   });
 
   test('Subscribing to channels', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
+    const expectedChannel = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
-      channels: ['room-1'],
+    observerPubNubClient.subscribe({
+      channels: [expectedChannel],
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
           // tag::CHAN-1[]
           pubnub.subscribe({
+            // tag::ignore[]
+            channels: [expectedChannel],
+            /**
+            // end::ignore[]
             channels: ['room-1'],
+            // tag::ignore[]
+             */
+            // end::ignore[]
           });
           // end::CHAN-1[]
         }
@@ -52,22 +64,29 @@ describe('Manage channels', () => {
   });
 
   test('Joining multiple channels', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
-    const channelsToJoin = ['room-1', 'room-2', 'room-3'];
+    const channelsToJoin = [
+      PubNub.generateUUID(), PubNub.generateUUID(), PubNub.generateUUID(),
+    ];
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
-      channels: ['room-1', 'room-2', 'room-3'],
+    observerPubNubClient.subscribe({
+      channels: channelsToJoin,
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
           // tag::CHAN-2[]
           pubnub.subscribe({
+            // tag::ignore[]
+            channels: channelsToJoin,
+            /**
+            // end::ignore[]
             channels: ['room-1', 'room-2', 'room-3'],
+            // tag::ignore[]
+             */
+            // end::ignore[]
           });
           // end::CHAN-2[]
         }
@@ -90,20 +109,19 @@ describe('Manage channels', () => {
   });
 
   test('Leaving a channel', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
+    const expectedChannel = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
-      channels: ['room-1'],
+    observerPubNubClient.subscribe({
+      channels: [expectedChannel],
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
           pubnub.subscribe({
-            channels: ['room-1'],
+            channels: [expectedChannel],
           });
         }
       },
@@ -118,38 +136,54 @@ describe('Manage channels', () => {
     pubnub.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
-          // tag::CHAN-3[]
-          pubnub.unsubscribe({
-            channels: ['room-1'],
-          });
-          // end::CHAN-3[]
+          setTimeout(() => {
+            // tag::CHAN-3[]
+            pubnub.unsubscribe({
+              // tag::ignore[]
+              channels: [expectedChannel],
+              /**
+              // end::ignore[]
+              channels: ['room-1'],
+              // tag::ignore[]
+               */
+              // end::ignore[]
+            });
+            // end::CHAN-3[]
+          }, 2000);
         }
       },
     });
   });
 
   test('Joining a channel group', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
+    const expectedChannels = [PubNub.generateUUID(), PubNub.generateUUID()];
+    const expectedGroup = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
-      channels: ['daughter'],
+    observerPubNubClient.subscribe({
+      channels: [expectedChannels[0]],
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (subscribeStatus) => {
         if (subscribeStatus.operation === 'PNSubscribeOperation') {
           pubnub.channelGroups.addChannels({
-            channels: ['son', 'daughter'],
-            channelGroup: 'family',
-          },
-          (status) => {
+            channels: expectedChannels,
+            channelGroup: expectedGroup,
+          }, (status) => {
             expect(status.error).toBeFalsy();
+
             // tag::CHAN-4[]
             pubnub.subscribe({
+            // tag::ignore[]
+              channelGroups: [expectedGroup],
+            /**
+            // end::ignore[]
               channelGroups: ['family'],
+            // tag::ignore[]
+             */
+            // end::ignore[]
             });
             // end::CHAN-4[]
           });
@@ -164,63 +198,97 @@ describe('Manage channels', () => {
     });
   });
 
-  test('Adding channels to channel groups', () => {
+  test('Adding channels to channel groups', (done) => {
+    const expectedChannels = [PubNub.generateUUID(), PubNub.generateUUID()];
+    const expectedGroup = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
     // tag::CHAN-5[]
     pubnub.channelGroups.addChannels({
+      // tag::ignore[]
+      channels: expectedChannels,
+      channelGroup: expectedGroup,
+      /**
+      // end::ignore[]
       channels: ['son', 'daughter'],
       channelGroup: 'family',
-    },
-    (status) => {
+      // tag::ignore[]
+       */
+      // end::ignore[]
+    }, (status) => {
       // tag::ignore[]
       expect(status.error).toBeFalsy();
+
       // end::ignore[]
       if (status.error) {
         console.log('operation failed w/ status: ', status);
       } else {
         console.log('operation done!');
       }
+      // tag::ignore[]
+
+      done();
+      // end::ignore[]
     });
     // end::CHAN-5[]
   });
 
-  test('Removing channels from channel groups', () => {
+  test('Removing channels from channel groups', (done) => {
+    const expectedChannels = [PubNub.generateUUID(), PubNub.generateUUID()];
+    const expectedGroup = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
     // tag::CHAN-6[]
-    // assuming an initialized PubNub instance already exists
     pubnub.channelGroups.removeChannels({
+      // tag::ignore[]
+      channels: [expectedChannels[0]],
+      channelGroup: expectedGroup,
+      /**
+      // end::ignore[]
       channels: ['son'],
       channelGroup: 'family',
-    },
-    (status) => {
+      // tag::ignore[]
+       */
+      // end::ignore[]
+    }, (status) => {
       // tag::ignore[]
       expect(status.error).toBeFalsy();
+
       // end::ignore[]
       if (status.error) {
         console.log('operation failed w/ error:', status);
       } else {
         console.log('operation done!');
       }
+      // tag::ignore[]
+
+      done();
+      // end::ignore[]
     });
     // end::CHAN-6[]
   });
 
-  test('Listing channels in a channel group', () => {
+  test('Listing channels in a channel group', (done) => {
+    const expectedChannels = [PubNub.generateUUID(), PubNub.generateUUID()];
+    const expectedGroup = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
     pubnub.channelGroups.addChannels({
-      channels: ['son', 'daughter'],
-      channelGroup: 'family',
-    },
-    (addSstatus) => {
-      expect(addSstatus.error).toBeFalsy();
+      channels: expectedChannels,
+      channelGroup: expectedGroup,
+    }, (addStatus) => {
+      expect(addStatus.error).toBeFalsy();
 
       // tag::CHAN-7[]
-      // assuming an initialized PubNub instance already exists
       pubnub.channelGroups.listChannels({
+        // tag::ignore[]
+        channelGroup: expectedGroup,
+        /**
+        // end::ignore[]
         channelGroup: 'family',
+        // tag::ignore[]
+         */
+        // end::ignore[]
       }, (status, response) => {
         if (status.error) {
           console.log('operation failed w/ error:', status);
@@ -228,39 +296,43 @@ describe('Manage channels', () => {
         }
 
         // tag::ignore[]
-        expect(response.channels).toContain('son');
-        expect(response.channels).toContain('daughter');
+        expect(response.channels).toContain(expectedChannels[0]);
+        expect(response.channels).toContain(expectedChannels[1]);
         // end::ignore[]
         console.log('listing push channel for device');
         response.channels.forEach((channel) => {
           console.log(channel);
         });
+        // tag::ignore[]
+
+        done();
+        // end::ignore[]
       });
       // end::CHAN-7[]
     });
   });
 
   test('Leaving a channel group', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
+    const expectedChannels = [PubNub.generateUUID(), PubNub.generateUUID()];
+    const expectedGroup = PubNub.generateUUID();
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
-      channels: ['daughter'],
+    observerPubNubClient.subscribe({
+      channels: [expectedChannels[1]],
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (subscribeStatus) => {
         if (subscribeStatus.operation === 'PNSubscribeOperation') {
           pubnub.channelGroups.addChannels({
-            channels: ['son', 'daughter'],
-            channelGroup: 'family',
-          },
-          (status) => {
+            channels: expectedChannels,
+            channelGroup: expectedGroup,
+          }, (status) => {
             expect(status.error).toBeFalsy();
+
             pubnub.subscribe({
-              channelGroups: ['family'],
+              channelGroups: [expectedGroup],
             });
           });
         }
@@ -269,9 +341,15 @@ describe('Manage channels', () => {
         if (presenceEvent.uuid === pubnub.getUUID()) {
           if (presenceEvent.action === 'join') {
             // tag::CHAN-8[]
-            // assuming an initialized PubNub instance already exists
             pubnub.unsubscribe({
+              // tag::ignore[]
+              channelGroups: [expectedGroup],
+              /**
+              // end::ignore[]
               channelGroups: ['family'],
+              // tag::ignore[]
+               */
+              // end::ignore[]
             });
             // end::CHAN-8[]
           } else if (presenceEvent.action === 'leave') {

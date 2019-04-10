@@ -19,7 +19,8 @@
     "test-snippets": "jest --ci --forceExit --config=snippets/jest-config.json"
   },
   "dependencies": {
-    "pubnub": "^4.22.0"
+    "bignumber.js": "^8.1.1",
+    "pubnub": "^4.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -27,7 +28,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
-    "babel-jest": "^24.5.0",
+    "babel-jest": "^24.7.1",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
     "eslint": "^5.15.2",
