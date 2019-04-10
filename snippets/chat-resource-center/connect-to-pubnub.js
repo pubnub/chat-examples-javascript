@@ -6,11 +6,15 @@ const subscribeKey = 'demo-36';
 const publishKey = 'demo-36';
 
 describe('Connect to PubNub', () => {
+  let observerPubNubClient = null;
   let pubNubClient = null;
 
   beforeEach(() => {
-    const uuid = PubNub.generateUUID();
+    let uuid = PubNub.generateUUID();
     pubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
+
+    uuid = PubNub.generateUUID();
+    observerPubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   });
@@ -18,6 +22,8 @@ describe('Connect to PubNub', () => {
   afterEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
+    observerPubNubClient.removeAllListeners();
+    observerPubNubClient.unsubscribeAll();
     pubNubClient.removeAllListeners();
     pubNubClient.unsubscribeAll();
     pubNubClient.stop();
@@ -51,9 +57,9 @@ describe('Connect to PubNub', () => {
   });
 
   test('Setting a UUID for each user', () => {
-    // tag::CON-3[]
     const uuid = PubNub.generateUUID();
 
+    // tag::CON-3[]
     const pubnub = new PubNub({
       subscribeKey,
       publishKey,
@@ -79,6 +85,7 @@ describe('Connect to PubNub', () => {
     }, (status, response) => {
       // handle state setting response
       // tag::ignore[]
+
       expect(status).toBeDefined();
       expect(status.error).toBeFalsy();
       expect(response.state).toEqual(expectedState);
@@ -91,8 +98,9 @@ describe('Connect to PubNub', () => {
       pubnub.getState({
         channels: ['room-1'],
       }, (status, response) => {
-        // handle state setting response
+        // handle state getting response
         // tag::ignore[]
+
         expect(status).toBeDefined();
         expect(status.error).toBeFalsy();
         expect(response.channels['room-1'].mood).toEqual(expectedState.mood);
@@ -104,16 +112,14 @@ describe('Connect to PubNub', () => {
   });
 
   test('Disconnecting from PubNub', (done) => {
-    const uuid = PubNub.generateUUID();
-    const observerClient = new PubNub({ uuid, subscribeKey, publishKey });
     const pubnub = pubNubClient;
 
-    observerClient.subscribe({
+    observerPubNubClient.subscribe({
       channels: ['room-1'],
       withPresence: true,
     });
 
-    observerClient.addListener({
+    observerPubNubClient.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
           pubnub.subscribe({
@@ -132,19 +138,36 @@ describe('Connect to PubNub', () => {
     pubnub.addListener({
       status: (status) => {
         if (status.operation === 'PNSubscribeOperation') {
-          // tag::CON-6[]
-          pubnub.unsubscribeAll();
-          // end::CON-6[]
+          setTimeout(() => {
+            // tag::CON-6[]
+            pubnub.unsubscribeAll();
+            // end::CON-6[]
+          }, 2000);
         }
       },
     });
   });
 
-  test('Reconnecting Manually', () => {
-    const pubnub = pubNubClient;
+  test('Reconnecting to PubNub', () => {
+    // tag::CON-7.1[]
+    const pubnub = new PubNub({
+      subscribeKey,
+      publishKey,
+      // enable for non-browser environment automatic reconnection
+      autoNetworkDetection: true,
+      // enable catchup on missed messages
+      restore: true,
+    });
+    // end::CON-7.1[]
 
-    // tag::CON-7[]
+    // tag::CON-7.2[]
+    /**
+     * If connection availability check will be done in other way,
+     * then use this  function to reconnect to PubNub.
+     */
     pubnub.reconnect();
-    // end::CON-7[]
+    // end::CON-7.2[]
+
+    expect(pubnub).toBeDefined();
   });
 });
