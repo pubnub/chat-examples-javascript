@@ -119,37 +119,100 @@ describe('Messages', () => {
 
     // tag::MSG-2[]
     pubnub.addListener({
-      status: (statusEvent) => {
-        if (statusEvent.category === 'PNConnectedCategory') {
-          publishSampleMessage();
-        }
-      },
-      message: (msg) => {
-        console.log(msg.message.title);
-        console.log(msg.message.description);
+      message: (message) => {
+        // handle message
+        // the channel for which the message belongs
+        const channelName = message.channel;
+        // the channel group or wildcard subscription match (if exists)
+        const channelGroup = message.subscription;
+        // publish timetoken
+        const publishTimetoken = message.timetoken;
+        // the payload
+        const msg = message.message;
+        // the publisher
+        const publisher = message.publisher;
         // tag::ignore[]
-        expect(msg.publisher).toEqual(pubnub.getUUID());
+
+        expect(channelName).toEqual(expectedChannel);
+        expect(channelGroup).toBeNull();
+        expect(publishTimetoken).toBeDefined();
+        expect(msg).toBeDefined();
+        expect(publisher).toEqual(pubnub.getUUID());
 
         handleMessage();
         // end::ignore[]
       },
-      presence: (presenceEvent) => {
+      presence: (presence) => {
         // handle presence
+        // the channel for which the message belongs
+        const channelName = presence.channel;
+        // the channel group or wildcard subscription match (if exists)
+        const channelGroup = presence.subscription;
+        // can be join, leave, state-change, interval or timeout
+        const action = presence.action;
+        // no. of users connected with the channel
+        const occupancy = presence.occupancy;
+        // user state
+        const state = presence.state;
+        // event timetoken
+        const timestamp = presence.timestamp;
+        // UUID of users who are connected with the channel
+        const uuid = presence.uuid;
         // tag::ignore[]
-        expect(presenceEvent.action).toEqual('join');
-        expect(presenceEvent.uuid).toEqual(pubnub.getUUID());
+
+        expect(channelName).toEqual(expectedChannel);
+        expect(channelGroup).toBeNull();
+        expect(action).toEqual('join');
+        expect(occupancy).toEqual(1);
+        expect(state).not.toBeDefined();
+        expect(timestamp).toBeDefined();
+        expect(uuid).toEqual(pubnub.getUUID());
 
         handlePresence();
+        // end::ignore[]
+      },
+      status: (status) => {
+        // handle status change
+        // channels for which updated client state received
+        const channels = status.affectedChannels;
+        // channel groups or wildcard subscription match (if exists)
+        const channelGroups = status.affectedChannelGroups;
+        // name of operation for which status update available
+        const operation = status.operation;
+        // operation result category
+        const category = status.category;
+        // tag::ignore[]
+
+        expect(channels).toEqual([expectedChannel]);
+        expect(channelGroups).toEqual([]);
+        expect(operation).toEqual('PNSubscribeOperation');
+        expect(category).toEqual('PNConnectedCategory');
+        if (category === 'PNConnectedCategory') {
+          publishSampleMessage();
+        }
         // end::ignore[]
       },
     });
     // end::MSG-2[]
   });
 
-  test.skip('Sending images and files', () => {
+  test.only('Sending images and files', () => {
     // tag::MSG-3[]
-    // TODO: need a sample here
+    // Calculating a PubNub Message Payload Size
+    const payloadSize = (channel, message) => {
+      const payload = JSON.stringify(message);
+      const encodedPayload = encodeURIComponent(`${channel}/${payload}`);
+
+      return encodedPayload.length + 150; // 150 is length of publish API prefix.
+    };
+
+    const channel = 'room-1';
+    const message = { senderId: 'user123', text: 'Hello World' };
+    const size = payloadSize(channel, message);
+    console.log('Payload Size:', size);
     // end::MSG-3[]
+
+    expect(size).toEqual(230);
   });
 
   test('Sending typing indicators', (done) => {
@@ -301,8 +364,8 @@ describe('Messages', () => {
       if (!messageUpdateSent) {
         messageTimetoken = messageId;
         messageUpdateSent = true;
-
         // tag::MSG-6.2[]
+
         pubnub.publish({
           // tag::ignore[]
           channel: expectedChannel,

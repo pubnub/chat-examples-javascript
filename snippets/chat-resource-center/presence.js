@@ -86,7 +86,7 @@ describe('Presence', () => {
             includeUUIDs: true,
             includeState: true,
           }, (status, response) => {
-            // handle state setting response
+            // handle status, response
             // tag::ignore[]
             expect(status.error).toBeFalsy();
             expect(response.totalOccupancy).toEqual(1);

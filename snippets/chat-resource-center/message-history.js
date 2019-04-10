@@ -89,6 +89,7 @@ describe('Message history', () => {
          */
         // end::ignore[]
       }, (status, results) => {
+        // handle status, response
         console.log(status);
         console.log(results);
         // tag::ignore[]
@@ -176,7 +177,7 @@ describe('Message history', () => {
         end: timetoken,
         /**
         // end::ignore[]
-        channel: 'history_test',
+        channel: 'room-1',
         // tag::ignore[]
          */
         // end::ignore[]
@@ -249,7 +250,7 @@ describe('Message history', () => {
         // end::ignore[]
         count: 15,
       }, (status, response) => {
-        // handle response
+        // handle status, response
         // tag::ignore[]
         const channelsList = Object.keys(response.channels);
         expect(status.error).toBeFalsy();
@@ -261,8 +262,8 @@ describe('Message history', () => {
         done();
         // end::ignore[]
       });
+      // end::HIST-4[]
     };
-    // end::HIST-4[]
 
     const handleMessagesPublish = (channel, messageTimetokens) => {
       timetokens[channel] = messageTimetokens;
