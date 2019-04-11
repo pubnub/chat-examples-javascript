@@ -1,8 +1,7 @@
 import React from 'react';
 
 const OnlineUsers = (props) => {
-    const [findNameOutOfId, onlineUsers, usersNumber] = 
-            [props.findNameOutOfId, props.onlineUsers, props.usersNumber];
+    const {findById, onlineUsers, usersNumber} = props;
     
     return (
         <div>
@@ -10,7 +9,7 @@ const OnlineUsers = (props) => {
                 <ul>
                   {onlineUsers.map((user, index) => 
                     <li key={index}>
-                        {findNameOutOfId(user.uuid)}
+                        {findById(user.uuid)}
                     </li>)}                 
                 </ul>
         </div>

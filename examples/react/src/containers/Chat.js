@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PubNubReact from 'pubnub-react';
 import OnlineUsers from '../components/OnlineUsers';
-import MessageBody from '../components/MessageBody';
+import MessageBody from './MessageBody';
 import MessagesList from '../components/MessagesList';
 import Header from '../components/Header';
 import users from '../config/users';
@@ -16,15 +16,18 @@ export default class extends Component {
         this.pubnub = new PubNubReact({
             publishKey,    //publishKey: 'Enter your key . . .'
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
-            uuid: this.uuid
+            uuid: this.uuid,
+            autoNetworkDetection: true,
         });
         this.state = {
-          msgContent: '',
           sendersInfo: [],
+          lastMsgTimetoken: '',
+          usersTyping: [],
           historyLoaded: false,
           historyMsgs: [],
           onlineUsers: [],
-          onlineUsersNumber: ''
+          onlineUsersNumber: '',
+          networkStatus: null
         }
         this.pubnub.init(this);
     }
@@ -33,13 +36,10 @@ export default class extends Component {
       return users[Math.floor(Math.random() * users.length)];
     }
 
-    componentWillMount() {
-      this.pubnub.subscribe({
-            channels: ['demo-animal-chat'],
-            withPresence: true
-      });
+    componentWillMount(){
+      this.subscribe();
 
-      this.pubnub.getMessage('demo-animal-chat', (m) => {
+      this.pubnub.getMessage('demo-animal-forest', (m) => {
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
@@ -47,30 +47,50 @@ export default class extends Component {
           text: m.message.text,
           time
         });
-        this.setState({sendersInfo});
+        this.removeTypingUser(this.uuid);
+        this.setState({
+          sendersInfo,
+          lastMsgTimetoken: m.timetoken
+        });
       });
 
-      this.pubnub.getPresence('demo-animal-chat', () => {
-          this.pubnub.hereNow({
-            channels: ['demo-animal-chat'],
-            includeUUIDs: true,
-            includeState: true
-          }, (status, response) => {
-            this.setState({
-              onlineUsers: response.channels['demo-animal-chat'].occupants,
-              onlineUsersNumber: response.channels['demo-animal-chat'].occupancy});
-          });
+      this.pubnub.getPresence('demo-animal-forest', (presence) => {
+        if (presence.action === 'state-change') {
+          if (presence.state.isTyping === true) 
+            this.addTypingUser(presence.uuid) 
+          else 
+            this.removeTypingUser(presence.uuid)
+        }
+
+        this.pubnub.hereNow({
+          channels: ['demo-animal-forest'],
+          includeUUIDs: true,
+          includeState: true
+        }, (status, response) => {
+          this.setState({
+            onlineUsers: response.channels['demo-animal-forest'].occupants,
+            onlineUsersNumber: response.channels['demo-animal-forest'].occupancy});
+        });
+      });
+
+      this.pubnub.getStatus((status) => {
+        if (status.category === 'PNNetworkDownCategory')
+          this.setState({networkStatus: 'It looks like you have a problem with your network :('});
+        if (status.category === 'PNNetworkUpCategory') {
+          this.setState({networkStatus: null})
+          this.subscribe(this.state.lastMsgTimetoken);
+        }       
       });
 
       this.pubnub.history({
-        channel: 'demo-animal-chat',
+        channel: 'demo-animal-forest',
         reverse: false, 
         count: 100,
         stringifiedTimeToken: true
         }, (status, response) => {
           this.setState({
             historyLoaded: true,
-            historyMsgs: response.messages
+            historyMsgs: response.messages,
           });
       });
 
@@ -81,10 +101,38 @@ export default class extends Component {
       this.leaveChat();
     }
 
-    leaveChat = () => {
-      this.pubnub.unsubscribe({
-        channels: ['demo-animal-chat']
+    subscribe = (timetoken = 0) => {
+      this.pubnub.subscribe({
+        channels: ['demo-animal-forest'],
+        withPresence: true,
+        timetoken: timetoken
       });
+    }
+
+    leaveChat = () => {
+      this.pubnub.unsubscribeAll();
+    }
+
+    setPubnubState = (isTyping) => {
+      this.pubnub.setState({
+        state: {
+          isTyping: isTyping
+        },
+        channels: ['demo-animal-forest']
+      })
+    }
+    
+    
+    addTypingUser = (uuid) => {
+      const usersTyping = this.state.usersTyping;
+      usersTyping.push(uuid);
+      this.setState({usersTyping})
+    }
+
+    removeTypingUser = (uuid) => {
+      var usersTyping = this.state.usersTyping;
+      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid)
+      this.setState({usersTyping})
     }
 
     getTime = (timetoken) => {
@@ -93,49 +141,31 @@ export default class extends Component {
       return `${hours}:${minutes}`;
     }
 
-    findNameOutOfId = (uuid) => {
+    findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
       return user.firstName + ' the ' + user.lastName;
     }
 
-    onChange = (e) => {
-      this.setState({
-        msgContent: e.target.value
-      });
-    }
-
-    onSubmit = async (e) => {
-      e.preventDefault();
-      this.state.msgContent.length &&
-      this.pubnub.publish({
-        message: {
-          senderId: this.uuid,
-          text: this.state.msgContent,
-        },
-        channel: 'demo-animal-chat',
-      });
-      this.setState({
-        msgContent: '',
-      })
-    }
- 
     render() {
         return (
           <div>
               <Header userName={this.userName}/>                
               <MessagesList 
                 sendersInfo={this.state.sendersInfo}
-                findNameOutOfId={this.findNameOutOfId}
+                findById={this.findById}
                 getTime={this.getTime}
                 historyLoaded={this.state.historyLoaded}
                 historyMsgs={this.state.historyMsgs}/>
               <MessageBody 
-                msgContent={this.state.msgContent}
-                onChange={this.onChange}
-                onSubmit={this.onSubmit}/>
+                uuid={this.uuid}
+                pubnub={this.pubnub}
+                setPubnubState={this.setPubnubState}
+                usersTyping={this.state.usersTyping}
+                findById={this.findById}
+                networkStatus={this.state.networkStatus}/>
               <OnlineUsers 
                 users={users}
-                findNameOutOfId={this.findNameOutOfId}
+                findById={this.findById}
                 onlineUsers={this.state.onlineUsers}
                 usersNumber={this.state.onlineUsersNumber}/>
           </div>
