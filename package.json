@@ -18,18 +18,25 @@
     "test-examples": "jest --ci --forceExit --passWithNoTests --config=examples/jest-config.json",
     "test-snippets": "jest --ci --forceExit --config=snippets/jest-config.json"
   },
+  "dependencies": {
+    "bignumber.js": "^8.1.1",
+    "pubnub": "^4.23.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
-    "babel-jest": "^24.5.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.7.1",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
     "eslint": "^5.15.2",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-react-app": "^3.0.8",
     "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-flowtype": "^3.6.1"
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "gulp": "^4.0.0",
@@ -38,9 +45,6 @@
     "jest": "^24.5.0",
     "jest-cli": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.1"
-  },
-  "peerDependencies": {
-    "pubnub": "^4.22.0"
   },
   "jest": {
     "collectCoverage": false,
@@ -65,10 +69,5 @@
     "center",
     "javascript",
     "pubnub"
-  ],
-  "dependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint-config-react-app": "^3.0.8",
-    "eslint-plugin-flowtype": "^3.6.1"
-  }
+  ]
 }

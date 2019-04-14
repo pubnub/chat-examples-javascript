@@ -1,135 +1,173 @@
-/* global test */
+/* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
+import https from 'https';
 
 const subscribeKey = 'demo-36';
 const publishKey = 'demo-36';
 
 describe('Connect to PubNub', () => {
-    let pubNubClient = null;
+  let observerPubNubClient = null;
+  let pubNubClient = null;
 
-    beforeEach(() => {
-        const uuid = PubNub.generateUUID();
-        pubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
+  beforeEach(() => {
+    let uuid = PubNub.generateUUID();
+    pubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
 
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    uuid = PubNub.generateUUID();
+    observerPubNubClient = new PubNub({ uuid, subscribeKey, publishKey });
+
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+  });
+
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
+    observerPubNubClient.removeAllListeners();
+    observerPubNubClient.unsubscribeAll();
+    pubNubClient.removeAllListeners();
+    pubNubClient.unsubscribeAll();
+    pubNubClient.stop();
+  });
+
+  test('Setup', (done) => {
+    /**
+    // tag::CON-1[]
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.js"></script>
+    // end::CON-1[]
+    */
+    https.get('https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.js', (response) => {
+      expect(response.statusCode)
+        .toEqual(200);
+      expect(parseInt(response.headers['content-length'], 10))
+        .toBeGreaterThan(0);
+      done();
     });
+  });
 
-    afterEach(() => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
-        pubNubClient.removeAllListeners();
-        pubNubClient.unsubscribeAll();
+  test('Initializing PubNub', () => {
+    // tag::CON-2[]
+    const pubnub = new PubNub({
+      subscribeKey,
+      publishKey,
     });
+    // end::CON-2[]
 
-    test('Setting a unique ID for each user', () => {
-        // tag::CON-1[]
-        let uuid = PubNub.generateUUID();
+    expect(pubnub).toBeDefined();
+    expect(pubnub.getUUID()).toBeDefined();
+  });
 
-        let pubnub = new PubNub({
-            subscribeKey,
-            publishKey,
-            uuid
-        });
-        // end::CON-1[]
+  test('Setting a UUID for each user', () => {
+    const uuid = PubNub.generateUUID();
 
-        expect(uuid).toBeDefined();
-        expect(pubnub).toBeDefined();
-        expect(pubnub.getUUID()).toEqual(uuid);
+    // tag::CON-3[]
+    const pubnub = new PubNub({
+      subscribeKey,
+      publishKey,
+      uuid,
     });
+    // end::CON-3[]
 
-    test.skip('Connecting with a user', () => {
-        // tag::CON-2[]
-        /**
-         * There is actually no thing like 'Connect to PubNub'.
-         *
-         * Connection in ChatEngine was a set of actions:
-         *   - grant access
-         *   - add channels to groups
-         *   - subscribe on channel groups.
-         *
-         * Should we explain all this here, or remove this case,
-         * since we have 'Manage Channels' where explained how to
-         * subscribe / unsubscribe?
-         */
-        // end::CON-2[]
+    expect(uuid).toBeDefined();
+    expect(pubnub).toBeDefined();
+    expect(pubnub.getUUID()).toEqual(uuid);
+  });
+
+  test('Setting state for a user', (done) => {
+    const pubnub = pubNubClient;
+    const expectedState = { mood: 'grumpy' };
+
+    // tag::CON-4[]
+    pubnub.setState({
+      state: {
+        mood: 'grumpy',
+      },
+      channels: ['room-1'],
+    }, (status, response) => {
+      // handle state setting response
+      // tag::ignore[]
+
+      expect(status).toBeDefined();
+      expect(status.error).toBeFalsy();
+      expect(response.state).toEqual(expectedState);
+      // end::ignore[]
     });
+    // end::CON-4[]
 
-    test('Set metadata for a user', (done) => {
-        let pubnub = pubNubClient;
-        const expectedState = { mood: 'grumpy' };
-
-        // tag::CON-3[]
-        /**
-         * There is no thing like 'Meta' for particular user or
-         * channel. Should we rename this test case to
-         * 'Set state for a user' or it is expected to get some new
-         * API?
-         */
-        pubnub.setState({
-            state: {
-                mood: 'grumpy'
-            },
-            channels: ['room-1']
-        }, (status, response) => {
-            // handle state setting response
-            // tag::ignore[]
-            expect(status).toBeDefined();
-            expect(status.error).toBeFalsy();
-            expect(response.state).toEqual(expectedState);
-            done();
-            // end::ignore[]
-        });
-        // end::CON-3[]
-    });
-
-    test('Disconnecting from PubNub', () => {
-        let pubnub = pubNubClient;
-
-        // tag::CON-4[]
-        /**
-         * There is actually no thing like 'Disconnect from PubNub'.
-         *
-         * Should we remove this case, since we have 'Manage Channels'
-         * where explained how to subscribe / unsubscribe?
-         * Or is it unsubscribe from all?
-         */
-        pubnub.unsubscribeAll();
-        // end::CON-4[]
-    });
-
-    test('Reconnecting to PubNub', (done) => {
-        let pubnub = pubNubClient;
-        const expectedChannels = ['room-1'];
-
-        // tag::CON-5[]
-        /**
-         * There is actually no thing like 'Reconnect from PubNub'.
-         *
-         * Should it be shown as sequence of unsubscribe -> subscribe
-         * calls here or we better to move it to 'Manage Channels' as
-         * new use case?
-         */
-        pubnub.subscribe({
-            channels: ['room-1']
-        });
-
+    setTimeout(() => {
+      // tag::CON-5[]
+      pubnub.getState({
+        channels: ['room-1'],
+      }, (status, response) => {
+        // handle state getting response
         // tag::ignore[]
-        pubnub.addListener({
-            status: (status) => {
-                expect(status.affectedChannels).toEqual(expectedChannels);
 
-                if (status.operation === 'PNSubscribeOperation') {
-                    // end::ignore[]
-                    pubnub.unsubscribe({
-                        channels: ['room-1']
-                    });
-                    // tag::ignore[]
-                } else if (status.operation === 'PNUnsubscribeOperation') {
-                    done();
-                }
-            }
-        });
+        expect(status).toBeDefined();
+        expect(status.error).toBeFalsy();
+        expect(response.channels['room-1'].mood).toEqual(expectedState.mood);
+        done();
         // end::ignore[]
-        // end::CON-5[]
+      });
+      // end::CON-5[]
+    }, 2000);
+  });
+
+  test('Disconnecting from PubNub', (done) => {
+    const pubnub = pubNubClient;
+
+    observerPubNubClient.subscribe({
+      channels: ['room-1'],
+      withPresence: true,
     });
+
+    observerPubNubClient.addListener({
+      status: (status) => {
+        if (status.operation === 'PNSubscribeOperation') {
+          pubnub.subscribe({
+            channels: ['room-1'],
+          });
+        }
+      },
+      presence: (presenceEvent) => {
+        if (presenceEvent.action === 'leave'
+          && presenceEvent.uuid === pubnub.getUUID()) {
+          done();
+        }
+      },
+    });
+
+    pubnub.addListener({
+      status: (status) => {
+        if (status.operation === 'PNSubscribeOperation') {
+          setTimeout(() => {
+            // tag::CON-6[]
+            pubnub.unsubscribeAll();
+            // end::CON-6[]
+          }, 2000);
+        }
+      },
+    });
+  });
+
+  test('Reconnecting to PubNub', () => {
+    // tag::CON-7.1[]
+    const pubnub = new PubNub({
+      subscribeKey,
+      publishKey,
+      // enable for non-browser environment automatic reconnection
+      autoNetworkDetection: true,
+      // enable catchup on missed messages
+      restore: true,
+    });
+    // end::CON-7.1[]
+
+    // tag::CON-7.2[]
+    /**
+     * If connection availability check will be done in other way,
+     * then use this  function to reconnect to PubNub.
+     */
+    pubnub.reconnect();
+    // end::CON-7.2[]
+
+    expect(pubnub).toBeDefined();
+  });
 });

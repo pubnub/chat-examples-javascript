@@ -1,20 +1,41 @@
 language: node_js
+node_js: node
 sudo: false
-node_js:
-  - '10'
 cache: yarn
 
-matrix:
+stages:
+  - examples
+  - snippets
+  - name: submodule
+    if: branch = master AND (type IN (api, cron, push))
+
+jobs:
   include:
-    - env: NAME='Examples test' TASK='examples_full_test' SHOULD_BUILD_DOCS=0
-    - env: NAME='Snippets test' TASK='snippets_full_test' SHOULD_BUILD_DOCS=1
+    - stage: examples
+      name: "Code lint"
+      install: npm install
+      script: gulp lint_examples
+    - name: "Integration tests"
+      install: npm install
+      script: gulp examples_tests
 
-install:
-  - npm i pubnub
-  - npm i
+    - stage: snippets
+      name: "Code lint"
+      install: npm install
+      script: gulp lint_snippets
+    - name: "Integration tests"
+      install: npm install
+      script: gulp snippets_tests
 
-script:
-  - gulp "${TASK}"
+    - stage: submodule
+      name: "Update reference"
+      install: npm init --force && npm install chalk fancy-log simple-git
+      before_script:
+        - git config --global user.name "${GH_NAME}"
+        - git config --global user.email "${GH_EMAIL}"
+        - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}"  > ~/.netrc
+      script: node .travis.docs.js
 
-after_success:
-  - ruby .travis.docs.rb
+name: "This task shouldn't be here. How to remove?"
+install: true
+script: true

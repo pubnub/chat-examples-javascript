@@ -1,33 +1,13 @@
-extends: airbnb/base
-globals:
-  describe: true
-  expect: true
-  jasmine: true
-  it: true
-  beforeEach: true
-  afterEach: true
-  Promise: true
-rules:
-  indent:
-    - error
-    - 4
-  max-len: 0
-  global-require: 0
-  vars-on-top: 0
-  padded-blocks: 0
-  no-console: 0
-  prefer-const: 0
-  prefer-template: 0
-  comma-dangle: 0
-  consistent-return: 0
-  no-param-reassign: 0
-  no-underscore-dangle: 0
-  no-unused-vars:
-    - warn
-    - varsIgnorePattern: "process"
-  import/no-unresolved:
-    - "error"
-    - ignore:
-      - state
-env:
-  jest: true
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jquery": true
+  },
+  "extends" : "airbnb-base",
+  "rules" : {
+    "no-console": "off",
+    "prefer-destructuring": "off"
+  }
+}
