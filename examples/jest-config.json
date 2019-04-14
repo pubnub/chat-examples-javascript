@@ -6,12 +6,12 @@
   ],
   "testPathIgnorePatterns": [
     "<rootDir>/.idea",
-    "<rootDir>/examples/",
+    "<rootDir>/examples/react/",
     "<rootDir>/node_modules/",
     "/node_modules/"
   ],
   "testMatch": [
-    "**/*.{js,jsx,mjs}"
+    "<rootDir>/examples/react/tests/**/*.{js,jsx,mjs}"
   ],
   "notify": true
 }
