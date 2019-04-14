@@ -121,15 +121,10 @@ describe('Messages', () => {
     pubnub.addListener({
       message: (message) => {
         // handle message
-        // the channel for which the message belongs
         const channelName = message.channel;
-        // the channel group or wildcard subscription match (if exists)
         const channelGroup = message.subscription;
-        // publish timetoken
         const publishTimetoken = message.timetoken;
-        // the payload
         const msg = message.message;
-        // the publisher
         const publisher = message.publisher;
         // tag::ignore[]
 
@@ -144,19 +139,12 @@ describe('Messages', () => {
       },
       presence: (presence) => {
         // handle presence
-        // the channel for which the message belongs
         const channelName = presence.channel;
-        // the channel group or wildcard subscription match (if exists)
         const channelGroup = presence.subscription;
-        // can be join, leave, state-change, interval or timeout
         const action = presence.action;
-        // no. of users connected with the channel
         const occupancy = presence.occupancy;
-        // user state
         const state = presence.state;
-        // event timetoken
         const timestamp = presence.timestamp;
-        // UUID of users who are connected with the channel
         const uuid = presence.uuid;
         // tag::ignore[]
 
@@ -173,13 +161,9 @@ describe('Messages', () => {
       },
       status: (status) => {
         // handle status change
-        // channels for which updated client state received
         const channels = status.affectedChannels;
-        // channel groups or wildcard subscription match (if exists)
         const channelGroups = status.affectedChannelGroups;
-        // name of operation for which status update available
         const operation = status.operation;
-        // operation result category
         const category = status.category;
         // tag::ignore[]
 

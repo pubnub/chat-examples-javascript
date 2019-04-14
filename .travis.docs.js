@@ -20,6 +20,9 @@ let changeStart = null;
 let changeEnd = null;
 let changeLog = null;
 
+
+// Examples location.
+const examplesPath = [currentRepositoryPath, 'examples', 'react'].join('/');
 // Samples location.
 const samplesPath = [currentRepositoryPath, 'snippets'].join('/');
 
@@ -148,27 +151,39 @@ const getChangeLogMessages = function () {
 /**
  * Gather hashes for commits, where tracked repository with snippets
  * has been changed.
+ *
+ * @param {String} path - Full path to folder for which should be
+ * checked commits with changed files.
+ * @param {function} completion - Log check completion callback.
  */
-const getSnippetsModificationCommits = function () {
+const getSnippetsModificationCommits = function (path, completion) {
   const range = [changeStart, changeEnd].join('...');
 
-  log.info(`Getting commits with '${chalk.cyan.bold(samplesPath)}' ` +
+  log.info(`Getting commits with '${chalk.cyan.bold(path)}' ` +
       `content changes in ${chalk.green.bold(range)} range...`);
 
   git(currentRepositoryPath)
-      .raw(['log', range, '-p', samplesPath])
+      .raw(['log', range, '-p', path])
       .then(results => {
+        let matchesCount = 0;
         const regEx = new RegExp('^commit (.*)','gm');
         let match;
 
         while ((match = regEx.exec(results)) !== null) {
+          matchesCount += 1;
           snippetsModificationCommits.push(match[1]);
         }
 
-        getChangeLogMessages();
+        if (matchesCount > 0) {
+          log.info(`Found ${matchesCount} commits with `
+            + `'${chalk.cyan.bold(path)}' content changes `
+            + `in ${chalk.green.bold(range)} range...`);
+        }
+
+        completion();
       })
       .catch((error) =>
-          logError(`Unable to get commits with '${samplesPath}' content ` +
+          logError(`Unable to get commits with '${path}' content ` +
               'change.', error)
       );
 };
@@ -197,7 +212,11 @@ const getLastCommitHash = function (path) {
         } else if (changeEnd === null) {
           changeEnd = data.latest.hash;
 
-          getSnippetsModificationCommits();
+          getSnippetsModificationCommits(examplesPath, () => {
+            getSnippetsModificationCommits(samplesPath, () => {
+              getChangeLogMessages();
+            });
+          });
         }
       })
       .catch((error) =>

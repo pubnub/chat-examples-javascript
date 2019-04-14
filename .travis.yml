@@ -36,6 +36,5 @@ jobs:
         - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}"  > ~/.netrc
       script: node .travis.docs.js
 
-name: "This task shouldn't be here. How to remove?"
 install: true
 script: true
