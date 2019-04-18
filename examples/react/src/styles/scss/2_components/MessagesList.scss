@@ -1,0 +1,58 @@
+.messageList {
+    @include size (890px, 480px);
+    border-left: 1px solid rgba(128, 128, 128, 0.164);
+    border-right: 1px solid rgba(128, 128, 128, 0.164);
+}
+
+.msgsDialog {
+    @include size (850px, 460px);
+    position: relative;
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    overflow-y: scroll;
+    position: relative;
+    list-style: none;
+    
+    li {
+        @include size (300px);
+        position: relative;
+        background-color: rgba(128, 128, 128, 0.164);
+        margin-top: 30px;
+        border: 1px solid #fff;
+        border-radius: 10px;
+
+        img {
+            position: absolute;
+            bottom: 0;
+            left: -30px;
+        }
+
+        .name_time {
+            background-color: #fff;
+            font-size: 0.8em;
+            color: #808080;
+            font-weight: bold;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .message {
+            @include size (280px);
+            word-wrap: break-word;
+            margin: 0 10px;
+        }
+    }
+
+    .senderMsg {
+        align-self: flex-end;
+        margin-right: 50px;
+        background-color: color(primary);
+        color: #fff;
+
+        img {
+            left: 305px;
+        }
+    }
+}

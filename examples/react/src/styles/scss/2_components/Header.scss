@@ -1,0 +1,47 @@
+.header {
+    @include size (890px);
+    position: relative;
+    margin-bottom: -20px;
+    border: 1px solid rgba(128, 128, 128, 0.164);
+
+    .logo {
+        position: absolute;
+        top: 12px;
+        left: 10px;
+    }
+
+    h1 {
+        font-weight: bold;
+        font-size: 1.5em;
+        position: absolute;
+        top: -5px;
+        left: 70px;
+    }
+
+    h2 {
+        font-weight: normal;
+        font-size: 1.1em;
+        position: absolute;
+        top: 22px;
+        left: 70px;
+    }
+
+    .userName {
+        position: absolute;
+        top: 12px;
+        right: 35px;
+        color: color(secondary);
+
+        span {
+            display: block;
+            color: #000;
+            font-weight: bold;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: -55px;
+        }
+    }
+}

@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.grid {
+  display: grid;
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 1fr 3fr;
+}
+.grid .header {
+  grid-row: 1;
+  grid-column: 2;
+}
+.grid .onlineUsers {
+  grid-row: 1/3;
+  grid-column: 1;
+}
+.grid .messageList {
+  grid-row: 2;
+  grid-column: 2;
+}
+.grid .messageBody {
+  grid-row: 3;
+  grid-column: 2;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.589);
+}
+
+.messageList {
+  width: 890px;
+  height: 480px;
+  border-left: 1px solid rgba(128, 128, 128, 0.164);
+  border-right: 1px solid rgba(128, 128, 128, 0.164);
+}
+
+.msgsDialog {
+  width: 850px;
+  height: 460px;
+  position: relative;
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  overflow-y: scroll;
+  position: relative;
+  list-style: none;
+}
+.msgsDialog li {
+  width: 300px;
+  position: relative;
+  background-color: rgba(128, 128, 128, 0.164);
+  margin-top: 30px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.msgsDialog li img {
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+}
+.msgsDialog li .name_time {
+  background-color: #fff;
+  font-size: 0.8em;
+  color: #808080;
+  font-weight: bold;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+}
+.msgsDialog li .message {
+  width: 280px;
+  word-wrap: break-word;
+  margin: 0 10px;
+}
+.msgsDialog .senderMsg {
+  align-self: flex-end;
+  margin-right: 50px;
+  background-color: #d32f2f;
+  color: #fff;
+}
+.msgsDialog .senderMsg img {
+  left: 305px;
+}
+
+.messageBody {
+  position: relative;
+}
+.messageBody li {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  list-style: none;
+}
+.messageBody .msgForm .msgInput {
+  width: 750px;
+  height: 25px;
+  margin-top: 30px;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+.messageBody .msgForm .submitBtn {
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: #d32f2f;
+  border: 1px solid #d32f2f;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.header {
+  width: 890px;
+  position: relative;
+  margin-bottom: -20px;
+  border: 1px solid rgba(128, 128, 128, 0.164);
+}
+.header .logo {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+}
+.header h1 {
+  font-weight: bold;
+  font-size: 1.5em;
+  position: absolute;
+  top: -5px;
+  left: 70px;
+}
+.header h2 {
+  font-weight: normal;
+  font-size: 1.1em;
+  position: absolute;
+  top: 22px;
+  left: 70px;
+}
+.header .userName {
+  position: absolute;
+  top: 12px;
+  right: 35px;
+  color: grey;
+}
+.header .userName span {
+  display: block;
+  color: #000;
+  font-weight: bold;
+}
+.header .userName img {
+  position: absolute;
+  top: 0;
+  left: -55px;
+}
+
+.onlineUsers {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.onlineUsers li {
+  margin-bottom: 15px;
+}
+.onlineUsers .backArrow {
+  order: 1;
+  font-size: 1.5em;
+  margin: 10px 0 0 20px;
+}
+.onlineUsers .onlineUsersCount {
+  position: absolute;
+  top: 15px;
+  left: 50px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.onlineUsers .onlineUsersCount span {
+  position: absolute;
+  top: 20px;
+  color: grey;
+  font-weight: normal;
+  display: block;
+}
+.onlineUsers .onlineUsersList {
+  list-style: none;
+  position: relative;
+  top: 80px;
+  left: 10px;
+}
+.onlineUsers .onlineUsersList .name {
+  position: absolute;
+  left: 100px;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=style.css.map */
