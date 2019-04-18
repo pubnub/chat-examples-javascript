@@ -35,6 +35,9 @@ class MessageBody extends Component {
             text: this.state.msgContent,
             },
             channel: 'demo-animal-forest',
+            meta: {
+                "profileImage": this.props.profileImage
+            }
         });
 
         this.props.setPubnubState(false);
@@ -46,19 +49,23 @@ class MessageBody extends Component {
 
      
     render() {
-        const {usersTyping, findById, networkStatus} = this.props;
+        const {networkStatus} = this.props;
         return (
-            <div>
-                <ul>
+            <div className='messageBody'>
+                {/* <ul> //typing indicators
                     {usersTyping.length > 0  &&
                         usersTyping.map((user, index) => 
                             <li key={index}>{findById(user)} is typing . . .</li>
                         )}
-                </ul>
+                </ul> */}
     
-                <form>
-                    <input value={this.state.msgContent} onChange={this.onChange}/>
-                    <button onClick={this.onSubmit} type='submit'>Submit</button>
+                <form className='msgForm'>
+                    <input 
+                        className='msgInput' 
+                        value={this.state.msgContent} 
+                        onChange={this.onChange}
+                        placeholder='Message . . .'/>
+                    <button className='submitBtn' onClick={this.onSubmit} type='submit'>Send</button>
                 </form>
 
                 {networkStatus}

@@ -13,6 +13,7 @@ export default class extends Component {
         const randomUser = this.getRandomUser();
         this.uuid = randomUser.uuid;
         this.userName = randomUser.firstName + ' the ' + randomUser.lastName;
+        this.profileImage = randomUser.profileImage;
         this.pubnub = new PubNubReact({
             publishKey,    //publishKey: 'Enter your key . . .'
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
@@ -40,12 +41,14 @@ export default class extends Component {
       this.subscribe();
 
       this.pubnub.getMessage('demo-animal-forest', (m) => {
+        console.log(m)
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
           senderId: m.message.senderId,
           text: m.message.text,
-          time
+          time,
+          profileImage: m.userMetadata.profileImage.smImage
         });
         this.removeTypingUser(this.uuid);
         this.setState({
@@ -85,7 +88,7 @@ export default class extends Component {
       this.pubnub.history({
         channel: 'demo-animal-forest',
         reverse: false, 
-        count: 100,
+        count: 10,
         stringifiedTimeToken: true
         }, (status, response) => {
           this.setState({
@@ -146,18 +149,28 @@ export default class extends Component {
       return user.firstName + ' the ' + user.lastName;
     }
 
+    getUserImage = (uuid) => {
+      const image = users.find(element => element.uuid === uuid);
+      return image.profileImage.smImage;
+    }
+
     render() {
         return (
-          <div>
-              <Header userName={this.userName}/>                
+          <div className='grid'>
+              <Header 
+                userName={this.userName}
+                profileImage={this.profileImage.lgImage}/>                
               <MessagesList 
+                uuid={this.uuid}
                 sendersInfo={this.state.sendersInfo}
                 findById={this.findById}
+                getUserImage={this.getUserImage}
                 getTime={this.getTime}
                 historyLoaded={this.state.historyLoaded}
                 historyMsgs={this.state.historyMsgs}/>
               <MessageBody 
                 uuid={this.uuid}
+                profileImage={this.profileImage}
                 pubnub={this.pubnub}
                 setPubnubState={this.setPubnubState}
                 usersTyping={this.state.usersTyping}
@@ -165,6 +178,7 @@ export default class extends Component {
                 networkStatus={this.state.networkStatus}/>
               <OnlineUsers 
                 users={users}
+                getUserImage={this.getUserImage}
                 findById={this.findById}
                 onlineUsers={this.state.onlineUsers}
                 usersNumber={this.state.onlineUsersNumber}/>
