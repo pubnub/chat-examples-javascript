@@ -56,3 +56,15 @@
         }
     }
 }
+
+@media (max-width :767px) {
+    #root{
+        .msgsDialog{
+            .senderMsg{
+                img{
+                    left :calc(100% + 5px);
+                }
+            }
+        }
+    }
+}

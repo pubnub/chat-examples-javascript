@@ -45,3 +45,15 @@
         }
     }
 }
+
+@media (max-width :600px) {
+    #root{
+        .header{
+            .userName{
+                top    :initial;
+                right  :10px;
+                bottom :10px;
+            }
+        }
+    }
+}

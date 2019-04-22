@@ -50,3 +50,54 @@ body {
   background: rgba(128, 128, 128, 0.589);
 }
 
+@media (max-width :1200px) {
+    #root{
+        .grid{
+            grid-template-columns :30% calc(70% - 2px);
+        }
+        .messageList{
+            width :100%;
+        }
+        .header{
+            width :100%;
+        }
+    }
+}
+
+@media (max-width :767px) {
+    #root{
+        .grid{
+            grid-template-columns :100%;
+            grid-template-rows    :90px 1fr 120px;
+            overflow              :hidden;
+            .onlineUsers{
+                display :none;
+            }
+            .header{
+                grid-column :1;
+                grid-row    :1;
+                margin      :0;
+                width       :100%;
+            }
+            .messageList{
+                grid-row    :2;
+                grid-column :1;
+            }
+            .messageBody{
+                grid-row    :3;
+                grid-column :1;
+            }
+            > div{
+                width :100%;
+            }
+        }
+    }
+}
+
+@media (max-width :600px) {
+    #root{
+        .grid{
+            grid-template-rows :150px 1fr 120px;
+        }
+    }
+}
