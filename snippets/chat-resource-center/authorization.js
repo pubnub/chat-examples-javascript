@@ -352,7 +352,7 @@ describe('Authorization', () => {
         channel: expectedChannel,
         /**
          // end::ignore[]
-         channel: 'room-1',
+        channel: 'room-1',
          // tag::ignore[]
          */
         // end::ignore[]

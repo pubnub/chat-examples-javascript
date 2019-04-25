@@ -101,10 +101,10 @@ describe('Mobile Push Notifications', () => {
         channels: expectedChannels,
         device: expectedDevice,
         /**
-         // end::ignore[]
-         channels: ['room-1', 'room-2'],
-         device: 'myDevice',
-         // tag::ignore[]
+        // end::ignore[]
+        channels: ['room-1', 'room-2'],
+        device: 'myDevice',
+        // tag::ignore[]
          */
         // end::ignore[]
         pushGateway: 'apns', // apns or gcm
@@ -157,9 +157,9 @@ describe('Mobile Push Notifications', () => {
             // tag::ignore[]
             channel: expectedChannel,
             /**
-             // end::ignore[]
-             channel: 'room-1',
-             // tag::ignore[]
+            // end::ignore[]
+            channel: 'room-1',
+            // tag::ignore[]
              */
             // end::ignore[]
           }, (status) => {
