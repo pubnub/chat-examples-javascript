@@ -2,8 +2,8 @@
 import PubNub from 'pubnub';
 import https from 'https';
 
-const subscribeKey = 'demo-36';
-const publishKey = 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
+const publishKey = process.env.PUBLISH_KEY || 'demo-36';
 
 describe('Connect to PubNub', () => {
   let observerPubNubClient = null;
@@ -47,8 +47,8 @@ describe('Connect to PubNub', () => {
   test('Initializing PubNub', () => {
     // tag::CON-2[]
     const pubnub = new PubNub({
-      subscribeKey,
-      publishKey,
+      subscribeKey: 'mySubscribeKey',
+      publishKey: 'myPublishKey',
     });
     // end::CON-2[]
 
@@ -57,19 +57,19 @@ describe('Connect to PubNub', () => {
   });
 
   test('Setting a UUID for each user', () => {
-    const uuid = PubNub.generateUUID();
+    const myUUID = PubNub.generateUUID();
 
     // tag::CON-3[]
     const pubnub = new PubNub({
-      subscribeKey,
-      publishKey,
-      uuid,
+      subscribeKey: 'mySubscribeKey',
+      publishKey: 'myPublishKey',
+      uuid: myUUID,
     });
     // end::CON-3[]
 
-    expect(uuid).toBeDefined();
+    expect(myUUID).toBeDefined();
     expect(pubnub).toBeDefined();
-    expect(pubnub.getUUID()).toEqual(uuid);
+    expect(pubnub.getUUID()).toEqual(myUUID);
   });
 
   test('Setting state for a user', (done) => {
@@ -151,8 +151,8 @@ describe('Connect to PubNub', () => {
   test('Reconnecting to PubNub', () => {
     // tag::CON-7.1[]
     const pubnub = new PubNub({
-      subscribeKey,
-      publishKey,
+      subscribeKey: 'mySubscribeKey',
+      publishKey: 'myPublishKey',
       // enable for non-browser environment automatic reconnection
       autoNetworkDetection: true,
       // enable catchup on missed messages

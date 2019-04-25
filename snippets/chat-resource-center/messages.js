@@ -1,8 +1,8 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
 
-const subscribeKey = 'demo-36';
-const publishKey = 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
+const publishKey = process.env.PUBLISH_KEY || 'demo-36';
 
 describe('Messages', () => {
   let observerPubNubClient = null;
@@ -180,7 +180,7 @@ describe('Messages', () => {
     // end::MSG-2[]
   });
 
-  test.only('Sending images and files', () => {
+  test('Sending images and files', () => {
     // tag::MSG-3[]
     // Calculating a PubNub Message Payload Size
     const payloadSize = (channel, message) => {
