@@ -12,7 +12,8 @@ export default class extends Component {
         super(props);
         const randomUser = this.getRandomUser();
         this.uuid = randomUser.uuid;
-        this.userName = randomUser.firstName + ' the ' + randomUser.lastName;
+        this.designation = randomUser.designation;
+        this.userName = randomUser.firstName + ' ' +  randomUser.lastName;
         this.profileImage = randomUser.profileImage;
         this.pubnub = new PubNubReact({
             publishKey,    //publishKey: 'Enter your key . . .'
@@ -23,9 +24,9 @@ export default class extends Component {
         this.state = {
           sendersInfo: [],
           lastMsgTimetoken: '',
-          usersTyping: [],
           historyLoaded: false,
           historyMsgs: [],
+          usersTyping: [],
           onlineUsers: [],
           onlineUsersNumber: '',
           networkStatus: null
@@ -36,12 +37,17 @@ export default class extends Component {
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
     }
+  
+    removeTypingUser = (uuid) => {
+      var usersTyping = this.state.usersTyping;
+      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid)
+      this.setState({usersTyping})
+    }
 
     componentWillMount(){
       this.subscribe();
 
       this.pubnub.getMessage('demo-animal-forest', (m) => {
-        console.log(m)
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
@@ -51,6 +57,7 @@ export default class extends Component {
           profileImage: m.userMetadata.profileImage.smImage
         });
         this.removeTypingUser(this.uuid);
+        
         this.setState({
           sendersInfo,
           lastMsgTimetoken: m.timetoken
@@ -58,13 +65,6 @@ export default class extends Component {
       });
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
-        if (presence.action === 'state-change') {
-          if (presence.state.isTyping === true) 
-            this.addTypingUser(presence.uuid) 
-          else 
-            this.removeTypingUser(presence.uuid)
-        }
-
         this.pubnub.hereNow({
           channels: ['demo-animal-forest'],
           includeUUIDs: true,
@@ -116,42 +116,23 @@ export default class extends Component {
       this.pubnub.unsubscribeAll();
     }
 
-    setPubnubState = (isTyping) => {
-      this.pubnub.setState({
-        state: {
-          isTyping: isTyping
-        },
-        channels: ['demo-animal-forest']
-      })
-    }
-    
-    
-    addTypingUser = (uuid) => {
-      const usersTyping = this.state.usersTyping;
-      usersTyping.push(uuid);
-      this.setState({usersTyping})
-    }
-
-    removeTypingUser = (uuid) => {
-      var usersTyping = this.state.usersTyping;
-      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid)
-      this.setState({usersTyping})
-    }
-
     getTime = (timetoken) => {
-      const hours = new Date(parseInt(timetoken.substring(0, 13))).getHours();
-      const minutes = new Date(parseInt(timetoken.substring(0, 13))).getMinutes();
-      return `${hours}:${minutes}`;
+      return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
     }
 
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
-      return user.firstName + ' the ' + user.lastName;
+      return user.firstName + ' ' + user.lastName;
+    }
+
+    getUserDesignation = (uuid) => {
+      const designation = users.find(element => element.uuid === uuid);
+      return designation.designation;
     }
 
     getUserImage = (uuid) => {
       const image = users.find(element => element.uuid === uuid);
-      return image.profileImage.smImage;
+      return image.profileImage.lgImage;
     }
 
     render() {
@@ -159,7 +140,8 @@ export default class extends Component {
           <div className='grid'>
               <Header 
                 userName={this.userName}
-                profileImage={this.profileImage.lgImage}/>                
+                profileImage={this.profileImage.lgImage}
+                usersNumber={this.state.onlineUsersNumber}/>                
               <MessagesList 
                 uuid={this.uuid}
                 sendersInfo={this.state.sendersInfo}
@@ -172,16 +154,15 @@ export default class extends Component {
                 uuid={this.uuid}
                 profileImage={this.profileImage}
                 pubnub={this.pubnub}
-                setPubnubState={this.setPubnubState}
-                usersTyping={this.state.usersTyping}
                 findById={this.findById}
                 networkStatus={this.state.networkStatus}/>
               <OnlineUsers 
                 users={users}
                 getUserImage={this.getUserImage}
+                logedUser={this.uuid}
                 findById={this.findById}
-                onlineUsers={this.state.onlineUsers}
-                usersNumber={this.state.onlineUsersNumber}/>
+                getUserDesignation={this.getUserDesignation}
+                onlineUsers={this.state.onlineUsers}/>
           </div>
         );
     }
