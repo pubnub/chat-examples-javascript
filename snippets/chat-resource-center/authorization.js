@@ -319,7 +319,7 @@ describe('Authorization', () => {
     expect(pubnub.getUUID()).toEqual(myUUID);
   });
 
-  test('Connecting to PubNub from a client', (done) => {
+  test('Handling "permission denied" errors', (done) => {
     const expectedAuthKey = observerPubNubClient.getUUID();
     const expectedChannel = PubNub.generateUUID();
     const channels = [expectedChannel];
