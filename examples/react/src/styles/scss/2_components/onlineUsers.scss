@@ -2,45 +2,39 @@
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-
-    li {
-        margin-bottom: 15px;
-    }
-
-    .backArrow {
-        order: 1;
-        font-size: 1.5em;
-        margin: 10px 0 0 20px;
-        color: color(backArrow);
-    }
-
-    .onlineUsersCount {
-        position: absolute;
-        top: 15px;
-        left: 50px;
-        font-size: 1.2em;
-        font-weight: bold;
-
-
-        span {
-            position: absolute;
-            top: 20px;
-            color: color(secondary);
-            font-weight: normal;
-            display: block;
-        }
-    }
+    height: 480px;
 
     .onlineUsersList {
         list-style: none;
         position: relative;
-        top: 80px;
-        left: 10px;
+        left: -30px;
+         
+        li {
+            margin-bottom: 15px;
+            position: relative;
 
-        .name {
-            position: absolute;
-            left: 100px;
-            font-weight: bold;
+            .name {
+                position: absolute;
+                left: 60px;
+                font-weight: bold;
+            }
+    
+            .designation {
+                position: absolute;
+                top: 20px;
+                left: 60px;
+                font-size: 0.9em;
+                color: color(secondary);
+            }
+
+            .logedUser {
+                position: absolute;
+                top: -2px;
+                right: -25px;
+                font-weight: bold;
+                font-size: 1.1em;
+            }
         }
+        
     }
 }

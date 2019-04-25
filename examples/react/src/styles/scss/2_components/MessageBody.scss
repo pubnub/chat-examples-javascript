@@ -1,24 +1,23 @@
 .messageBody {
     position: relative;
 
-    li {
-        position: absolute;
-        top: 0px;
-        left: 10px;
-        list-style: none;
-    } 
-
     .msgForm {
+        position: absolute;
+        left: 5px;
+        bottom: 20px;
     
         .msgInput {
-            @include size (750px, 25px);
+            @include size (830px, 25px);
             margin-top: 30px;
-            border: 1px solid color(secondary);
-            border-radius: 10px;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
         }
-    
+
         .submitBtn {
-            @include size (100px, 30px);
+            @include size (90px, 30px);
             margin-left: 10px;
             background-color: color(primary);
             border: 1px solid color(primary);

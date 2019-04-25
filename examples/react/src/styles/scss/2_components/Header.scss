@@ -1,29 +1,65 @@
 .header {
-    @include size (890px);
+    @include size (1203px);
     position: relative;
-    margin-bottom: -20px;
     border: 1px solid rgba(128, 128, 128, 0.164);
+
+    .onlineUsersCount {
+        position: absolute;
+        top: 10px;
+        left: 80px;
+        font-size: 1.2em;
+        font-weight: bold;       
+        
+        .onlineUsersLogo {
+            position: absolute;
+            top: 5px;
+            left: -70px;
+        }
+
+        .members {
+            position: relative;
+            left: -10px;
+        }
+
+        span {
+            position: absolute;
+            top: 25px;
+            left: 5px;
+            color: color(secondary);
+            font-weight: normal;
+            display: block;
+        }
+
+        .onlineCircle {
+            @include size(8px, 8px);
+            position: absolute;
+            top: 35px;
+            left: -10px;
+            border-radius: 50%;
+            background-color: rgb(12, 204, 12);           
+        }
+    }
 
     .logo {
         position: absolute;
         top: 12px;
-        left: 10px;
+        left: 260px;
     }
 
     h1 {
+        position: absolute;
         font-weight: bold;
         font-size: 1.5em;
-        position: absolute;
         top: -5px;
-        left: 70px;
+        left: 320px;
     }
 
     h2 {
         font-weight: normal;
-        font-size: 1.1em;
+        font-size: 1em;
         position: absolute;
-        top: 22px;
-        left: 70px;
+        top: 24px;
+        left: 320px;
     }
 
     .userName {
