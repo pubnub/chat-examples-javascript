@@ -48,6 +48,7 @@ export default class extends Component {
       this.subscribe();
 
       this.pubnub.getMessage('demo-animal-forest', (m) => {
+        console.log(m)
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
@@ -133,6 +134,11 @@ export default class extends Component {
     getUserImage = (uuid) => {
       const image = users.find(element => element.uuid === uuid);
       return image.profileImage.lgImage;
+    }
+
+    getUserImage = (uuid) => {
+      const image = users.find(element => element.uuid === uuid);
+      return image.profileImage.smImage;
     }
 
     render() {

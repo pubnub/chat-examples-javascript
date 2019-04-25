@@ -30,8 +30,6 @@ import bamboo_panda_45px from '../styles/avatars/45px/Bamboo-Panda.png';
 import cuddly_koala_45px from '../styles/avatars/45px/Cuddly-Koala.png';
 import fast_ostrich_45px from '../styles/avatars/45px/Fast-Ostrich.png';
 import brown_meerkat_45px from '../styles/avatars/45px/Brown-Meerkat.png';
-
-
 import baby_deer_28px from '../styles/avatars/28px/baby-deer.png';
 import blue_bird_28px from '../styles/avatars/28px/blue-bird.png';
 import colorful_cock_28px from '../styles/avatars/28px/colorful-cock.png';
