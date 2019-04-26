@@ -12,18 +12,6 @@ class MessageBody extends Component {
         this.setState({
             msgContent: e.target.value,
         });
-
-        const {timeout} = this;
-
-        if (timeout)
-            clearTimeout(timeout);
-        else
-            this.props.setPubnubState(true);
-  
-        this.timeout = setTimeout(() => {
-            this.props.setPubnubState(false);
-            this.timeout = undefined;
-        }, 1000)
     }
   
     onSubmit = (e) => {
@@ -39,8 +27,6 @@ class MessageBody extends Component {
                 "profileImage": this.props.profileImage
             }
         });
-
-        this.props.setPubnubState(false);
     
         this.setState({
             msgContent: '',
@@ -51,14 +37,7 @@ class MessageBody extends Component {
     render() {
         const {networkStatus} = this.props;
         return (
-            <div className='messageBody'>
-                {/* <ul> //typing indicators
-                    {usersTyping.length > 0  &&
-                        usersTyping.map((user, index) => 
-                            <li key={index}>{findById(user)} is typing . . .</li>
-                        )}
-                </ul> */}
-    
+            <div className='messageBody'>    
                 <form className='msgForm'>
                     <input 
                         className='msgInput' 
@@ -69,8 +48,6 @@ class MessageBody extends Component {
                 </form>
 
                 {networkStatus}
-
-                <br/><br/>
             </div>
         );
     }

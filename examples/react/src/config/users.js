@@ -200,5 +200,125 @@ export default [
             lgImage: avatars.safari_camel_45px,
             smImage: avatars.safari_camel_28px
         }
+    },
+    {
+        uuid: 'user-21',
+        firstName: 'Honey',
+        lastName: 'Bee',
+        designation: 'Co-Founder',
+        profileImage: {
+            lgImage: avatars.honey_bee_45px,
+            smImage: avatars.honey_bee_28px
+        }
+    },
+    {
+        uuid: 'user-22',
+        firstName: 'Angry',
+        lastName: 'Crocodile',
+        designation: 'Solution Architect',
+        profileImage: {
+            lgImage: avatars.angry_crocodile_45px,
+            smImage: avatars.angry_crocodile_28px
+        }
+    },
+    {
+        uuid: 'user-22',
+        firstName: 'Mountain',
+        lastName: 'Kangaroo',
+        designation: 'Product Manager',
+        profileImage: {
+            lgImage: avatars.mountain_kangaroo_45px,
+            smImage: avatars.mountain_kangaroo_28px
+        }
+    },
+    {
+        uuid: 'user-24',
+        firstName: 'Scary',
+        lastName: 'Snake',
+        designation: 'Engineer',
+        profileImage: {
+            lgImage: avatars.scary_snake_45px,
+            smImage: avatars.scary_snake_28px
+        }
+    },
+    {
+        uuid: 'user-25',
+        firstName: 'Greenland',
+        lastName: 'Reindeer',
+        designation: 'Technician',
+        profileImage: {
+            lgImage: avatars.greenland_reindeer_45px,
+            smImage: avatars.greenland_reindeer_28px
+        }
+    },
+    {
+        uuid: 'user-26',
+        firstName: 'Crazy',
+        lastName: 'Frog',
+        designation: 'Receptionist',
+        profileImage: {
+            lgImage: avatars.crazy_frog_45px,
+            smImage: avatars.crazy_frog_28px
+        }
+    },
+    {
+        uuid: 'user-27',
+        firstName: 'Black',
+        lastName: 'Pig',
+        designation: 'Account Manager',
+        profileImage: {
+            lgImage: avatars.black_pig_45px,
+            smImage: avatars.black_pig_28px
+        }
+    },
+    {
+        uuid: 'user-28',
+        firstName: 'Red',
+        lastName: 'Fox',
+        designation: 'Support Rep',
+        profileImage: {
+            lgImage: avatars.red_fox_45px,
+            smImage: avatars.red_fox_28px
+        }
+    },
+    {
+        uuid: 'user-29',
+        firstName: 'Bamboo',
+        lastName: 'Panda',
+        designation: 'Dev-Ops Engineer',
+        profileImage: {
+            lgImage: avatars.bamboo_panda_45px,
+            smImage: avatars.bamboo_panda_28px
+        }
+    },
+    {
+        uuid: 'user-30',
+        firstName: 'Cuddly',
+        lastName: 'Koala',
+        designation: 'Network Engineer',
+        profileImage: {
+            lgImage: avatars.cuddly_koala_45px,
+            smImage: avatars.cuddly_koala_28px
+        }
+    },
+    {
+        uuid: 'user-31',
+        firstName: 'Fast',
+        lastName: 'Ostrich',
+        designation: 'Technician',
+        profileImage: {
+            lgImage: avatars.fast_ostrich_45px,
+            smImage: avatars.fast_ostrich_28px
+        }
+    },
+    {
+        uuid: 'user-32',
+        firstName: 'Brown',
+        lastName: 'Meerkat',
+        designation: 'Solution Architect',
+        profileImage: {
+            lgImage: avatars.brown_meerkat_45px,
+            smImage: avatars.brown_meerkat_28px
+        }
     }
 ]

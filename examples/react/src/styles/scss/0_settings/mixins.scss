@@ -4,62 +4,8 @@
     min-height: $min-height
 }
 
-@media (max-width :1200px) {
-    #root{
-        .messageBody{
-            .msgForm{
-                .msgInput{
-                    width         :calc(100% - 40px);
-                    margin-bottom :20px;
-                    margin-left   :23px;
-                }
-                .submitBtn{
-                    float        :right;
-                    margin-right :15px;
-                }
-            }
-        }
-        .msgsDialog{
-            width :calc(100% - 40px);
-        }
-    }
-}
-
-@media (max-width :767px) {
-    #root{
-        .msgsDialog{
-            width      :calc(100% - 40px);
-            overflow-x :hidden;
-            li{
-                &:not(.senderMsg){
-                    width        :98%;
-                    padding-left :0;
-                }
-                .message{
-                    width   :100%;
-                    padding :10px 5px;
-                }
-            }
-            li.senderMsg{
-                width        :calc(98% - 40px);
-                margin-right :50px;
-            }
-        }
-        .messageBody{
-            .msgForm{
-                .submitBtn{
-                    float        :right;
-                    margin-right :15px;
-                }
-                .msgInput{
-                    width      :calc(100% - 30px);
-                    margin     :20px auto;
-                    display    :block;
-                    padding    :10px 15px;
-                    box-sizing :border-box;
-                    height     :40px;
-                }
-            }
-        }
+@mixin breakpoint ($point) {
+    @media (min-width: $point) {
+        @content;
     }
 }

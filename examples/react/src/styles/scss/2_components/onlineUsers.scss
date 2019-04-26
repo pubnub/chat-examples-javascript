@@ -2,45 +2,48 @@
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-
-    li {
-        margin-bottom: 15px;
-    }
-
-    .backArrow {
-        order: 1;
-        font-size: 1.5em;
-        margin: 10px 0 0 20px;
-        color: color(backArrow);
-    }
-
-    .onlineUsersCount {
-        position: absolute;
-        top: 15px;
-        left: 50px;
-        font-size: 1.2em;
-        font-weight: bold;
-
-
-        span {
-            position: absolute;
-            top: 20px;
-            color: color(secondary);
-            font-weight: normal;
-            display: block;
-        }
-    }
+    height: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.164);
+    border-top: unset;
 
     .onlineUsersList {
         list-style: none;
         position: relative;
-        top: 80px;
-        left: 10px;
+        left: -30px;
+         
+        li {
+            margin-bottom: 40px;
+            position: relative;
 
-        .name {
-            position: absolute;
-            left: 100px;
-            font-weight: bold;
+            img {
+                position: absolute;
+                left: 0;
+            }
+
+            .name {
+                position: relative;
+                display: inline;
+                top: 0;
+                left: 60px;
+                font-weight: bold;
+
+                .youSign {
+                    position: absolute;
+                    top: -2px;
+                    right: -45px;
+                    font-weight: bold;
+                    font-size: 1.1em;
+                }
+            }
+    
+            .designation {
+                position: absolute;
+                top: 20px;
+                left: 60px;
+                font-size: 0.9em;
+                color: color(secondary);
+            }
+
         }
     }
 }

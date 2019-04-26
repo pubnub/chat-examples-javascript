@@ -18,7 +18,18 @@ import striped_zebra_45px from '../styles/avatars/45px/striped-zebra.png';
 import tropical_toucan_45px from '../styles/avatars/45px/tropical-toucan.png';
 import white_rabbit_45px from '../styles/avatars/45px/white-rabbit.png';
 import wild_eagle_45px from '../styles/avatars/45px/wild-eagle.png';
-
+import honey_bee_45px from '../styles/avatars/45px/Honey-Bee.png';
+import angry_crocodile_45px from '../styles/avatars/45px/Angry-Crocodile.png';
+import mountain_kangaroo_45px from '../styles/avatars/45px/Mountain-Kangaroo.png';
+import scary_snake_45px from '../styles/avatars/45px/Scary-Snake.png';
+import greenland_reindeer_45px from '../styles/avatars/45px/Greenland-Reindeer.png';
+import crazy_frog_45px from '../styles/avatars/45px/Crazy-Frog.png';
+import black_pig_45px from '../styles/avatars/45px/Black-Pig.png';
+import red_fox_45px from '../styles/avatars/45px/Red-Fox.png';
+import bamboo_panda_45px from '../styles/avatars/45px/Bamboo-Panda.png';
+import cuddly_koala_45px from '../styles/avatars/45px/Cuddly-Koala.png';
+import fast_ostrich_45px from '../styles/avatars/45px/Fast-Ostrich.png';
+import brown_meerkat_45px from '../styles/avatars/45px/Brown-Meerkat.png';
 import baby_deer_28px from '../styles/avatars/28px/baby-deer.png';
 import blue_bird_28px from '../styles/avatars/28px/blue-bird.png';
 import colorful_cock_28px from '../styles/avatars/28px/colorful-cock.png';
@@ -39,6 +50,18 @@ import striped_zebra_28px from '../styles/avatars/28px/striped-zebra.png';
 import tropical_toucan_28px from '../styles/avatars/28px/tropical-toucan.png';
 import white_rabbit_28px from '../styles/avatars/28px/white-rabbit.png';
 import wild_eagle_28px from '../styles/avatars/28px/wild-eagle.png';
+import honey_bee_28px from '../styles/avatars/28px/Honey-Bee.png';
+import angry_crocodile_28px from '../styles/avatars/28px/Angry-Crocodile.png';
+import mountain_kangaroo_28px from '../styles/avatars/28px/Mountain-Kangaroo.png';
+import scary_snake_28px from '../styles/avatars/28px/Scary-Snake.png';
+import greenland_reindeer_28px from '../styles/avatars/28px/Greenland-Reindeer.png';
+import crazy_frog_28px from '../styles/avatars/28px/Crazy-Frog.png';
+import black_pig_28px from '../styles/avatars/28px/Black-Pig.png';
+import red_fox_28px from '../styles/avatars/28px/Red-Fox.png';
+import bamboo_panda_28px from '../styles/avatars/28px/Bamboo-Panda.png';
+import cuddly_koala_28px from '../styles/avatars/28px/Cuddly-Koala.png';
+import fast_ostrich_28px from '../styles/avatars/28px/Fast-Ostrich.png';
+import brown_meerkat_28px from '../styles/avatars/28px/Brown-Meerkat.png';
 
 export default {
     baby_deer_45px,
@@ -60,6 +83,18 @@ export default {
     striped_zebra_45px,
     tropical_toucan_45px,
     white_rabbit_45px,
+    honey_bee_45px,
+    angry_crocodile_45px,
+    mountain_kangaroo_45px,
+    scary_snake_45px,
+    greenland_reindeer_45px,
+    crazy_frog_45px,
+    black_pig_45px,
+    red_fox_45px,
+    bamboo_panda_45px,
+    cuddly_koala_45px,
+    fast_ostrich_45px, 
+    brown_meerkat_45px, 
     wild_eagle_45px,
     baby_deer_28px,
     blue_bird_28px,
@@ -80,5 +115,17 @@ export default {
     striped_zebra_28px,
     tropical_toucan_28px,
     white_rabbit_28px,
-    wild_eagle_28px
+    wild_eagle_28px,
+    honey_bee_28px,
+    angry_crocodile_28px,
+    mountain_kangaroo_28px,
+    scary_snake_28px,
+    greenland_reindeer_28px,
+    crazy_frog_28px,
+    black_pig_28px,
+    red_fox_28px,
+    bamboo_panda_28px,
+    cuddly_koala_28px,
+    fast_ostrich_28px, 
+    brown_meerkat_28px, 
 };
