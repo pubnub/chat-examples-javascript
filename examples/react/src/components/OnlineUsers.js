@@ -18,11 +18,12 @@ const OnlineUsers = (props) => {
             <ul className='onlineUsersList'>
                 {onlineUsers.map((user, index) => 
                 <li key={index}>
-                    <div className='name'>{findById(user.uuid)}</div>
+                    <div className='name'>{findById(user.uuid)}
+                        {user.uuid === logedUser && <div className='youSign'>(You)</div>}                   
+                    </div>
                     <div className='designation'>{getUserDesignation(user.uuid)}</div>
                     <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid)}/>
                     
-                    {user.uuid === logedUser && <div className='logedUser'>(You)</div>}
                 </li>)}                 
             </ul>
         </div>
