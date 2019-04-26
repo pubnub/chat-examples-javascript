@@ -7,40 +7,46 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.grid {
-  display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-template-rows: 70px 1fr 60px;
-  grid-template-columns: 250px 1fr;
+#root {
+  width: 80vw;
+  height: 80vh;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
 }
-.grid .header {
+#root .grid {
+  display: grid;
+  width: 100%;
+  height: 80%;
+  grid-template-rows: 70px 100% 60px;
+  grid-template-columns: 280px 1fr;
+}
+#root .grid .header {
   grid-row: 1;
   grid-column: 1/3;
 }
-.grid .onlineUsers {
-  grid-row: 2/3;
+#root .grid .onlineUsers {
+  grid-row: 2/4;
   grid-column: 1;
 }
-.grid .messageList {
+#root .grid .messageList {
   grid-row: 2;
   grid-column: 2;
 }
-.grid .messageBody {
+#root .grid .messageBody {
   grid-row: 3;
   grid-column: 2;
 }
 
 .messageList {
-  width: 953px;
-  height: 480px;
-  border-left: 1px solid rgba(128, 128, 128, 0.164);
+  width: 100%;
+  height: 100%;
   border-right: 1px solid rgba(128, 128, 128, 0.164);
 }
 
 .msgsDialog {
-  width: 915px;
-  height: 480px;
+  height: inherit;
   position: relative;
   display: flex;
   margin-top: 0;
@@ -52,7 +58,7 @@ body {
 .msgsDialog .message {
   max-width: 280px;
   word-wrap: break-word;
-  padding: 0 10px;
+  padding: 2%;
   display: inline-block;
   border-radius: 10px;
 }
@@ -105,12 +111,13 @@ body {
   position: relative;
 }
 .messageBody .msgForm {
+  width: 100%;
   position: absolute;
   left: 5px;
-  bottom: 20px;
+  bottom: 10px;
 }
 .messageBody .msgForm .msgInput {
-  width: 830px;
+  width: 85%;
   height: 25px;
   margin-top: 30px;
   border: none;
@@ -119,9 +126,8 @@ body {
   outline: none;
 }
 .messageBody .msgForm .submitBtn {
-  width: 90px;
+  width: 12%;
   height: 30px;
-  margin-left: 10px;
   background-color: #d32f2f;
   border: 1px solid #d32f2f;
   border-radius: 10px;
@@ -130,7 +136,7 @@ body {
 }
 
 .header {
-  width: 1203px;
+  width: 100%;
   position: relative;
   border: 1px solid rgba(128, 128, 128, 0.164);
 }
@@ -170,26 +176,26 @@ body {
 .header .logo {
   position: absolute;
   top: 12px;
-  left: 260px;
+  left: 282px;
 }
 .header h1 {
   position: absolute;
   font-weight: bold;
   font-size: 1.5em;
   top: -5px;
-  left: 320px;
+  left: 340px;
 }
 .header h2 {
   font-weight: normal;
   font-size: 1em;
   position: absolute;
   top: 24px;
-  left: 320px;
+  left: 340px;
 }
 .header .userName {
   position: absolute;
   top: 12px;
-  right: 35px;
+  right: 20px;
   color: grey;
 }
 .header .userName span {
@@ -207,7 +213,9 @@ body {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 480px;
+  height: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.164);
+  border-top: unset;
 }
 .onlineUsers .onlineUsersList {
   list-style: none;
@@ -215,13 +223,26 @@ body {
   left: -30px;
 }
 .onlineUsers .onlineUsersList li {
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   position: relative;
 }
-.onlineUsers .onlineUsersList li .name {
+.onlineUsers .onlineUsersList li img {
   position: absolute;
+  left: 0;
+}
+.onlineUsers .onlineUsersList li .name {
+  position: relative;
+  display: inline;
+  top: 0;
   left: 60px;
   font-weight: bold;
+}
+.onlineUsers .onlineUsersList li .name .youSign {
+  position: absolute;
+  top: -2px;
+  right: -45px;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 .onlineUsers .onlineUsersList li .designation {
   position: absolute;
@@ -229,13 +250,6 @@ body {
   left: 60px;
   font-size: 0.9em;
   color: grey;
-}
-.onlineUsers .onlineUsersList li .logedUser {
-  position: absolute;
-  top: -2px;
-  right: -25px;
-  font-weight: bold;
-  font-size: 1.1em;
 }
 
 /*# sourceMappingURL=style.css.map */

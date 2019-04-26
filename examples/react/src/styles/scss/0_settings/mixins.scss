@@ -3,3 +3,9 @@
     height: $height;
     min-height: $min-height
 }
+
+@mixin breakpoint ($point) {
+    @media (min-width: $point) {
+        @content;
+    }
+}

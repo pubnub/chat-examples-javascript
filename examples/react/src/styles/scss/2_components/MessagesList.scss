@@ -1,11 +1,10 @@
 .messageList {
-    @include size (953px, 480px);
-    border-left: 1px solid rgba(128, 128, 128, 0.164);
+    @include size (100%, 100%);
     border-right: 1px solid rgba(128, 128, 128, 0.164);
 }
 
 .msgsDialog {
-    @include size (915px, 480px);
+    height: inherit;
     position: relative;
     display: flex;
     margin-top: 0;
@@ -17,7 +16,7 @@
     .message {
         max-width: 280px;
         word-wrap: break-word;
-        padding: 0 10px;
+        padding: 2%;
         display: inline-block;
         border-radius: 10px;
     }

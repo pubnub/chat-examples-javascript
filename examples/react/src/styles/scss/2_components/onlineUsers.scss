@@ -2,7 +2,9 @@
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 480px;
+    height: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.164);
+    border-top: unset;
 
     .onlineUsersList {
         list-style: none;
@@ -10,13 +12,28 @@
         left: -30px;
          
         li {
-            margin-bottom: 15px;
+            margin-bottom: 40px;
             position: relative;
 
-            .name {
+            img {
                 position: absolute;
+                left: 0;
+            }
+
+            .name {
+                position: relative;
+                display: inline;
+                top: 0;
                 left: 60px;
                 font-weight: bold;
+
+                .youSign {
+                    position: absolute;
+                    top: -2px;
+                    right: -45px;
+                    font-weight: bold;
+                    font-size: 1.1em;
+                }
             }
     
             .designation {
@@ -27,13 +44,6 @@
                 color: color(secondary);
             }
 
-            .logedUser {
-                position: absolute;
-                top: -2px;
-                right: -25px;
-                font-weight: bold;
-                font-size: 1.1em;
-            }
         }
         
     }
