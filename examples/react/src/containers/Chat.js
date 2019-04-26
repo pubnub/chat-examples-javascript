@@ -136,11 +136,6 @@ export default class extends Component {
       return image.profileImage.lgImage;
     }
 
-    getUserImage = (uuid) => {
-      const image = users.find(element => element.uuid === uuid);
-      return image.profileImage.smImage;
-    }
-
     render() {
         return (
           <div className='grid'>
