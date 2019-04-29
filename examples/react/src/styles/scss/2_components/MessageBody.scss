@@ -15,10 +15,13 @@
             &:focus {
                 outline: none;
             }
+<<<<<<< HEAD
 
             @include breakpoint ($tablet) {
                 margin-left: 5px;
             }
+=======
+>>>>>>> master
         }
 
         .submitBtn {

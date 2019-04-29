@@ -5,10 +5,13 @@
     height: 100%;
     border: 1px solid rgba(128, 128, 128, 0.164);
     border-top: unset;
+<<<<<<< HEAD
 
     @include breakpoint ($tablet) {
         display: none;
     }
+=======
+>>>>>>> master
 
     .onlineUsersList {
         list-style: none;
