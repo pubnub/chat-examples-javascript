@@ -7,5 +7,6 @@ $colors: (
     @return map-get($colors, $color_name);
 }
 
-$tablet: 767px;
-$desktop: 1200px;
+$mobile: 415px;
+$tablet: 770px;
+// $desktop: 1200px;
