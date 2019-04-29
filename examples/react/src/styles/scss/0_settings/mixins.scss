@@ -5,11 +5,7 @@
 }
 
 @mixin breakpoint ($point) {
-<<<<<<< HEAD
     @media (max-width: $point) {
-=======
-    @media (min-width: $point) {
->>>>>>> master
         @content;
     }
 }

@@ -7,11 +7,5 @@ $colors: (
     @return map-get($colors, $color_name);
 }
 
-<<<<<<< HEAD
 $mobile: 415px;
 $tablet: 770px;
-// $desktop: 1200px;
-=======
-$tablet: 767px;
-$desktop: 1200px;
->>>>>>> master
