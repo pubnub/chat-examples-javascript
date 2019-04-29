@@ -8,7 +8,11 @@
         top: 10px;
         left: 80px;
         font-size: 1.2em;
-        font-weight: bold;       
+        font-weight: bold;    
+        
+        @include breakpoint ($tablet) {
+            display: none;
+        }
         
         .onlineUsersLogo {
             position: absolute;
@@ -44,6 +48,10 @@
         position: absolute;
         top: 12px;
         left: 282px;
+
+        @include breakpoint ($tablet) {
+                left: 10px;
+        }
     }
 
     h1 {
@@ -52,6 +60,16 @@
         font-size: 1.5em;
         top: -5px;
         left: 340px;
+
+        @include breakpoint ($tablet) {
+            left: 70px;
+        }
+
+        @include breakpoint ($mobile) {
+            font-size: 1em;
+            top: 0;
+            left: 60px;
+        }
     }
 
     h2 {
@@ -60,6 +78,18 @@
         position: absolute;
         top: 24px;
         left: 340px;
+
+        @include breakpoint ($tablet) {
+            width: 500px;
+            left: 70px;
+        }
+
+        @include breakpoint ($mobile) {
+            width: 140px;
+            font-size: .8em;
+            top: 18px;
+            left: 60px;
+        }
     }
 
     .userName {
