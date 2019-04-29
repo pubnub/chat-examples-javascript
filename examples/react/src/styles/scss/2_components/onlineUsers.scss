@@ -6,6 +6,10 @@
     border: 1px solid rgba(128, 128, 128, 0.164);
     border-top: unset;
 
+    @include breakpoint ($tablet) {
+        display: none;
+    }
+
     .onlineUsersList {
         list-style: none;
         position: relative;
