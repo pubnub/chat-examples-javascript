@@ -22,7 +22,7 @@ const OnlineUsers = (props) => {
                         {user.uuid === logedUser && <div className='youSign'>(You)</div>}                   
                     </div>
                     <div className='designation'>{getUserDesignation(user.uuid)}</div>
-                    <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid)}/>
+                    <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid, 'lgImage')}/>
                     
                 </li>)}                 
             </ul>

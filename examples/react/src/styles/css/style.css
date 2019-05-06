@@ -9,9 +9,14 @@ body {
 
 #root {
   width: 100vw;
-  height: 80vh;
+  height: 85vh;
   position: relative;
   margin-bottom: 0;
+}
+@media (max-width: 850px) {
+  #root {
+    height: 81vh;
+  }
 }
 #root .grid {
   display: grid;
@@ -19,6 +24,11 @@ body {
   height: 90%;
   grid-template-rows: 70px 100% 60px;
   grid-template-columns: 280px 1fr;
+}
+@media (max-width: 850px) {
+  #root .grid {
+    grid-template-rows: 90px 100% 60px;
+  }
 }
 #root .grid .header {
   grid-row: 1;
@@ -51,9 +61,29 @@ body {
   width: 100%;
   height: 100%;
   border-right: 1px solid rgba(128, 128, 128, 0.164);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.164);
 }
-
-.msgsDialog {
+.messageList .networkErrorImg {
+  width: 80%;
+  height: 100%;
+  position: relative;
+  left: 100px;
+}
+@media (max-width: 1024px) {
+  .messageList .networkErrorImg {
+    width: 100%;
+    height: 70%;
+    left: 20px;
+    bottom: -100px;
+  }
+}
+@media (max-width: 415px) {
+  .messageList .networkErrorImg {
+    width: 100%;
+    left: 20px;
+  }
+}
+.messageList .msgsDialog {
   height: inherit;
   position: relative;
   display: flex;
@@ -63,54 +93,55 @@ body {
   position: relative;
   list-style: none;
 }
-.msgsDialog .message {
-  max-width: 280px;
-  word-wrap: break-word;
-  padding: 2%;
+.messageList .msgsDialog .message {
+  max-width: 270px;
+  padding: 15px;
   display: inline-block;
   border-radius: 10px;
 }
-.msgsDialog .name, .msgsDialog .time {
+.messageList .msgsDialog .name, .messageList .msgsDialog .time {
   font-size: 0.8em;
   color: #808080;
   font-weight: bold;
   position: absolute;
 }
-.msgsDialog li {
+.messageList .msgsDialog li {
   width: 300px;
   position: relative;
   margin-top: 40px;
+  margin-left: 8px;
 }
-.msgsDialog li img {
+.messageList .msgsDialog li img {
   position: absolute;
   bottom: 0;
   left: -30px;
 }
-.msgsDialog li .name, .msgsDialog li .time {
+.messageList .msgsDialog li .name, .messageList .msgsDialog li .time {
   left: 5px;
 }
-.msgsDialog li .name {
+.messageList .msgsDialog li .name {
   top: -18px;
 }
-.msgsDialog li .time {
+.messageList .msgsDialog li .time {
   bottom: -15px;
 }
-.msgsDialog li .message {
+.messageList .msgsDialog li .message {
   background-color: rgba(128, 128, 128, 0.164);
 }
-.msgsDialog .senderMsg {
+.messageList .msgsDialog .senderMsg {
   align-self: flex-end;
   margin-right: 50px;
   color: #fff;
   text-align: right;
 }
-.msgsDialog .senderMsg img {
+.messageList .msgsDialog .senderMsg img {
   left: 305px;
 }
-.msgsDialog .senderMsg .message {
+.messageList .msgsDialog .senderMsg .message {
   background-color: #d32f2f;
+  text-align: left;
 }
-.msgsDialog .senderMsg .name, .msgsDialog .senderMsg .time {
+.messageList .msgsDialog .senderMsg .name, .messageList .msgsDialog .senderMsg .time {
   left: unset;
   right: 5px;
 }
@@ -122,13 +153,19 @@ body {
   width: 100%;
   position: absolute;
   left: 5px;
-  bottom: 10px;
+  bottom: 12px;
+}
+@media (max-width: 850px) {
+  .messageBody .msgForm {
+    bottom: 0;
+  }
 }
 .messageBody .msgForm .msgInput {
-  width: 85%;
+  width: 82%;
   height: 25px;
   margin-top: 30px;
   border: none;
+  font-size: 1.2em;
 }
 .messageBody .msgForm .msgInput:focus {
   outline: none;
@@ -138,6 +175,66 @@ body {
     margin-left: 5px;
   }
 }
+@media (max-width: 415px) {
+  .messageBody .msgForm .msgInput {
+    width: 74%;
+  }
+}
+.messageBody .msgForm .emojiIcon {
+  position: relative;
+  top: 7px;
+  right: 10px;
+  cursor: pointer;
+}
+@media (max-width: 850px) {
+  .messageBody .msgForm .emojiIcon {
+    right: 30px;
+  }
+}
+@media (max-width: 415px) {
+  .messageBody .msgForm .emojiIcon {
+    right: 10px;
+  }
+}
+.messageBody .msgForm .emojisWindow {
+  width: 250px;
+  height: 200px;
+  position: absolute;
+  right: 30px;
+  top: -135px;
+  background-color: white;
+}
+@media (max-width: 1024px) {
+  .messageBody .msgForm .emojisWindow {
+    right: 10px;
+  }
+}
+@media (max-width: 415px) {
+  .messageBody .msgForm .emojisWindow {
+    width: 220px;
+  }
+}
+.messageBody .msgForm .emojisWindow .emoji {
+  margin: 1px 6px -1px 7px;
+}
+@media (max-width: 415px) {
+  .messageBody .msgForm .emojisWindow .emoji {
+    margin: 1px 3px 0 5px;
+  }
+}
+.messageBody .msgForm .emojisWindow .closeBtn {
+  position: absolute;
+  bottom: 8px;
+  left: 5px;
+  background-color: unset;
+  border: none;
+  color: grey;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+.messageBody .msgForm .emojisWindow .closeBtn:focus {
+  outline: none;
+}
 .messageBody .msgForm .submitBtn {
   width: 12%;
   height: 30px;
@@ -146,6 +243,25 @@ body {
   border-radius: 10px;
   color: #fff;
   font-weight: bold;
+  position: absolute;
+  top: 30px;
+  right: 38px;
+  z-index: 1;
+  cursor: pointer;
+}
+.messageBody .msgForm .submitBtn:focus {
+  outline: none;
+}
+@media (max-width: 1024px) {
+  .messageBody .msgForm .submitBtn {
+    right: 22px;
+  }
+}
+@media (max-width: 415px) {
+  .messageBody .msgForm .submitBtn {
+    padding-left: 1px;
+    padding-right: 2px;
+  }
 }
 
 .header {
@@ -154,11 +270,17 @@ body {
   border: 1px solid rgba(128, 128, 128, 0.164);
 }
 .header .onlineUsersCount {
-  position: absolute;
-  top: 10px;
-  left: 80px;
+  width: 278px;
+  height: 70px;
+  position: relative;
   font-size: 1.2em;
   font-weight: bold;
+  border-right: 1px solid rgba(128, 128, 128, 0.164);
+}
+@media (max-width: 770px) {
+  .header .onlineUsersCount {
+    display: none;
+  }
 }
 @media (max-width: 770px) {
   .header .onlineUsersCount {
@@ -167,34 +289,71 @@ body {
 }
 .header .onlineUsersCount .onlineUsersLogo {
   position: absolute;
-  top: 5px;
-  left: -70px;
+  top: 10px;
+  left: 15px;
+}
+@media (max-width: 850px) {
+  .header .onlineUsersCount .onlineUsersLogo {
+    top: 20px;
+  }
 }
 .header .onlineUsersCount .members {
   position: relative;
-  left: -10px;
+  top: 8px;
+  left: 70px;
+}
+@media (max-width: 850px) {
+  .header .onlineUsersCount .members {
+    top: 20px;
+  }
 }
 .header .onlineUsersCount span {
   position: absolute;
-  top: 25px;
-  left: 5px;
+  top: 30px;
+  left: 86px;
   color: grey;
   font-weight: normal;
   display: block;
+}
+@media (max-width: 850px) {
+  .header .onlineUsersCount span {
+    top: 40px;
+  }
 }
 .header .onlineUsersCount .onlineCircle {
   width: 8px;
   height: 8px;
   position: absolute;
-  top: 35px;
-  left: -10px;
+  top: 40px;
+  left: 72px;
   border-radius: 50%;
   background-color: #0ccc0c;
+}
+@media (max-width: 850px) {
+  .header .onlineUsersCount .onlineCircle {
+    top: 50px;
+  }
 }
 .header .logo {
   position: absolute;
   top: 12px;
-  left: 282px;
+  left: 290px;
+}
+@media (max-width: 850px) {
+  .header .logo {
+    top: 20px;
+  }
+}
+@media (max-width: 770px) {
+  .header .logo {
+    left: 10px;
+  }
+}
+@media (max-width: 415px) {
+  .header .logo {
+    top: 18px;
+    left: 2px;
+  }
 }
 @media (max-width: 770px) {
   .header .logo {
@@ -204,9 +363,26 @@ body {
 .header h1 {
   position: absolute;
   font-weight: bold;
-  font-size: 1.5em;
-  top: -5px;
-  left: 340px;
+  font-size: 1.1em;
+  top: 2px;
+  left: 345px;
+}
+@media (max-width: 850px) {
+  .header h1 {
+    top: 10px;
+  }
+}
+@media (max-width: 770px) {
+  .header h1 {
+    left: 70px;
+  }
+}
+@media (max-width: 415px) {
+  .header h1 {
+    font-size: 1em;
+    top: 5px;
+    left: 50px;
+  }
 }
 @media (max-width: 770px) {
   .header h1 {
@@ -224,8 +400,34 @@ body {
   font-weight: normal;
   font-size: 1em;
   position: absolute;
-  top: 24px;
-  left: 340px;
+  top: 20px;
+  left: 345px;
+}
+@media (max-width: 850px) {
+  .header h2 {
+    top: 30px;
+    line-height: 0.9em;
+    width: 150px;
+  }
+}
+@media (max-width: 770px) {
+  .header h2 {
+    width: 550px;
+    left: 70px;
+  }
+}
+@media (max-width: 586px) {
+  .header h2 {
+    width: 150px;
+  }
+}
+@media (max-width: 415px) {
+  .header h2 {
+    width: 130px;
+    font-size: 0.8em;
+    top: 23px;
+    left: 50px;
+  }
 }
 @media (max-width: 770px) {
   .header h2 {
@@ -247,6 +449,17 @@ body {
   right: 20px;
   color: grey;
 }
+@media (max-width: 850px) {
+  .header .userName {
+    top: 20px;
+  }
+}
+@media (max-width: 415px) {
+  .header .userName {
+    top: 18px;
+    right: 5px;
+  }
+}
 .header .userName span {
   display: block;
   color: #000;
@@ -255,7 +468,7 @@ body {
 .header .userName img {
   position: absolute;
   top: 0;
-  left: -55px;
+  left: -50px;
 }
 
 .onlineUsers {
@@ -289,14 +502,14 @@ body {
   display: inline;
   top: 0;
   left: 60px;
+  font-size: 0.9em;
   font-weight: bold;
 }
 .onlineUsers .onlineUsersList li .name .youSign {
   position: absolute;
-  top: -2px;
-  right: -45px;
+  top: 0;
+  right: -40px;
   font-weight: bold;
-  font-size: 1.1em;
 }
 .onlineUsers .onlineUsersList li .designation {
   position: absolute;
