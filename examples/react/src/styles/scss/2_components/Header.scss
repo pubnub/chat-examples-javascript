@@ -4,11 +4,11 @@
     border: 1px solid rgba(128, 128, 128, 0.164);
 
     .onlineUsersCount {
-        position: absolute;
-        top: 10px;
-        left: 80px;
+        @include size(278px, $height:70px);
+        position: relative;
         font-size: 1.2em;
-        font-weight: bold;    
+        font-weight: bold;
+        border-right: 1px solid rgba(128, 128, 128, 0.164); 
         
         @include breakpoint ($tablet) {
             display: none;
@@ -16,50 +16,80 @@
         
         .onlineUsersLogo {
             position: absolute;
-            top: 5px;
-            left: -70px;
+            top: 10px;
+            left: 15px;
+
+            @include breakpoint ($tablet_desktop) {
+                top:20px;
+            }
         }
 
         .members {
             position: relative;
-            left: -10px;
+            top: 8px;
+            left: 70px;
+
+            @include breakpoint ($tablet_desktop) {
+                top:20px;
+            }
         }
 
         span {
             position: absolute;
-            top: 25px;
-            left: 5px;
+            top: 30px;
+            left: 86px;
             color: color(secondary);
             font-weight: normal;
             display: block;
+
+            @include breakpoint ($tablet_desktop) {
+                top: 40px;
+            }
         }
 
         .onlineCircle {
             @include size(8px, 8px);
             position: absolute;
-            top: 35px;
-            left: -10px;
+            top: 40px;
+            left: 72px;
             border-radius: 50%;
-            background-color: rgb(12, 204, 12);           
+            background-color: rgb(12, 204, 12);     
+            
+            @include breakpoint (850px) {
+                top: 50px;
+            }
         }
     }
 
     .logo {
         position: absolute;
         top: 12px;
-        left: 282px;
+        left: 290px;
+
+        @include breakpoint ($tablet_desktop) {
+            top:20px;
+        }
 
         @include breakpoint ($tablet) {
-                left: 10px;
+            left: 10px;
+        }
+
+        @include breakpoint ($mobile) {
+            top: 18px;
+            left: 2px;
         }
     }
 
     h1 {
         position: absolute;
         font-weight: bold;
-        font-size: 1.5em;
-        top: -5px;
-        left: 340px;
+        font-size: 1.1em;
+        top: 2px;
+        left: 345px;
+
+        @include breakpoint ($tablet_desktop) {
+            top: 10px;
+        }
 
         @include breakpoint ($tablet) {
             left: 70px;
@@ -67,8 +97,8 @@
 
         @include breakpoint ($mobile) {
             font-size: 1em;
-            top: 0;
-            left: 60px;
+            top: 5px;
+            left: 50px;
         }
     }
 
@@ -76,19 +106,29 @@
         font-weight: normal;
         font-size: 1em;
         position: absolute;
-        top: 24px;
-        left: 340px;
+        top: 20px;
+        left: 345px;
+
+        @include breakpoint ($tablet_desktop) {
+            top: 30px;
+            line-height: .9em;
+            width: 150px;
+        }
 
         @include breakpoint ($tablet) {
-            width: 500px;
+            width: 550px;
             left: 70px;
         }
 
+        @include breakpoint (586px) {
+            width: 150px;
+        }
+        
         @include breakpoint ($mobile) {
-            width: 140px;
+            width: 130px;
             font-size: .8em;
-            top: 18px;
-            left: 60px;
+            top: 23px;
+            left: 50px;
         }
     }
 
@@ -97,6 +137,15 @@
         top: 12px;
         right: 20px;
         color: color(secondary);
+
+        @include breakpoint ($tablet_desktop) {
+            top: 20px;
+        }
+
+        @include breakpoint ($mobile) {
+            top: 18px;
+            right: 5px;
+        }
 
         span {
             display: block;
@@ -107,7 +156,7 @@
         img {
             position: absolute;
             top: 0;
-            left: -55px;
+            left: -50px;
         }
     }
 }

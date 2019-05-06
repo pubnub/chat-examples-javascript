@@ -29,14 +29,14 @@
                 display: inline;
                 top: 0;
                 left: 60px;
+                font-size: .9em;
                 font-weight: bold;
 
                 .youSign {
                     position: absolute;
-                    top: -2px;
-                    right: -45px;
+                    top: 0;
+                    right: -40px;
                     font-weight: bold;
-                    font-size: 1.1em;
                 }
             }
     
@@ -49,5 +49,6 @@
             }
 
         }
+        
     }
 }

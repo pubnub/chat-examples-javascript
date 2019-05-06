@@ -11,9 +11,13 @@ body {
 
 #root {
     width: 100vw;
-    height: 80vh;
+    height: 85vh;
     position: relative;
     margin-bottom: 0;
+
+    @include breakpoint ($tablet_desktop) {
+        height: 81vh;
+    }
 
     .grid {
         display: grid;
@@ -21,6 +25,10 @@ body {
         height: 90%;
         grid-template-rows: 70px 100% 60px;
         grid-template-columns: 280px 1fr;
+
+        @include breakpoint ($tablet_desktop) {
+            grid-template-rows: 90px 100% 60px;
+        }
         
         .header {
             grid-row: 1;

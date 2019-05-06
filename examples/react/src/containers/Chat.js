@@ -6,6 +6,8 @@ import MessagesList from '../components/MessagesList';
 import Header from '../components/Header';
 import users from '../config/users';
 import {publishKey, subscribeKey} from '../config/keys';
+
+import networkErrorImg from '../styles/networkError.png';
  
 export default class extends Component {
     constructor(props) {
@@ -14,12 +16,13 @@ export default class extends Component {
         this.uuid = randomUser.uuid;
         this.designation = randomUser.designation;
         this.userName = randomUser.firstName + ' ' +  randomUser.lastName;
-        this.profileImage = randomUser.profileImage;
+        this.profileImage = randomUser.profileImage.lgImage;
         this.pubnub = new PubNubReact({
             publishKey,    //publishKey: 'Enter your key . . .'
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
             uuid: this.uuid,
             autoNetworkDetection: true,
+            restore: true
         });
         this.state = {
           sendersInfo: [],
@@ -29,7 +32,8 @@ export default class extends Component {
           usersTyping: [],
           onlineUsers: [],
           onlineUsersNumber: '',
-          networkStatus: null
+          networkErrorStatus: false,
+          networkErrorImg: null
         }
         this.pubnub.init(this);
     }
@@ -44,18 +48,20 @@ export default class extends Component {
       this.setState({usersTyping})
     }
 
-    componentWillMount(){
+    componentWillMount(){           
+      const networkError = new Image();
+      networkError.src = networkErrorImg;
+      this.setState({networkErrorImg: networkError})
+
       this.subscribe();
 
       this.pubnub.getMessage('demo-animal-forest', (m) => {
-        console.log(m)
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
           senderId: m.message.senderId,
           text: m.message.text,
           time,
-          profileImage: m.userMetadata.profileImage.smImage
         });
         this.removeTypingUser(this.uuid);
         
@@ -66,6 +72,7 @@ export default class extends Component {
       });
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
+        console.log(presence)
         this.pubnub.hereNow({
           channels: ['demo-animal-forest'],
           includeUUIDs: true,
@@ -78,18 +85,18 @@ export default class extends Component {
       });
 
       this.pubnub.getStatus((status) => {
-        if (status.category === 'PNNetworkDownCategory')
-          this.setState({networkStatus: 'It looks like you have a problem with your network :('});
-        if (status.category === 'PNNetworkUpCategory') {
-          this.setState({networkStatus: null})
-          this.subscribe(this.state.lastMsgTimetoken);
-        }       
+        if (status.category === 'PNNetworkDownCategory') 
+            this.setState({networkErrorStatus: true});
+        if (status.category === 'PNNetworkUpCategory'){
+            this.setState({networkErrorStatus: false});
+            this.pubnub.reconnect();      
+        }
       });
 
       this.pubnub.history({
         channel: 'demo-animal-forest',
         reverse: false, 
-        count: 10,
+        count: 100,
         stringifiedTimeToken: true
         }, (status, response) => {
           this.setState({
@@ -105,11 +112,10 @@ export default class extends Component {
       this.leaveChat();
     }
 
-    subscribe = (timetoken = 0) => {
+    subscribe = () => {
       this.pubnub.subscribe({
         channels: ['demo-animal-forest'],
-        withPresence: true,
-        timetoken: timetoken
+        withPresence: true
       });
     }
 
@@ -131,9 +137,9 @@ export default class extends Component {
       return designation.designation;
     }
 
-    getUserImage = (uuid) => {
+    getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
-      return image.profileImage.lgImage;
+      return image.profileImage[size];
     }
 
     render() {
@@ -141,7 +147,7 @@ export default class extends Component {
           <div className='grid'>
               <Header 
                 userName={this.userName}
-                profileImage={this.profileImage.lgImage}
+                profileImage={this.profileImage}
                 usersNumber={this.state.onlineUsersNumber}/>                
               <MessagesList 
                 uuid={this.uuid}
@@ -150,13 +156,13 @@ export default class extends Component {
                 getUserImage={this.getUserImage}
                 getTime={this.getTime}
                 historyLoaded={this.state.historyLoaded}
-                historyMsgs={this.state.historyMsgs}/>
+                historyMsgs={this.state.historyMsgs}
+                networkErrorStatus={this.state.networkErrorStatus}
+                networkErrorImg = {this.state.networkErrorImg}/>
               <MessageBody 
                 uuid={this.uuid}
-                profileImage={this.profileImage}
                 pubnub={this.pubnub}
-                findById={this.findById}
-                networkStatus={this.state.networkStatus}/>
+                findById={this.findById}/>
               <OnlineUsers 
                 users={users}
                 getUserImage={this.getUserImage}
