@@ -158,7 +158,7 @@ body {
 }
 @media (max-width: 850px) {
   .messageBody .msgForm {
-    bottom: 0;
+    /*bottom: 0;*/
   }
 }
 .messageBody .msgForm .msgInput {
@@ -183,8 +183,8 @@ body {
 }
 .messageBody .msgForm .emojiIcon {
   position: relative;
-  top: 7px;
-  right: 10px;
+  top: 5px;
+  right: 20px;
   cursor: pointer;
 }
 @media (max-width: 850px) {
