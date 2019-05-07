@@ -1,3 +1,4 @@
+// tag::CHT-1.1[]
 import React, { Component } from 'react';
 import PubNubReact from 'pubnub-react';
 import OnlineUsers from '../components/OnlineUsers';
@@ -34,24 +35,28 @@ export default class extends Component {
           onlineUsersNumber: '',
           networkErrorStatus: false,
           networkErrorImg: null
-        }
+        };
         this.pubnub.init(this);
     }
+    // end::CHT-1.1[]
 
+    // tag::CHT-2.1[]
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
-    }
+    };
   
     removeTypingUser = (uuid) => {
       var usersTyping = this.state.usersTyping;
-      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid)
+      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid);
       this.setState({usersTyping})
-    }
+    };
+    // end::CHT-2.1[]
 
+    // tag::CHT-4[]
     componentWillMount(){           
       const networkError = new Image();
       networkError.src = networkErrorImg;
-      this.setState({networkErrorImg: networkError})
+      this.setState({networkErrorImg: networkError});
 
       this.subscribe();
 
@@ -72,7 +77,6 @@ export default class extends Component {
       });
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
-        console.log(presence)
         this.pubnub.hereNow({
           channels: ['demo-animal-forest'],
           includeUUIDs: true,
@@ -107,41 +111,49 @@ export default class extends Component {
 
       window.addEventListener('beforeunload', this.leaveChat);
     }
-    
+    // end::CHT-4[]
+
+    // tag::CHT-5[]
     componentWillUnmount() {
       this.leaveChat();
     }
+    // end::CHT-5[]
 
+    // tag::CHT-3[]
     subscribe = () => {
       this.pubnub.subscribe({
         channels: ['demo-animal-forest'],
         withPresence: true
       });
-    }
+    };
 
     leaveChat = () => {
       this.pubnub.unsubscribeAll();
-    }
+    };
+    // end::CHT-3[]
 
+    // tag::CHT-2.2[]
     getTime = (timetoken) => {
       return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
-    }
+    };
 
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
       return user.firstName + ' ' + user.lastName;
-    }
+    };
 
     getUserDesignation = (uuid) => {
       const designation = users.find(element => element.uuid === uuid);
       return designation.designation;
-    }
+    };
 
     getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
       return image.profileImage[size];
-    }
+    };
+    // end::CHT-2.2[]
 
+    // tag::CHT-6[]
     render() {
         return (
           <div className='grid'>
@@ -173,4 +185,7 @@ export default class extends Component {
           </div>
         );
     }
+    // end::CHT-6[]
+// tag::CHT-1.2[]
 }
+// end::CHT-1.2[]

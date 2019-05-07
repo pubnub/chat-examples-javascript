@@ -1,54 +1,68 @@
+// tag::MSGS-1.1[]
 import React from 'react';
 
-const MessageList = (props) => { 
+export default (props) => {
     const {uuid, sendersInfo, getTime, historyLoaded, historyMsgs, findById, getUserImage, networkErrorStatus, networkErrorImg} = props;
+    // end::MSGS-1.1[]
 
-    const styleSenderMsg = (senderId) => {
-        if (uuid === senderId) {
-            var senderMsgs = document.getElementsByClassName(senderId);
-            if (senderMsgs.length) {
-                var arr = [].slice.call(senderMsgs);
-                arr.map(e => e.className = 'senderMsg'); 
-            }
-        }
-    }
-    
+    // tag::MSGS-2[]
+    const styleForMessageSender = senderId => uuid === senderId ? 'senderMsg' : senderId;
+    // end::MSGS-2[]
+
+    // tag::MSGS-3[]
     const scrollToBottom = () => {
-        if(document.querySelector(".msgsDialog")) {
-            const elem = document.querySelector(".msgsDialog");
+        const elem = document.querySelector(".msgsDialog");
+
+        if(elem) {
             elem.scrollTop = elem.scrollHeight;
         }
-    }
-    
+    };
+    // end::MSGS-3[]
+
+    // tag::MSGS-4.1[]
     return (
-        <div className='messageList'> 
-        {console.log('u mess list/NEI')}
-            {networkErrorStatus && networkErrorImg ? <img referrerPolicy="no-referrer-when-downgrade" className='networkErrorImg' alt='Network error' src={networkErrorImg.src}/> : 
-            historyLoaded && 
+        <div className='messageList'>
+            {networkErrorStatus && networkErrorImg ? (
+                <img referrerPolicy="no-referrer-when-downgrade" className='networkErrorImg' alt='Network error' src={networkErrorImg.src}/>
+            ) : (historyLoaded &&
                 <ul className='msgsDialog'>
-                {historyMsgs.map( m =>
-                    <li className={m.entry.senderId} key={m.timetoken}>
-                        {styleSenderMsg(m.entry.senderId)}
-                        <div className='name'>{findById(m.entry.senderId)}</div>
-                        <div className='time'>{getTime(m.timetoken)}</div>
-                        <div className='message'>{m.entry.text}</div> 
-                        <img width='28' height='28' alt='' src={getUserImage(m.entry.senderId, 'smImage')}/>        
-                    </li>)}
-                {sendersInfo.map( (m, index) =>
-                    <li className={m.senderId} key={index}>
-                        {styleSenderMsg(m.senderId)}
-                        <div className='name'>{findById(m.senderId)}</div>
-                        <div className='time'>{m.time}</div>
-                        <div className='message'>{m.text}</div> 
-                        <img width='28' height='28' alt='' src={getUserImage(m.senderId, 'smImage')}/>         
-                    </li>)}
+                    {/*// end::MSGS-4.1[]*/}
+                    {/*// tag::MSGS-5[]*/}
+                    {historyMsgs.map( m =>
+                        <li className={styleForMessageSender(m.entry.senderId)} key={m.timetoken}>
+                            <div className='name'>{findById(m.entry.senderId)}</div>
+                            <div className='time'>{getTime(m.timetoken)}</div>
+                            <div className='message'>{m.entry.text}</div>
+                            <img width='28' height='28' alt='' src={getUserImage(m.entry.senderId, 'smImage')}/>
+                        </li>)
+                    }
+                    {/*// end::MSGS-5[]*/}
+                    {/*// tag::MSGS-6[]*/}
+                    {sendersInfo.map( (m, index) =>
+                        <li className={styleForMessageSender(m.senderId)} key={index}>
+                            <div className='name'>{findById(m.senderId)}</div>
+                            <div className='time'>{m.time}</div>
+                            <div className='message'>{m.text}</div>
+                            <img width='28' height='28' alt='' src={getUserImage(m.senderId, 'smImage')}/>
+                        </li>)
+                    }
+                    {/*// end::MSGS-6[]*/}
 
-                {scrollToBottom()}
+                    {/*// tag::MSGS-4.2[]*/}
+                    {scrollToBottom()}
+                    {/*// end::MSGS-4.2[]*/}
+                {/*// tag::MSGS-4.3[]*/}
                 </ul>
-            }
+                // end::MSGS-4.3[]
+            // tag::MSGS-4.4[]
+            )}
+            {/*// end::MSGS-4.4[]*/}
+        {/*// tag::MSGS-4.5[]*/}
         </div>
+        // end::MSGS-4.5[]
+    // tag::MSGS-4.6[]
     );
+    // end::MSGS-4.6[]
+    // tag::MSGS-1.2[]
 }
-
-export default MessageList;
-
+// end::MSGS-1.2[]
