@@ -1,4 +1,3 @@
-// tag::CHT-1.1[]
 import React, { Component } from 'react';
 import PubNubReact from 'pubnub-react';
 import OnlineUsers from '../components/OnlineUsers';
@@ -34,44 +33,35 @@ export default class extends Component {
           onlineUsersNumber: '',
           networkErrorStatus: false,
           networkErrorImg: null
-        };
+        }
         this.pubnub.init(this);
     }
-    // end::CHT-1.1[]
 
-    // tag::CHT-2.1[]
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
-    };
-  
-    removeTypingUser = (uuid) => {
-      var usersTyping = this.state.usersTyping;
-      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid);
-      this.setState({usersTyping})
-    };
-    // end::CHT-2.1[]
+    }
 
-    // tag::CHT-4[]
     componentWillMount(){           
       const networkError = new Image();
       networkError.src = networkErrorImg;
-      this.setState({networkErrorImg: networkError});
+      this.setState({networkErrorImg: networkError})
 
       this.subscribe();
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
-        this.pubnub.hereNow({
-          channels: ['demo-animal-forest'],
-          includeUUIDs: true,
-          includeState: true
-        }, (status, response) => {
+        if (presence.action === 'join') {
+          var users = this.state.onlineUsers;
+          users.push({
+            state: presence.state,
+            uuid: presence.uuid
+          })
           this.setState({
             onlineUsers: users,
             onlineUsersNumber: this.state.onlineUsersNumber + 1
-          });
+          });         
         }
 
-        if (presence.action === 'leave' || 'timeout') {
+        if (presence.action === ('leave' || 'timeout')) {
           this.onLeaveOrTimeoutEvent(presence.uuid);
         }
       });
@@ -117,21 +107,17 @@ export default class extends Component {
 
       window.addEventListener('beforeunload', this.leaveChat);
     }
-    // end::CHT-4[]
-
-    // tag::CHT-5[]
+    
     componentWillUnmount() {
       this.leaveChat();
     }
-    // end::CHT-5[]
 
-    // tag::CHT-3[]
     subscribe = () => {
       this.pubnub.subscribe({
         channels: ['demo-animal-forest'],
         withPresence: true
       });
-    };
+    }
 
     hereNow = () => {
       this.pubnub.hereNow({
@@ -151,31 +137,43 @@ export default class extends Component {
 
     leaveChat = () => {
       this.pubnub.unsubscribeAll();
-    };
-    // end::CHT-3[]
+    }
 
-    // tag::CHT-2.2[]
+    onLeaveOrTimeoutEvent = (uuid) => {
+      var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== uuid);
+      this.setState({
+        onlineUsers: leftUsers
+      });
+
+      const length = this.state.onlineUsers.length
+      this.setState({        
+        onlineUsersNumber: length
+      });
+    }
+
     getTime = (timetoken) => {
       return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
-    };
+    }
 
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
       return user.firstName + ' ' + user.lastName;
-    };
+    }
 
     getUserDesignation = (uuid) => {
       const designation = users.find(element => element.uuid === uuid);
       return designation.designation;
-    };
+    }
 
     getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
       return image.profileImage[size];
-    };
-    // end::CHT-2.2[]
+    }
 
-    // tag::CHT-6[]
+    reload = () => {
+      this.setState(this.state);
+    }
+
     render() {
         return (
           <div className='grid'>
@@ -208,7 +206,4 @@ export default class extends Component {
           </div>
         );
     }
-    // end::CHT-6[]
-// tag::CHT-1.2[]
 }
-// end::CHT-1.2[]
