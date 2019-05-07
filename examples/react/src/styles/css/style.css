@@ -94,13 +94,14 @@ body {
   list-style: none;
 }
 .messageList .msgsDialog .message {
+  font-size: 15px;
   max-width: 270px;
   padding: 15px;
   display: inline-block;
   border-radius: 10px;
 }
 .messageList .msgsDialog .name, .messageList .msgsDialog .time {
-  font-size: 0.8em;
+  font-size: 11px;
   color: #808080;
   font-weight: bold;
   position: absolute;
@@ -162,10 +163,10 @@ body {
 }
 .messageBody .msgForm .msgInput {
   width: 82%;
-  height: 25px;
+  height: 35px;
   margin-top: 30px;
   border: none;
-  font-size: 1.2em;
+  font-size: 15px;
 }
 .messageBody .msgForm .msgInput:focus {
   outline: none;
@@ -273,7 +274,7 @@ body {
   width: 278px;
   height: 70px;
   position: relative;
-  font-size: 1.2em;
+  font-size: 17px;
   font-weight: bold;
   border-right: 1px solid rgba(128, 128, 128, 0.164);
 }
@@ -299,7 +300,7 @@ body {
 }
 .header .onlineUsersCount .members {
   position: relative;
-  top: 8px;
+  top: 14px;
   left: 70px;
 }
 @media (max-width: 850px) {
@@ -308,8 +309,9 @@ body {
   }
 }
 .header .onlineUsersCount span {
+  font-size: 14px;
   position: absolute;
-  top: 30px;
+  top: 33px;
   left: 86px;
   color: grey;
   font-weight: normal;
@@ -363,7 +365,7 @@ body {
 .header h1 {
   position: absolute;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 17px;
   top: 2px;
   left: 345px;
 }
@@ -398,7 +400,7 @@ body {
 }
 .header h2 {
   font-weight: normal;
-  font-size: 1em;
+  font-size: 15px;
   position: absolute;
   top: 20px;
   left: 345px;
