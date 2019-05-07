@@ -22,7 +22,6 @@ const MessageList = (props) => {
     
     return (
         <div className='messageList'> 
-        {console.log('u mess list/NEI')}
             {networkErrorStatus && networkErrorImg ? <img referrerPolicy="no-referrer-when-downgrade" className='networkErrorImg' alt='Network error' src={networkErrorImg.src}/> : 
             historyLoaded && 
                 <ul className='msgsDialog'>

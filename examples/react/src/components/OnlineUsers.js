@@ -3,7 +3,7 @@ import React from 'react';
 const OnlineUsers = (props) => {
     const {logedUser, findById, onlineUsers, getUserImage, getUserDesignation} = props;
 
-    const putLogedUserFirst = (arr) => {  
+    const putLogedUserFirst = (arr) => { 
         if(arr.length) {
             const logedUserIndex = arr.map(elem => elem.uuid).indexOf(logedUser);
             if(logedUserIndex !== -1) {
@@ -22,8 +22,7 @@ const OnlineUsers = (props) => {
                         {user.uuid === logedUser && <div className='youSign'>(You)</div>}                   
                     </div>
                     <div className='designation'>{getUserDesignation(user.uuid)}</div>
-                    <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid, 'lgImage')}/>
-                    
+                    <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid, 'lgImage')}/>                  
                 </li>)}                 
             </ul>
         </div>
