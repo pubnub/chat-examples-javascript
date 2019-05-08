@@ -11,9 +11,8 @@ export default (props) => {
 
     // tag::MSGS-3[]
     const scrollToBottom = () => {
-        const elem = document.querySelector(".msgsDialog");
-
-        if(elem) {
+        if(document.querySelector(".msgsDialog")) {
+            const elem = document.querySelector(".msgsDialog");
             elem.scrollTop = elem.scrollHeight;
         }
     };

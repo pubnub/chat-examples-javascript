@@ -43,12 +43,7 @@ export default class extends Component {
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
     };
-  
-    removeTypingUser = (uuid) => {
-      var usersTyping = this.state.usersTyping;
-      usersTyping = usersTyping.filter(userUUID => userUUID !== uuid);
-      this.setState({usersTyping})
-    };
+
     // end::CHT-2.1[]
 
     // tag::CHT-4[]
@@ -60,19 +55,28 @@ export default class extends Component {
       this.subscribe();
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
-        this.pubnub.hereNow({
-          channels: ['demo-animal-forest'],
-          includeUUIDs: true,
-          includeState: true
-        }, (status, response) => {
+        if (presence.action === 'join') {
+          var users = this.state.onlineUsers;
+          users.push({
+            state: presence.state,
+            uuid: presence.uuid
+          })
           this.setState({
             onlineUsers: users,
             onlineUsersNumber: this.state.onlineUsersNumber + 1
-          });
+          });         
         }
 
-        if (presence.action === ('leave' || 'timeout')) {
-          this.onLeaveOrTimeoutEvent(presence.uuid);
+        if ((presence.action === 'leave') || (presence.action ==='timeout')) {
+          var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== presence.uuid);
+          this.setState({
+            onlineUsers: leftUsers
+          });
+    
+          const length = this.state.onlineUsers.length
+          this.setState({        
+            onlineUsersNumber: length
+          });
         }
       });
 
@@ -132,18 +136,6 @@ export default class extends Component {
         withPresence: true
       });
     };
-
-    onLeaveOrTimeoutEvent = (uuid) => {
-      var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== uuid);
-      this.setState({
-        onlineUsers: leftUsers
-      });
-
-      const length = this.state.onlineUsers.length
-      this.setState({        
-        onlineUsersNumber: length
-      });
-    }
 
     hereNow = () => {
       this.pubnub.hereNow({
@@ -215,8 +207,7 @@ export default class extends Component {
                 logedUser={this.uuid}
                 findById={this.findById}
                 getUserDesignation={this.getUserDesignation}
-                onlineUsers={this.state.onlineUsers}
-                hereNow={this.hereNow}/>
+                onlineUsers={this.state.onlineUsers}/>
           </div>
         );
     }
