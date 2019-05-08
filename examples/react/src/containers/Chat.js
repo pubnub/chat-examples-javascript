@@ -23,13 +23,14 @@ export default class extends Component {
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
             uuid: this.uuid,
             autoNetworkDetection: true,
-            restore: true,
+            restore: true
         });
         this.state = {
           sendersInfo: [],
           lastMsgTimetoken: '',
           historyLoaded: false,
           historyMsgs: [],
+          usersTyping: [],
           onlineUsers: [],
           onlineUsersNumber: '',
           networkErrorStatus: false,
@@ -59,46 +60,6 @@ export default class extends Component {
 
       this.subscribe();
 
-      this.pubnub.getPresence('demo-animal-forest', (presence) => {
-        this.pubnub.hereNow({
-          channels: ['demo-animal-forest'],
-          includeUUIDs: true,
-          includeState: true
-        }, (status, response) => {
-          this.setState({
-            onlineUsers: users,
-            onlineUsersNumber: this.state.onlineUsersNumber + 1
-          });
-        }
-
-        if (presence.action === ('leave' || 'timeout')) {
-          this.onLeaveOrTimeoutEvent(presence.uuid);
-        }
-      });
-
-      this.pubnub.getStatus((status) => {
-        if (status.category === 'PNConnectedCategory'){
-           this.hereNow();
-            this.pubnub.history({
-              channel: 'demo-animal-forest',
-              reverse: false, 
-              stringifiedTimeToken: true
-              }, (status, response) => {
-                this.setState({
-                  historyLoaded: true,
-                  historyMsgs: response.messages,
-                });
-            });
-        }   
-                 
-        if (status.category === 'PNNetworkDownCategory') 
-            this.setState({networkErrorStatus: true});
-        if (status.category === 'PNNetworkUpCategory'){
-            this.setState({networkErrorStatus: false});
-            this.pubnub.reconnect();      
-        }
-      });
-
       this.pubnub.getMessage('demo-animal-forest', (m) => {
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
@@ -107,12 +68,45 @@ export default class extends Component {
           text: m.message.text,
           time,
         });
-        this.setState(this.state);
+        this.removeTypingUser(this.uuid);
         
         this.setState({
           sendersInfo,
           lastMsgTimetoken: m.timetoken
         });
+      });
+
+      this.pubnub.getPresence('demo-animal-forest', (presence) => {
+        this.pubnub.hereNow({
+          channels: ['demo-animal-forest'],
+          includeUUIDs: true,
+          includeState: true
+        }, (status, response) => {
+          this.setState({
+            onlineUsers: response.channels['demo-animal-forest'].occupants,
+            onlineUsersNumber: response.channels['demo-animal-forest'].occupancy});
+        });
+      });
+
+      this.pubnub.getStatus((status) => {
+        if (status.category === 'PNNetworkDownCategory') 
+            this.setState({networkErrorStatus: true});
+        if (status.category === 'PNNetworkUpCategory'){
+            this.setState({networkErrorStatus: false});
+            this.pubnub.reconnect();      
+        }
+      });
+
+      this.pubnub.history({
+        channel: 'demo-animal-forest',
+        reverse: false, 
+        count: 100,
+        stringifiedTimeToken: true
+        }, (status, response) => {
+          this.setState({
+            historyLoaded: true,
+            historyMsgs: response.messages,
+          });
       });
 
       window.addEventListener('beforeunload', this.leaveChat);
@@ -132,34 +126,6 @@ export default class extends Component {
         withPresence: true
       });
     };
-
-    onLeaveOrTimeoutEvent = (uuid) => {
-      var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== uuid);
-      this.setState({
-        onlineUsers: leftUsers
-      });
-
-      const length = this.state.onlineUsers.length
-      this.setState({        
-        onlineUsersNumber: length
-      });
-    }
-
-    hereNow = () => {
-      this.pubnub.hereNow({
-        channels: ['demo-animal-forest'],
-        includeUUIDs: true,
-        includeState: true
-      }, (status, response) => {
-         this.setState({
-          onlineUsers: response.channels['demo-animal-forest'].occupants,
-          onlineUsersNumber: response.channels['demo-animal-forest'].occupancy
-        });
-
-        if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1)
-          this.hereNow();
-      });
-    }
 
     leaveChat = () => {
       this.pubnub.unsubscribeAll();
@@ -215,8 +181,7 @@ export default class extends Component {
                 logedUser={this.uuid}
                 findById={this.findById}
                 getUserDesignation={this.getUserDesignation}
-                onlineUsers={this.state.onlineUsers}
-                hereNow={this.hereNow}/>
+                onlineUsers={this.state.onlineUsers}/>
           </div>
         );
     }

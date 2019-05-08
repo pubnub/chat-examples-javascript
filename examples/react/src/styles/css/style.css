@@ -283,6 +283,11 @@ body {
     display: none;
   }
 }
+@media (max-width: 770px) {
+  .header .onlineUsersCount {
+    display: none;
+  }
+}
 .header .onlineUsersCount .onlineUsersLogo {
   position: absolute;
   top: 10px;
@@ -352,6 +357,11 @@ body {
     left: 2px;
   }
 }
+@media (max-width: 770px) {
+  .header .logo {
+    left: 10px;
+  }
+}
 .header h1 {
   position: absolute;
   font-weight: bold;
@@ -374,6 +384,18 @@ body {
     font-size: 1em;
     top: 5px;
     left: 50px;
+  }
+}
+@media (max-width: 770px) {
+  .header h1 {
+    left: 70px;
+  }
+}
+@media (max-width: 415px) {
+  .header h1 {
+    font-size: 1em;
+    top: 0;
+    left: 60px;
   }
 }
 .header h2 {
@@ -407,6 +429,20 @@ body {
     font-size: 0.8em;
     top: 23px;
     left: 50px;
+  }
+}
+@media (max-width: 770px) {
+  .header h2 {
+    width: 500px;
+    left: 70px;
+  }
+}
+@media (max-width: 415px) {
+  .header h2 {
+    width: 140px;
+    font-size: 0.8em;
+    top: 18px;
+    left: 60px;
   }
 }
 .header .userName {
