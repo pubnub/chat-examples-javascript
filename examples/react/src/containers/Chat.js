@@ -7,6 +7,7 @@ import MessagesList from '../components/MessagesList';
 import Header from '../components/Header';
 import users from '../config/users';
 import {publishKey, subscribeKey} from '../config/keys';
+import {forestChatChannel} from '../config/chat';
 
 import networkErrorImg from '../styles/networkError.png';
  
@@ -55,7 +56,7 @@ export default class extends Component {
 
       this.subscribe();
 
-      this.pubnub.getMessage('demo-animal-forest', (m) => {
+      this.pubnub.getMessage(forestChatChannel, (m) => {
         const time = this.getTime(m.timetoken);
         const sendersInfo = this.state.sendersInfo;
         sendersInfo.push({
@@ -71,7 +72,7 @@ export default class extends Component {
         });
       });
 
-      this.pubnub.getPresence('demo-animal-forest', (presence) => {
+      this.pubnub.getPresence(forestChatChannel, (presence) => {
         if (presence.action === 'join') {
           var users = this.state.onlineUsers;
           users.push({
@@ -107,7 +108,7 @@ export default class extends Component {
       });
 
       this.pubnub.history({
-        channel: 'demo-animal-forest',
+        channel: forestChatChannel,
         reverse: false, 
         count: 100,
         stringifiedTimeToken: true
@@ -131,20 +132,20 @@ export default class extends Component {
     // tag::CHT-3[]
     subscribe = () => {
       this.pubnub.subscribe({
-        channels: ['demo-animal-forest'],
+        channels: [forestChatChannel],
         withPresence: true
       });
     };
 
     hereNow = () => {
       this.pubnub.hereNow({
-        channels: ['demo-animal-forest'],
+        channels: [forestChatChannel],
         includeUUIDs: true,
         includeState: true
       }, (status, response) => {
          this.setState({
-          onlineUsers: response.channels['demo-animal-forest'].occupants,
-          onlineUsersNumber: response.channels['demo-animal-forest'].occupancy
+          onlineUsers: response.channels[forestChatChannel].occupants,
+          onlineUsersNumber: response.channels[forestChatChannel].occupancy
         });
 
         if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1)
