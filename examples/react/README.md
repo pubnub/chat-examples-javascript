@@ -31,14 +31,16 @@ npm install
 1. Create a file in the config folder to hold your PubNub Account keys
 
 ```bash
-vi src/config/keys
+vi src/config/keys.js
 ```
 
 The file should look as below.
 
-```
+```js
 var publishKey = 'YOUR_PUBLISH_KEY';
 var subscribeKey = 'YOUR_SUBSCRIBE_KEY';
+
+export { publishKey, subscribeKey }
 ```
 
 1. Run the app in development mode.
