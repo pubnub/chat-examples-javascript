@@ -14,7 +14,7 @@ export default (props) => {
                 <img className='onlineUsersLogo' width='45' height='45' alt='logo' src={onlineLogo}/>
                 <div className='members'>{usersNumber} members</div>
                 <span>Online</span>
-                <span className='onlineCircle'/>>
+                <span className='onlineCircle'/>
             </div>
             {/*// end::HEAD-2[]*/}
             {/*// tag::HEAD-3[]*/}
