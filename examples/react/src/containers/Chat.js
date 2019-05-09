@@ -23,13 +23,14 @@ export default class extends Component {
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
             uuid: this.uuid,
             autoNetworkDetection: true,
-            restore: true,
+            restore: true
         });
         this.state = {
           sendersInfo: [],
           lastMsgTimetoken: '',
           historyLoaded: false,
           historyMsgs: [],
+          usersTyping: [],
           onlineUsers: [],
           onlineUsersNumber: '',
           networkErrorStatus: false,
@@ -53,6 +54,22 @@ export default class extends Component {
       this.setState({networkErrorImg: networkError});
 
       this.subscribe();
+
+      this.pubnub.getMessage('demo-animal-forest', (m) => {
+        const time = this.getTime(m.timetoken);
+        const sendersInfo = this.state.sendersInfo;
+        sendersInfo.push({
+          senderId: m.message.senderId,
+          text: m.message.text,
+          time,
+        });
+        this.removeTypingUser(this.uuid);
+        
+        this.setState({
+          sendersInfo,
+          lastMsgTimetoken: m.timetoken
+        });
+      });
 
       this.pubnub.getPresence('demo-animal-forest', (presence) => {
         if (presence.action === 'join') {
@@ -81,20 +98,6 @@ export default class extends Component {
       });
 
       this.pubnub.getStatus((status) => {
-        if (status.category === 'PNConnectedCategory'){
-           this.hereNow();
-            this.pubnub.history({
-              channel: 'demo-animal-forest',
-              reverse: false, 
-              stringifiedTimeToken: true
-              }, (status, response) => {
-                this.setState({
-                  historyLoaded: true,
-                  historyMsgs: response.messages,
-                });
-            });
-        }   
-                 
         if (status.category === 'PNNetworkDownCategory') 
             this.setState({networkErrorStatus: true});
         if (status.category === 'PNNetworkUpCategory'){
@@ -103,20 +106,16 @@ export default class extends Component {
         }
       });
 
-      this.pubnub.getMessage('demo-animal-forest', (m) => {
-        const time = this.getTime(m.timetoken);
-        const sendersInfo = this.state.sendersInfo;
-        sendersInfo.push({
-          senderId: m.message.senderId,
-          text: m.message.text,
-          time,
-        });
-        this.setState(this.state);
-        
-        this.setState({
-          sendersInfo,
-          lastMsgTimetoken: m.timetoken
-        });
+      this.pubnub.history({
+        channel: 'demo-animal-forest',
+        reverse: false, 
+        count: 100,
+        stringifiedTimeToken: true
+        }, (status, response) => {
+          this.setState({
+            historyLoaded: true,
+            historyMsgs: response.messages,
+          });
       });
 
       window.addEventListener('beforeunload', this.leaveChat);

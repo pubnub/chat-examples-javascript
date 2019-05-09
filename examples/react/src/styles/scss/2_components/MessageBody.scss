@@ -12,10 +12,10 @@
         }
         
         .msgInput {
-            @include size (82%, 35px); 
+            @include size (82%, 25px); 
             margin-top: 30px;
             border: none;
-            font-size: 17px;
+            font-size: 1.2em;
 
             &:focus {
                 outline: none;
@@ -36,20 +36,8 @@
             right: 10px;
             cursor: pointer;
 
-            @include breakpoint ($Xlarge_screens) {
-                right: -100px;
-            }
-
-            @include breakpoint ($large_screens) {
-                right: -30px;
-            }
-
-            @include breakpoint (1300px) {
-                right: 0;
-            }
-
-            @include breakpoint ($desktop) {
-                right: 50px;
+            @include breakpoint ($tablet_desktop) {
+                right: 30px;
             }
 
             @include breakpoint ($mobile) {
@@ -82,7 +70,7 @@
 
             .closeBtn {
                 position: absolute;
-                bottom: 5px;
+                bottom: 8px;
                 left: 5px;
                 background-color: unset;
                 border: none;
@@ -104,7 +92,7 @@
             color: #fff;
             font-weight: bold;
             position: absolute;
-            top: 35px;
+            top: 30px;
             right: 38px;
             z-index: 1;
             cursor: pointer;
@@ -113,21 +101,11 @@
                 outline: none;
             }
 
-            @include breakpoint ($Xlarge_screens) {
-                width: 7%;
-            }
-
-            @include breakpoint ($large_screens) {
-                width: 9%;
-            }
-
             @include breakpoint ($desktop) {
-                width: 15%;
                 right: 22px;
             }
 
             @include breakpoint ($mobile) {
-                width: 11%;
                 padding-left: 1px;
                 padding-right: 2px;
             }
