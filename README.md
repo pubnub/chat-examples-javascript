@@ -35,6 +35,7 @@ If you don't already have an account, you can create one for free [here](https:/
 
 Add your PubNub keys to the keys file in the config folder.
 ```bash
+cd examples/react/
 vi src/config/keys.js
 ```
 The file should look as below:
