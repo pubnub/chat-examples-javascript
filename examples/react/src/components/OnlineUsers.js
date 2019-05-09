@@ -1,8 +1,11 @@
+// tag::ONLN-1.1[]
 import React from 'react';
 
-const OnlineUsers = (props) => {
+export default (props) => {
     const {logedUser, findById, onlineUsers, getUserImage, getUserDesignation} = props;
 
+    // end::ONLN-1.1[]
+    // tag::ONLN-2[]
     const putLogedUserFirst = (arr) => { 
         if(arr.length) {
             const logedUserIndex = arr.map(elem => elem.uuid).indexOf(logedUser);
@@ -12,10 +15,14 @@ const OnlineUsers = (props) => {
             }
         }    
     }
-    
+    // end::ONLN-2[]
+
+    // tag::ONLN-3.1[]  
     return (
         <div className='onlineUsers'>
-        {putLogedUserFirst(onlineUsers)}
+            {putLogedUserFirst(onlineUsers)}
+            {/*// end::ONLN-3.1[]*/}
+            {/*// tag::ONLN-4[]*/}
             <ul className='onlineUsersList'>
                 {onlineUsers.map((user, index) => 
                 <li key={index}>
@@ -24,10 +31,15 @@ const OnlineUsers = (props) => {
                     </div>
                     <div className='designation'>{getUserDesignation(user.uuid)}</div>
                     <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid, 'lgImage')}/>                  
-                </li>)}                 
+                </li>)
+            }                 
             </ul>
+            {/*// end::ONLN-4[]*/}
+            {/*// tag::ONLN-3.2[]*/}
         </div>
+        // end::ONLN-3.2[]
+        // tag::ONLN-3.3[]
     );
 }
 
-export default OnlineUsers;
+// end::ONLN-1.2[]

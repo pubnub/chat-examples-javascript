@@ -1,3 +1,4 @@
+// tag::CHT-1.1[]
 import React, { Component } from 'react';
 import PubNubReact from 'pubnub-react';
 import OnlineUsers from '../components/OnlineUsers';
@@ -7,7 +8,6 @@ import Header from '../components/Header';
 import users from '../config/users';
 import {publishKey, subscribeKey} from '../config/keys';
 import {forestChatChannel} from '../config/chat';
-
 
 import networkErrorImg from '../styles/networkError.png';
  
@@ -39,15 +39,20 @@ export default class extends Component {
         }
         this.pubnub.init(this);
     }
+    // end::CHT-1.1[]
 
+    // tag::CHT-2.1[]
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
-    }
+    };
 
+    // end::CHT-2.1[]
+
+    // tag::CHT-4[]
     componentWillMount(){           
       const networkError = new Image();
       networkError.src = networkErrorImg;
-      this.setState({networkErrorImg: networkError})
+      this.setState({networkErrorImg: networkError});
 
       this.subscribe();
 
@@ -125,17 +130,23 @@ export default class extends Component {
 
       window.addEventListener('beforeunload', this.leaveChat);
     }
+
+    // end::CHT-4[]
+
+    // tag::CHT-5[]
     
     componentWillUnmount() {
       this.leaveChat();
     }
+    // end::CHT-5[]
 
+    // tag::CHT-3[]
     subscribe = () => {
       this.pubnub.subscribe({
         channels: [forestChatChannel],
         withPresence: true
       });
-    }
+    };
 
     hereNow = () => {
       this.pubnub.hereNow({
@@ -155,11 +166,13 @@ export default class extends Component {
 
     leaveChat = () => {
       this.pubnub.unsubscribeAll();
-    }
+    };
+    // end::CHT-3[]
 
+    // tag::CHT-2.2[]
     getTime = (timetoken) => {
       return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
-    }
+    };
 
     getDate = (timetoken, msgType, index = 0) => {
       const msgWeekday = this.getWeekday(timetoken);
@@ -177,31 +190,33 @@ export default class extends Component {
         default:
           return;
       }
-    }
+    };
     
     getWeekday = (timetoken) => {
       const weekday = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {weekday: 'long'});
       return weekday;
-    }
+    };
 
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
       if (user)
         return user.firstName + ' ' + user.lastName;
-    }
+    };
 
     getUserDesignation = (uuid) => {
       const designation = users.find(element => element.uuid === uuid);
       if (designation)
         return designation.designation;
-    }
+    };
 
     getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
       if (image)
         return image.profileImage[size];
-    }
+    };
+    // end::CHT-2.2[]
 
+    // tag::CHT-6[]
     render() {
         return (
           <div className='grid'>
@@ -235,4 +250,7 @@ export default class extends Component {
           </div>
         );
     }
+    // end::CHT-6[]
+// tag::CHT-1.2[]
 }
+// end::CHT-1.2[]

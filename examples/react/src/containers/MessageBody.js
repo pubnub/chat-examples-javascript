@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import emojiIcon from '../styles/emojis/emojiIcon.png';
+import {forestChatChannel} from '../config/chat';
 import emojis from '../config/emojis';
 
 class MessageBody extends Component {
