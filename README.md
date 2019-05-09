@@ -30,6 +30,20 @@ If you don't already have an account, you can create one for free [here](https:/
 * Select Your Project > Your Key. Click on Key Info and copy your `Publish Key` and `Subscribe Key`
 * Enable the following add-on features on your key: Presence, Storage & Playback, Stream Controller
 
+### Using your PubNub keys
+
+Add your PubNub keys to the keys file in the config folder.
+```bash
+vi src/config/keys.js
+```
+The file should look as below:
+```js
+var publishKey = 'YOUR_PUBLISH_KEY';
+var subscribeKey = 'YOUR_SUBSCRIBE_KEY';
+
+export { publishKey, subscribeKey }
+```
+
 ## Building the project
 
 1. Navigate to the react project directory
@@ -38,23 +52,7 @@ cd examples/react/
 npm install
 ```
 
-2. Create a file in the config folder to hold your PubNub Account keys
-
-```bash
-vi src/config/keys.js
-```
-
-The file should look as below.
-
-```js
-var publishKey = 'YOUR_PUBLISH_KEY';
-var subscribeKey = 'YOUR_SUBSCRIBE_KEY';
-
-export { publishKey, subscribeKey }
-```
-
-3. Run the app in development mode.
-
+2. Run the app in development mode.
 ```bash
 $ npm start
 ```
