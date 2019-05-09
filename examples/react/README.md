@@ -1,5 +1,5 @@
 
-# Animal Chat React Application
+# Animal Forest Chat React Application
 
 [![Build Status](https://travis-ci.com/pubnub/chat-examples-javascript.svg?token=ey6rVJnpqsBKpxXy2fYF&branch=master)](https://travis-ci.com/pubnub/chat-examples-javascript)
 
