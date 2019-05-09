@@ -3,98 +3,127 @@
     border-right: 1px solid rgba(128, 128, 128, 0.164);
     border-bottom: 1px solid rgba(128, 128, 128, 0.164);
 
-        .networkErrorImg {
-            @include size (80%, 100%);
-            position: relative;
-            left: 100px;
+    .networkErrorImg {
+        @include size (80%, 100%);
+        position: relative;
+        left: 100px;
 
-            @include breakpoint ($desktop) {
-                @include size (100%, 70%);
-                left: 20px;
-                bottom: -100px;
-            }
-
-            @include breakpoint ($mobile) {
-                width: 100%;
-                left: 20px;
-            }
+        @include breakpoint ($desktop) {
+            @include size (100%, 70%);
+            left: 20px;
+            bottom: -100px;
         }
 
-        .msgsDialog {
-            height: inherit;
-            position: relative;
-            display: flex;
-            margin-top: 0;
-            flex-direction: column;
-            overflow-y: auto;
-            position: relative;
-            list-style: none;
+        @include breakpoint ($mobile) {
+            width: 100%;
+            left: 20px;
+        }
+    }
+
+    .msgsDialog {
+        height: inherit;
+        position: relative;
+        display: flex;
+        margin-top: 0;
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        list-style: none;
+    
+        .text {
+            max-width: 270px;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+    
+        .name, .time {
+            font-size: 15px;
+            color: #808080;
+            font-weight: bold;
+            position: absolute;
+        }
         
-            .message {
-                max-width: 270px;
-                padding: 15px;
-                display: inline-block;
-                border-radius: 10px;
-            }
-        
-            .name, .time {
-                font-size: 0.8em;
-                color: #808080;
-                font-weight: bold;
-                position: absolute;
-            }
-            
-            li {
-                @include size (300px);
+        li {
+            @include size (300px);
+            position: relative;
+            margin-top: 40px;
+            margin-left: 8px;
+
+            .msgSentDay {
+                display: flex;
+                justify-content: center;
                 position: relative;
-                margin-top: 40px;
-                margin-left: 8px;
-                
-                img {
-                    position: absolute;
-                    bottom: 0;
-                    left: -30px;
+                width: 70vw;
+                top: -20px;
+                margin-top: 0px;
+                margin-bottom: 30px;
+                color: color(secondary);
+                font-size: 1.2em;
+
+                @include breakpoint ($tablet) {
+                    width: 90vw;
                 }
-        
-                .name, .time {
-                    left: 5px;
+
+                @include breakpoint ($mobile) {
+                    width: 80vw;
+                    font-size: 1.1em;
                 }
-                
-                .name {
-                    top: -18px;
+
+                &:empty {
+                    display: none;
                 }
-                
-                .time {
-                    bottom: -15px;
-                }
-        
-                .message {
-                    background-color: rgba(128, 128, 128, 0.164);
-                }
-                
-                
             }
             
-            .senderMsg {
-                align-self: flex-end;
-                margin-right: 50px;
-                color: #fff;
-                text-align: right;
-                
-                img {
-                    left: 305px;
-                }
-                
-                .message {
-                    background-color: color(primary); 
-                    text-align: left;
-                }
+            img {
+                position: absolute;
+                bottom: 0;
+                left: -30px;
+            }
+
+            .message {
+                position: relative;
+                word-break: break-all;
+            }
+
+            .name, .time {
+                left: 5px;
+            }
+            
+            .name {
+                top: -18px;
+            }
+            
+            .time {
+                bottom: -18px;
+            }
+    
+            .text {
+                background-color: rgba(128, 128, 128, 0.164);
+            }                              
+        }
         
-                .name, .time {
-                    left: unset;
-                    right: 5px;
-                }
+        .senderMsg {
+            align-self: flex-end;
+            margin-right: 50px;
+            color: #fff;
+            text-align: right;
+            
+            img {
+                left: 305px;
+            }
+            
+            .text {
+                background-color: color(primary); 
+                text-align: left;
+            }
+    
+            .name, .time {
+                left: unset;
+                right: 5px;
             }
         }
+    }
 }
 
