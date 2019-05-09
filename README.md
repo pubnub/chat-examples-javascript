@@ -10,6 +10,7 @@ samples live here.
 | Directory  | Description |
 |:----------:| ----------- |
 | `examples` | Location where gathered applications which explain how to solve tasks related to _chat_ using PubNub SDK. |
+| `examples > react` | Location where the animal chat application is stored. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/javascript/)|
 | `snippets` | Location where verified and tested code snippets are stored.<br>Snippets from `chat-resource-center` can be found inside of [Chat Resource Center](https://pubnub.github.io/chat-resource-center/). |
 
 
