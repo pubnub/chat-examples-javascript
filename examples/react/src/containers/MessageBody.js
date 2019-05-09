@@ -1,6 +1,7 @@
 // tag::MSGB-1.1[]
 import React, {Component} from 'react';
 import emojiIcon from '../styles/emojis/emojiIcon.png';
+import {forestChatChannel} from '../config/chat';
 import emojis from '../config/emojis';
 
 export default class MessageBody extends Component {
@@ -34,7 +35,7 @@ export default class MessageBody extends Component {
                 senderId: this.props.uuid,
                 text: this.state.msgContent,
             },
-            channel: 'demo-animal-forest'
+            channel: forestChatChannel
         });
 
         this.setState({
