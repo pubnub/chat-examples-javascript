@@ -24,19 +24,19 @@ export default class extends Component {
             subscribeKey,  //subscribeKey: 'Enter your key . . .'
             uuid: this.uuid,
             autoNetworkDetection: true,
-            restore: true
+            restore: true,
         });
         this.state = {
           sendersInfo: [],
-          lastMsgTimetoken: '',
+          lastMsgWeekday: '',
+          msgsSentDate: [],
           historyLoaded: false,
           historyMsgs: [],
-          usersTyping: [],
           onlineUsers: [],
           onlineUsersNumber: '',
           networkErrorStatus: false,
           networkErrorImg: null
-        };
+        }
         this.pubnub.init(this);
     }
     // end::CHT-1.1[]
@@ -56,22 +56,6 @@ export default class extends Component {
 
       this.subscribe();
 
-      this.pubnub.getMessage(forestChatChannel, (m) => {
-        const time = this.getTime(m.timetoken);
-        const sendersInfo = this.state.sendersInfo;
-        sendersInfo.push({
-          senderId: m.message.senderId,
-          text: m.message.text,
-          time,
-        });
-        this.removeTypingUser(this.uuid);
-        
-        this.setState({
-          sendersInfo,
-          lastMsgTimetoken: m.timetoken
-        });
-      });
-
       this.pubnub.getPresence(forestChatChannel, (presence) => {
         if (presence.action === 'join') {
           var users = this.state.onlineUsers;
@@ -85,7 +69,7 @@ export default class extends Component {
           });         
         }
 
-        if ((presence.action === 'leave') || (presence.action ==='timeout')) {
+        if ((presence.action === 'leave') || (presence.action === 'timeout')) {
           var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== presence.uuid);
           this.setState({
             onlineUsers: leftUsers
@@ -99,6 +83,26 @@ export default class extends Component {
       });
 
       this.pubnub.getStatus((status) => {
+        if (status.category === 'PNConnectedCategory'){
+           this.hereNow();
+            this.pubnub.history({
+              channel: forestChatChannel,
+              reverse: false, 
+              stringifiedTimeToken: true
+              }, (status, response) => {
+                const lastMsgWeekday = this.getWeekday(response.endTimeToken);
+
+                this.setState({
+                  historyLoaded: true,
+                  historyMsgs: response.messages,
+                  lastMsgWeekday
+                });
+
+                var msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
+                this.setState({msgsSentDate})
+            });
+        }   
+                 
         if (status.category === 'PNNetworkDownCategory') 
             this.setState({networkErrorStatus: true});
         if (status.category === 'PNNetworkUpCategory'){
@@ -107,23 +111,30 @@ export default class extends Component {
         }
       });
 
-      this.pubnub.history({
-        channel: forestChatChannel,
-        reverse: false, 
-        count: 100,
-        stringifiedTimeToken: true
-        }, (status, response) => {
-          this.setState({
-            historyLoaded: true,
-            historyMsgs: response.messages,
-          });
+      this.pubnub.getMessage(forestChatChannel, (m) => {
+        const sendersInfo = this.state.sendersInfo;
+        sendersInfo.push({
+          senderId: m.message.senderId,
+          text: m.message.text,
+          timetoken: m.timetoken,
+        });
+        this.setState(this.state);
+
+
+        const lastMsgWeekday = this.getWeekday(m.timetoken)
+        this.setState({
+          sendersInfo,
+          lastMsgWeekday
+        });
       });
 
       window.addEventListener('beforeunload', this.leaveChat);
     }
+
     // end::CHT-4[]
 
     // tag::CHT-5[]
+    
     componentWillUnmount() {
       this.leaveChat();
     }
@@ -163,19 +174,45 @@ export default class extends Component {
       return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
     };
 
+    getDate = (timetoken, msgType, index = 0) => {
+      const msgWeekday = this.getWeekday(timetoken);
+      const date = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {day: 'numeric', month: 'long'});
+      switch (msgType) {
+        case 'historyMsg':
+            if (this.state.msgsSentDate[index - 1] !== msgWeekday)
+              return `${date}, ${msgWeekday}`; 
+              break;
+        case 'senderMsg':
+          if (this.state.lastMsgWeekday !== msgWeekday)
+          return `${date}, ${msgWeekday}`;
+          break;
+
+        default:
+          return;
+      }
+    };
+    
+    getWeekday = (timetoken) => {
+      const weekday = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {weekday: 'long'});
+      return weekday;
+    };
+
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
-      return user.firstName + ' ' + user.lastName;
+      if (user)
+        return user.firstName + ' ' + user.lastName;
     };
 
     getUserDesignation = (uuid) => {
       const designation = users.find(element => element.uuid === uuid);
-      return designation.designation;
+      if (designation)
+        return designation.designation;
     };
 
     getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
-      return image.profileImage[size];
+      if (image)
+        return image.profileImage[size];
     };
     // end::CHT-2.2[]
 
@@ -193,6 +230,7 @@ export default class extends Component {
                 findById={this.findById}
                 getUserImage={this.getUserImage}
                 getTime={this.getTime}
+                getDate={this.getDate}
                 historyLoaded={this.state.historyLoaded}
                 historyMsgs={this.state.historyMsgs}
                 networkErrorStatus={this.state.networkErrorStatus}
@@ -200,7 +238,8 @@ export default class extends Component {
               <MessageBody 
                 uuid={this.uuid}
                 pubnub={this.pubnub}
-                findById={this.findById}/>
+                findById={this.findById}
+                chatName={forestChatChannel}/>
               <OnlineUsers 
                 users={users}
                 getUserImage={this.getUserImage}

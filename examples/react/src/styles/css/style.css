@@ -90,18 +90,18 @@ body {
   margin-top: 0;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
   list-style: none;
 }
-.messageList .msgsDialog .message {
-  font-size: 15px;
+.messageList .msgsDialog .text {
   max-width: 270px;
   padding: 15px;
   display: inline-block;
   border-radius: 10px;
 }
 .messageList .msgsDialog .name, .messageList .msgsDialog .time {
-  font-size: 11px;
+  font-size: 15px;
   color: #808080;
   font-weight: bold;
   position: absolute;
@@ -112,10 +112,39 @@ body {
   margin-top: 40px;
   margin-left: 8px;
 }
+.messageList .msgsDialog li .msgSentDay {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 70vw;
+  top: -20px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  color: grey;
+  font-size: 1.2em;
+}
+@media (max-width: 770px) {
+  .messageList .msgsDialog li .msgSentDay {
+    width: 90vw;
+  }
+}
+@media (max-width: 415px) {
+  .messageList .msgsDialog li .msgSentDay {
+    width: 80vw;
+    font-size: 1.1em;
+  }
+}
+.messageList .msgsDialog li .msgSentDay:empty {
+  display: none;
+}
 .messageList .msgsDialog li img {
   position: absolute;
   bottom: 0;
   left: -30px;
+}
+.messageList .msgsDialog li .message {
+  position: relative;
+  word-break: break-all;
 }
 .messageList .msgsDialog li .name, .messageList .msgsDialog li .time {
   left: 5px;
@@ -124,9 +153,9 @@ body {
   top: -18px;
 }
 .messageList .msgsDialog li .time {
-  bottom: -15px;
+  bottom: -18px;
 }
-.messageList .msgsDialog li .message {
+.messageList .msgsDialog li .text {
   background-color: rgba(128, 128, 128, 0.164);
 }
 .messageList .msgsDialog .senderMsg {
@@ -138,7 +167,7 @@ body {
 .messageList .msgsDialog .senderMsg img {
   left: 305px;
 }
-.messageList .msgsDialog .senderMsg .message {
+.messageList .msgsDialog .senderMsg .text {
   background-color: #d32f2f;
   text-align: left;
 }
@@ -158,7 +187,7 @@ body {
 }
 @media (max-width: 850px) {
   .messageBody .msgForm {
-    /*bottom: 0;*/
+    bottom: 0;
   }
 }
 .messageBody .msgForm .msgInput {
@@ -166,7 +195,7 @@ body {
   height: 35px;
   margin-top: 30px;
   border: none;
-  font-size: 15px;
+  font-size: 17px;
 }
 .messageBody .msgForm .msgInput:focus {
   outline: none;
@@ -183,13 +212,28 @@ body {
 }
 .messageBody .msgForm .emojiIcon {
   position: relative;
-  top: 4px;
-  right: 25px;
+  top: 7px;
+  right: 10px;
   cursor: pointer;
 }
-@media (max-width: 850px) {
+@media (max-width: 3000px) {
   .messageBody .msgForm .emojiIcon {
-    right: 30px;
+    right: -100px;
+  }
+}
+@media (max-width: 2000px) {
+  .messageBody .msgForm .emojiIcon {
+    right: -30px;
+  }
+}
+@media (max-width: 1300px) {
+  .messageBody .msgForm .emojiIcon {
+    right: 0;
+  }
+}
+@media (max-width: 1024px) {
+  .messageBody .msgForm .emojiIcon {
+    right: 50px;
   }
 }
 @media (max-width: 415px) {
@@ -217,6 +261,7 @@ body {
 }
 .messageBody .msgForm .emojisWindow .emoji {
   margin: 1px 6px -1px 7px;
+  cursor: pointer;
 }
 @media (max-width: 415px) {
   .messageBody .msgForm .emojisWindow .emoji {
@@ -225,7 +270,7 @@ body {
 }
 .messageBody .msgForm .emojisWindow .closeBtn {
   position: absolute;
-  bottom: 8px;
+  bottom: 5px;
   left: 5px;
   background-color: unset;
   border: none;
@@ -245,7 +290,7 @@ body {
   color: #fff;
   font-weight: bold;
   position: absolute;
-  top: 30px;
+  top: 35px;
   right: 38px;
   z-index: 1;
   cursor: pointer;
@@ -253,13 +298,25 @@ body {
 .messageBody .msgForm .submitBtn:focus {
   outline: none;
 }
+@media (max-width: 3000px) {
+  .messageBody .msgForm .submitBtn {
+    width: 7%;
+  }
+}
+@media (max-width: 2000px) {
+  .messageBody .msgForm .submitBtn {
+    width: 9%;
+  }
+}
 @media (max-width: 1024px) {
   .messageBody .msgForm .submitBtn {
+    width: 15%;
     right: 22px;
   }
 }
 @media (max-width: 415px) {
   .messageBody .msgForm .submitBtn {
+    width: 11%;
     padding-left: 1px;
     padding-right: 2px;
   }
@@ -277,11 +334,6 @@ body {
   font-size: 17px;
   font-weight: bold;
   border-right: 1px solid rgba(128, 128, 128, 0.164);
-}
-@media (max-width: 770px) {
-  .header .onlineUsersCount {
-    display: none;
-  }
 }
 @media (max-width: 770px) {
   .header .onlineUsersCount {
@@ -309,9 +361,8 @@ body {
   }
 }
 .header .onlineUsersCount span {
-  font-size: 14px;
   position: absolute;
-  top: 33px;
+  top: 30px;
   left: 86px;
   color: grey;
   font-weight: normal;
@@ -326,7 +377,7 @@ body {
   width: 8px;
   height: 8px;
   position: absolute;
-  top: 40px;
+  top: 38px;
   left: 72px;
   border-radius: 50%;
   background-color: #0ccc0c;
@@ -357,11 +408,6 @@ body {
     left: 2px;
   }
 }
-@media (max-width: 770px) {
-  .header .logo {
-    left: 10px;
-  }
-}
 .header h1 {
   position: absolute;
   font-weight: bold;
@@ -384,18 +430,6 @@ body {
     font-size: 1em;
     top: 5px;
     left: 50px;
-  }
-}
-@media (max-width: 770px) {
-  .header h1 {
-    left: 70px;
-  }
-}
-@media (max-width: 415px) {
-  .header h1 {
-    font-size: 1em;
-    top: 0;
-    left: 60px;
   }
 }
 .header h2 {
@@ -429,20 +463,6 @@ body {
     font-size: 0.8em;
     top: 23px;
     left: 50px;
-  }
-}
-@media (max-width: 770px) {
-  .header h2 {
-    width: 500px;
-    left: 70px;
-  }
-}
-@media (max-width: 415px) {
-  .header h2 {
-    width: 140px;
-    font-size: 0.8em;
-    top: 18px;
-    left: 60px;
   }
 }
 .header .userName {

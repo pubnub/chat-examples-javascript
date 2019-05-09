@@ -6,7 +6,7 @@
     .onlineUsersCount {
         @include size(278px, $height:70px);
         position: relative;
-        font-size: 1.2em;
+        font-size: 17px;
         font-weight: bold;
         border-right: 1px solid rgba(128, 128, 128, 0.164); 
         
@@ -26,7 +26,7 @@
 
         .members {
             position: relative;
-            top: 8px;
+            top: 14px;
             left: 70px;
 
             @include breakpoint ($tablet_desktop) {
@@ -50,7 +50,7 @@
         .onlineCircle {
             @include size(8px, 8px);
             position: absolute;
-            top: 40px;
+            top: 38px;
             left: 72px;
             border-radius: 50%;
             background-color: rgb(12, 204, 12);     
@@ -83,7 +83,7 @@
     h1 {
         position: absolute;
         font-weight: bold;
-        font-size: 1.1em;
+        font-size: 17px;
         top: 2px;
         left: 345px;
 
@@ -104,7 +104,7 @@
 
     h2 {
         font-weight: normal;
-        font-size: 1em;
+        font-size: 15px;
         position: absolute;
         top: 20px;
         left: 345px;
