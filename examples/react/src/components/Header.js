@@ -26,11 +26,10 @@ export default (props) => {
             <div className='userName'>Hello, 
                 <span>{userName}</span>
                 <img width='45' height='45' alt='profileImage' src={profileImage}/>
-            </div>   
+            </div>
             {/*// end::HEAD-4[]*/}
-        {/*// tag::HEAD-1.2[]*/}        
+        {/*// tag::HEAD-1.2[]*/}
         </div>
     );
 }
-
 // end::HEAD-1.2[]

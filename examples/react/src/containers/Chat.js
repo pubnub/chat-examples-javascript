@@ -36,7 +36,7 @@ export default class extends Component {
           onlineUsersNumber: '',
           networkErrorStatus: false,
           networkErrorImg: null
-        }
+        };
         this.pubnub.init(this);
     }
     // end::CHT-1.1[]
@@ -45,7 +45,6 @@ export default class extends Component {
     getRandomUser = () => {
       return users[Math.floor(Math.random() * users.length)];
     };
-
     // end::CHT-2.1[]
 
     // tag::CHT-4[]
@@ -62,7 +61,7 @@ export default class extends Component {
           users.push({
             state: presence.state,
             uuid: presence.uuid
-          })
+          });
           this.setState({
             onlineUsers: users,
             onlineUsersNumber: this.state.onlineUsersNumber + 1
@@ -75,7 +74,7 @@ export default class extends Component {
             onlineUsers: leftUsers
           });
     
-          const length = this.state.onlineUsers.length
+          const length = this.state.onlineUsers.length;
           this.setState({        
             onlineUsersNumber: length
           });
@@ -83,7 +82,7 @@ export default class extends Component {
       });
 
       this.pubnub.getStatus((status) => {
-        if (status.category === 'PNConnectedCategory'){
+        if (status.category === 'PNConnectedCategory') {
            this.hereNow();
             this.pubnub.history({
               channel: forestChatChannel,
@@ -103,9 +102,11 @@ export default class extends Component {
             });
         }   
                  
-        if (status.category === 'PNNetworkDownCategory') 
+        if (status.category === 'PNNetworkDownCategory') {
             this.setState({networkErrorStatus: true});
-        if (status.category === 'PNNetworkUpCategory'){
+        }
+
+        if (status.category === 'PNNetworkUpCategory') {
             this.setState({networkErrorStatus: false});
             this.pubnub.reconnect();      
         }
@@ -121,7 +122,7 @@ export default class extends Component {
         this.setState(this.state);
 
 
-        const lastMsgWeekday = this.getWeekday(m.timetoken)
+        const lastMsgWeekday = this.getWeekday(m.timetoken);
         this.setState({
           sendersInfo,
           lastMsgWeekday
@@ -130,11 +131,9 @@ export default class extends Component {
 
       window.addEventListener('beforeunload', this.leaveChat);
     }
-
     // end::CHT-4[]
 
     // tag::CHT-5[]
-    
     componentWillUnmount() {
       this.leaveChat();
     }
@@ -159,10 +158,11 @@ export default class extends Component {
           onlineUsersNumber: response.channels[forestChatChannel].occupancy
         });
 
-        if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1)
+        if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1) {
           this.hereNow();
+        }
       });
-    }
+    };
 
     leaveChat = () => {
       this.pubnub.unsubscribeAll();
@@ -179,12 +179,16 @@ export default class extends Component {
       const date = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {day: 'numeric', month: 'long'});
       switch (msgType) {
         case 'historyMsg':
-            if (this.state.msgsSentDate[index - 1] !== msgWeekday)
-              return `${date}, ${msgWeekday}`; 
-              break;
+          if (this.state.msgsSentDate[index - 1] !== msgWeekday) {
+              return `${date}, ${msgWeekday}`;
+          }
+
+          break;
         case 'senderMsg':
-          if (this.state.lastMsgWeekday !== msgWeekday)
-          return `${date}, ${msgWeekday}`;
+          if (this.state.lastMsgWeekday !== msgWeekday) {
+            return `${date}, ${msgWeekday}`;
+          }
+
           break;
 
         default:
@@ -193,26 +197,35 @@ export default class extends Component {
     };
     
     getWeekday = (timetoken) => {
-      const weekday = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {weekday: 'long'});
-      return weekday;
+      return new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {weekday: 'long'});
     };
 
     findById = (uuid) => {
       const user = users.find( element => element.uuid === uuid );
-      if (user)
+
+      if (user) {
         return user.firstName + ' ' + user.lastName;
+      }
+
+      return 'user';
     };
 
     getUserDesignation = (uuid) => {
       const designation = users.find(element => element.uuid === uuid);
-      if (designation)
+
+      if (designation) {
         return designation.designation;
+      }
+
+      return 'engineer';
     };
 
     getUserImage = (uuid, size) => {
       const image = users.find(element => element.uuid === uuid);
-      if (image)
+
+      if (image) {
         return image.profileImage[size];
+      }
     };
     // end::CHT-2.2[]
 
@@ -223,7 +236,7 @@ export default class extends Component {
               <Header 
                 userName={this.userName}
                 profileImage={this.profileImage}
-                usersNumber={this.state.onlineUsersNumber}/>                
+                usersNumber={this.state.onlineUsersNumber}/>
               <MessagesList 
                 uuid={this.uuid}
                 sendersInfo={this.state.sendersInfo}
