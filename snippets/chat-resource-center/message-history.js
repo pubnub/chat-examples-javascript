@@ -109,7 +109,7 @@ describe('Message history', () => {
       publishMessage(pubnub, expectedChannels[1], () => {
         setTimeout(() => {
           fetchMessagesCount();
-        }, 2000);
+        }, 5000);
       });
     });
   });
@@ -156,7 +156,7 @@ describe('Message history', () => {
         publishMessage(pubnub, expectedChannel, () => {
           setTimeout(() => {
             fetchMessagesHistory();
-          }, 2000);
+          }, 5000);
         });
       });
     });
