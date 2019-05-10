@@ -5,7 +5,7 @@ const subscribeKey = process.env.PAM_SUBSCRIBE_KEY || 'demo';
 const publishKey = process.env.PAM_PUBLISH_KEY || 'demo';
 const secretKey = process.env.PAM_SECRET_KEY || 'demo';
 
-describe.only('Authorization', () => {
+describe('Authorization', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
 

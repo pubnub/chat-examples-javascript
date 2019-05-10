@@ -4,7 +4,7 @@ import PubNub from 'pubnub';
 const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
 const publishKey = process.env.PUBLISH_KEY || 'demo';
 
-describe.skip('Mobile Push Notifications', () => {
+describe('Mobile Push Notifications', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
 

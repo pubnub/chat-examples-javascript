@@ -47,7 +47,7 @@ const publishMultipleMessages = (pubnub, channel, count, completion) => {
   publishMessage(pubnub, channel, handleMessagePublish);
 };
 
-describe.skip('Message history', () => {
+describe('Message history', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
 
