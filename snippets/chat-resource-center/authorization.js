@@ -1,11 +1,11 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
 
-const subscribeKey = process.env.PAM_SUBSCRIBE_KEY || 'demo-36';
-const publishKey = process.env.PAM_PUBLISH_KEY || 'demo-36';
-const secretKey = process.env.PAM_SECRET_KEY || 'demo-36';
+const subscribeKey = process.env.PAM_SUBSCRIBE_KEY || 'demo';
+const publishKey = process.env.PAM_PUBLISH_KEY || 'demo';
+const secretKey = process.env.PAM_SECRET_KEY || 'demo';
 
-describe('Authorization', () => {
+describe.only('Authorization', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
 
@@ -66,6 +66,9 @@ describe('Authorization', () => {
           text: 'Hello, hoomans!',
         },
       }, (status, response) => {
+        if (status.error) {
+          console.log('#2 ERROR:', status);
+        }
         expect(status.error).toBeFalsy();
         expect(response.timetoken).toBeDefined();
 
@@ -93,6 +96,9 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
       setTimeout(() => {
         handleGrant(status);
       }, 1000);
@@ -143,6 +149,9 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
       setTimeout(() => {
         handleGrant(status);
       }, 1000);
@@ -189,6 +198,9 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
       setTimeout(() => {
         handleGrant(status);
       }, 1000);
@@ -233,6 +245,9 @@ describe('Authorization', () => {
           // handle status
           // tag::ignore[]
 
+          if (status.error) {
+            console.log('#2 ERROR:', status);
+          }
           expect(status.error).toBeFalsy();
           setTimeout(() => {
             handleGrant(true);
@@ -246,6 +261,9 @@ describe('Authorization', () => {
     pubnub.grant({
       channels, authKeys, ttl: 1, read: true, write: true,
     }, (status) => {
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
       expect(status.error).toBeFalsy();
 
       setTimeout(() => {
@@ -267,6 +285,9 @@ describe('Authorization', () => {
         channels: [expectedChannel],
         channelGroup: [expectedChannelGroup],
       }, (status) => {
+        if (status.error) {
+          console.log('#2 ERROR:', status);
+        }
         expect(status.error).toBeFalsy();
 
         done();
@@ -294,6 +315,9 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
       setTimeout(() => {
         handleGrant(status);
       }, 1000);
