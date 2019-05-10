@@ -15,8 +15,8 @@
   "main": "",
   "scripts": {
     "test": "jest --ci --forceExit",
-    "test-examples": "jest --ci --forceExit --passWithNoTests --config=examples/jest-config.json",
-    "test-snippets": "jest --ci --forceExit --config=snippets/jest-config.json"
+    "test-examples": "jest --bail --ci --forceExit --runInBand --passWithNoTests --config=examples/jest-config.json",
+    "test-snippets": "jest --bail --ci --forceExit --runInBand --config=snippets/jest-config.json"
   },
   "dependencies": {
     "bignumber.js": "^8.1.1",

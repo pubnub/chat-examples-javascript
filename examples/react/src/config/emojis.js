@@ -30,124 +30,124 @@ import star from '../styles/emojis/star.png';
 import heart from '../styles/emojis/heart.png';
 
 export default [
-    {
-        emoji: smiling,
-        code: 0x1F603
-    },
-    {
-        emoji: sad,
-        code: 0x1F641
-    },
-    {
-        emoji: crying,
-        code: 0x1F622
-    },
-    {
-        emoji: loudly_crying,
-        code: 0x1F62D
-    },
-    {
-        emoji: frowning,
-        code: 0x1F626
-    },
-    {
-        emoji: smiling2,
-        code: 0x1F604
-    },
-    {
-        emoji: open_mouth,
-        code: 0x1F62E   
-    },
-    {
-        emoji: tired,
-        code: 0x1F62B
-    },
-    {
-        emoji: smiling3,
-        code: 0x1F60A
-    },
-    {
-        emoji: kiss,
-        code: 0x1F618
-    },
-    {
-        emoji: heart_eyes,
-        code: 0x1F60D
-    },
-    {
-        emoji: tears_of_joy,
-        code: 0x1F602
-    },
-    {
-        emoji: sunglasses,
-        code: 0x1F60E
-    },
-    {
-        emoji: winking,
-        code: 0x1F609
-    },
-    {
-        emoji: astonished,
-        code: 0x1F632
-    },
-    {
-        emoji: persevering,
-        code: 0x1F623
-    },
-    {
-        emoji: angry,
-        code: 0x1F621
-    },
-    {
-        emoji: confused,
-        code: 0x1F615
-    },
-    {
-        emoji: smiling4,
-        code: 0x1F642
-    },
-    {
-        emoji: stuck_out_tongue,
-        code: 0x1F61D
-    },
-    {
-        emoji: head_bandage,
-        code: 0x1F915
-    },
-    {
-        emoji: flushed,
-        code: 0x1F633
-    },
-    {
-        emoji: cold,
-        code: 0x1F630
-    },
-    {
-        emoji: nauseated,
-        code: 0x1F922
-    },
-    {
-        emoji: pensive,
-        code: 0x1F614
-    },
-    {
-        emoji: angel,
-        code: 0x1F607
-    },
-    {
-        emoji: devil,
-        code: 0x1F608
-    },
-    {
-        emoji: thumbs_up,
-        code: 0x1F44D
-    },
-    {
-        emoji: star,
-        code: 0x2B50
-    },
-    {
-        emoji: heart,
-        code: 0x1F493
-    },
+  {
+    emoji: smiling,
+    code: 0x1F603
+  },
+  {
+    emoji: sad,
+    code: 0x1F641
+  },
+  {
+    emoji: crying,
+    code: 0x1F622
+  },
+  {
+    emoji: loudly_crying,
+    code: 0x1F62D
+  },
+  {
+    emoji: frowning,
+    code: 0x1F626
+  },
+  {
+    emoji: smiling2,
+    code: 0x1F604
+  },
+  {
+    emoji: open_mouth,
+    code: 0x1F62E
+  },
+  {
+    emoji: tired,
+    code: 0x1F62B
+  },
+  {
+    emoji: smiling3,
+    code: 0x1F60A
+  },
+  {
+    emoji: kiss,
+    code: 0x1F618
+  },
+  {
+    emoji: heart_eyes,
+    code: 0x1F60D
+  },
+  {
+    emoji: tears_of_joy,
+    code: 0x1F602
+  },
+  {
+    emoji: sunglasses,
+    code: 0x1F60E
+  },
+  {
+    emoji: winking,
+    code: 0x1F609
+  },
+  {
+    emoji: astonished,
+    code: 0x1F632
+  },
+  {
+    emoji: persevering,
+    code: 0x1F623
+  },
+  {
+    emoji: angry,
+    code: 0x1F621
+  },
+  {
+    emoji: confused,
+    code: 0x1F615
+  },
+  {
+    emoji: smiling4,
+    code: 0x1F642
+  },
+  {
+    emoji: stuck_out_tongue,
+    code: 0x1F61D
+  },
+  {
+    emoji: head_bandage,
+    code: 0x1F915
+  },
+  {
+    emoji: flushed,
+    code: 0x1F633
+  },
+  {
+    emoji: cold,
+    code: 0x1F630
+  },
+  {
+    emoji: nauseated,
+    code: 0x1F922
+  },
+  {
+    emoji: pensive,
+    code: 0x1F614
+  },
+  {
+    emoji: angel,
+    code: 0x1F607
+  },
+  {
+    emoji: devil,
+    code: 0x1F608
+  },
+  {
+    emoji: thumbs_up,
+    code: 0x1F44D
+  },
+  {
+    emoji: star,
+    code: 0x2B50
+  },
+  {
+    emoji: heart,
+    code: 0x1F493
+  },
 ]

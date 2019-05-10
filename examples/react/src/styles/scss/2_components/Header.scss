@@ -151,6 +151,10 @@
             display: block;
             color: #000;
             font-weight: bold;
+
+            @include breakpoint ($mobile) {
+                font-size: 0.9em;
+            }
         }
 
         img {
