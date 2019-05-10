@@ -48,7 +48,7 @@ export default class extends Component {
   // end::CHT-2.1[]
 
   // tag::CHT-4[]
-  componentWillMount(){
+  componentWillMount() {
     const networkError = new Image();
     networkError.src = networkErrorImg;
     this.setState({networkErrorImg: networkError});
@@ -57,11 +57,13 @@ export default class extends Component {
 
     this.pubnub.getPresence(forestChatChannel, (presence) => {
       if (presence.action === 'join') {
-        var users = this.state.onlineUsers;
+        let users = this.state.onlineUsers;
+
         users.push({
           state: presence.state,
           uuid: presence.uuid
         });
+
         this.setState({
           onlineUsers: users,
           onlineUsersNumber: this.state.onlineUsersNumber + 1
@@ -69,21 +71,57 @@ export default class extends Component {
       }
 
       if ((presence.action === 'leave') || (presence.action === 'timeout')) {
-        var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== presence.uuid);
-        this.setState({
-          onlineUsers: leftUsers
-        });
+        let leftUsers = this.state.onlineUsers.filter(users => users.uuid !== presence.uuid);
 
+        this.setState({
+          onlineUsers: leftUsers,
+        });
+   
         const length = this.state.onlineUsers.length;
         this.setState({
           onlineUsersNumber: length
         });
+      }
+
+      if (presence.action === 'interval') {
+        if (presence.join || presence.leave) {
+          let onlineUsers = this.state.onlineUsers;
+          let onlineUsersNumber = this.state.onlineUsersNumber;
+ 
+          if (presence.join) {
+            presence.join.map(user => (
+              user !== this.uuid &&
+              onlineUsers.push({
+                state: presence.state,
+                uuid: user
+              })
+            ));
+
+            onlineUsersNumber += presence.join.length;
+          }
+
+          if (presence.leave) {
+            presence.leave.map(leftUser => onlineUsers.splice(onlineUsers.indexOf(leftUser), 1));
+            onlineUsersNumber -= presence.leave.length;
+          }
+
+          if (presence.timeout) {
+            presence.timeout.map(timeoutUser => onlineUsers.splice(onlineUsers.indexOf(timeoutUser), 1));
+            onlineUsersNumber -= presence.timeout.length;
+          }
+
+          this.setState({
+            onlineUsers,
+            onlineUsersNumber
+          });
+        }
       }
     });
 
     this.pubnub.getStatus((status) => {
       if (status.category === 'PNConnectedCategory') {
         this.hereNow();
+
         this.pubnub.history({
           channel: forestChatChannel,
           reverse: false,
@@ -97,8 +135,8 @@ export default class extends Component {
             lastMsgWeekday
           });
 
-          var msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
-          this.setState({msgsSentDate})
+          let msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
+          this.setState({msgsSentDate});
         });
       }
                  
@@ -109,18 +147,20 @@ export default class extends Component {
       if (status.category === 'PNNetworkUpCategory') {
         this.setState({networkErrorStatus: false});
         this.pubnub.reconnect();
+        this.scrollToBottom();
       }
     });
 
     this.pubnub.getMessage(forestChatChannel, (m) => {
       const sendersInfo = this.state.sendersInfo;
+      
       sendersInfo.push({
         senderId: m.message.senderId,
         text: m.message.text,
         timetoken: m.timetoken,
       });
+      
       this.setState(this.state);
-
 
       const lastMsgWeekday = this.getWeekday(m.timetoken);
       this.setState({
@@ -151,7 +191,7 @@ export default class extends Component {
     this.pubnub.hereNow({
       channels: [forestChatChannel],
       includeUUIDs: true,
-      includeState: true
+      includeState: false
     }, (status, response) => {
       this.setState({
         onlineUsers: response.channels[forestChatChannel].occupants,
@@ -177,20 +217,20 @@ export default class extends Component {
   getDate = (timetoken, msgType, index = 0) => {
     const msgWeekday = this.getWeekday(timetoken);
     const date = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {day: 'numeric', month: 'long'});
+    
     switch (msgType) {
       case 'historyMsg':
         if (this.state.msgsSentDate[index - 1] !== msgWeekday) {
-          return `${date}, ${msgWeekday}`;
+          return `${date}, ${msgWeekday}`; 
         }
-
+        
         break;
       case 'senderMsg':
         if (this.state.lastMsgWeekday !== msgWeekday) {
           return `${date}, ${msgWeekday}`;
         }
-
+        
         break;
-
       default:
         return;
     }
@@ -202,29 +242,33 @@ export default class extends Component {
 
   findById = (uuid) => {
     const user = users.find( element => element.uuid === uuid );
-
+  
     if (user) {
       return user.firstName + ' ' + user.lastName;
     }
-
-    return 'user';
   };
 
   getUserDesignation = (uuid) => {
     const designation = users.find(element => element.uuid === uuid);
-
+  
     if (designation) {
       return designation.designation;
     }
-
-    return 'engineer';
   };
 
   getUserImage = (uuid, size) => {
     const image = users.find(element => element.uuid === uuid);
-
+  
     if (image) {
-      return image.profileImage[size];
+        return image.profileImage[size];
+    }
+  };
+
+  scrollToBottom = () => {
+    const elem = document.querySelector(".msgsDialog");
+
+    if(elem) {
+        elem.scrollTop = elem.scrollHeight;
     }
   };
   // end::CHT-2.2[]
@@ -233,11 +277,11 @@ export default class extends Component {
   render() {
     return (
       <div className='grid'>
-        <Header
+        <Header 
           userName={this.userName}
           profileImage={this.profileImage}
-          usersNumber={this.state.onlineUsersNumber}/>
-        <MessagesList
+          usersNumber={this.state.onlineUsersNumber}/>                
+        <MessagesList 
           uuid={this.uuid}
           sendersInfo={this.state.sendersInfo}
           findById={this.findById}
@@ -247,21 +291,22 @@ export default class extends Component {
           historyLoaded={this.state.historyLoaded}
           historyMsgs={this.state.historyMsgs}
           networkErrorStatus={this.state.networkErrorStatus}
-          networkErrorImg = {this.state.networkErrorImg}/>
-        <MessageBody
+          networkErrorImg={this.state.networkErrorImg}
+          scrollToBottom={this.scrollToBottom}/>
+        <MessageBody 
           uuid={this.uuid}
           pubnub={this.pubnub}
           findById={this.findById}
           chatName={forestChatChannel}/>
-        <OnlineUsers
+        <OnlineUsers 
           users={users}
           getUserImage={this.getUserImage}
           logedUser={this.uuid}
           findById={this.findById}
           getUserDesignation={this.getUserDesignation}
           onlineUsers={this.state.onlineUsers}/>
-      </div>
-    );
+        </div>
+      );
   }
   // end::CHT-6[]
 // tag::CHT-1.2[]

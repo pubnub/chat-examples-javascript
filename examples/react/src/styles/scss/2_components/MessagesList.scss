@@ -15,8 +15,8 @@
         }
 
         @include breakpoint ($mobile) {
-            width: 100%;
-            left: 20px;
+            width: 120%;
+            left: -20px;
         }
     }
 
@@ -51,11 +51,15 @@
             margin-top: 40px;
             margin-left: 8px;
 
+            @include breakpoint ($mobile) {
+                @include size (150px);
+            }
+
             .msgSentDay {
                 display: flex;
                 justify-content: center;
                 position: relative;
-                width: 70vw;
+                width: 60vw;
                 top: -20px;
                 margin-top: 0px;
                 margin-bottom: 30px;
@@ -67,7 +71,7 @@
                 }
 
                 @include breakpoint ($mobile) {
-                    width: 80vw;
+                    width: 75vw;
                     font-size: 1.1em;
                 }
 
@@ -75,6 +79,11 @@
                     display: none;
                 }
             }
+
+            // .line {
+            //     width: 15vw;
+            //     border-bottom: 1px solid black;
+            // }
             
             img {
                 position: absolute;
@@ -84,7 +93,7 @@
 
             .message {
                 position: relative;
-                word-break: break-all;
+                word-break: break-word;
             }
 
             .name, .time {
@@ -112,6 +121,10 @@
             
             img {
                 left: 305px;
+
+                @include breakpoint ($mobile) {
+                    left: 155px;
+                }
             }
             
             .text {

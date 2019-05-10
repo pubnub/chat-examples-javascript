@@ -22,11 +22,12 @@
             }
             
             @include breakpoint ($tablet) {
+                width: 75%;
                 margin-left: 5px;
             }
             
             @include breakpoint ($mobile) {
-                width: 74%;
+                width: 70%;
             }
         }
 
@@ -52,8 +53,8 @@
                 right: 50px;
             }
 
-            @include breakpoint ($mobile) {
-                right: 10px;
+            @include breakpoint ($tablet) {
+                right: -10px;
             }
         }
 

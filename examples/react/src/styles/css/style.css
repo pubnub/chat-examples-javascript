@@ -79,8 +79,8 @@ body {
 }
 @media (max-width: 415px) {
   .messageList .networkErrorImg {
-    width: 100%;
-    left: 20px;
+    width: 120%;
+    left: -20px;
   }
 }
 .messageList .msgsDialog {
@@ -112,11 +112,16 @@ body {
   margin-top: 40px;
   margin-left: 8px;
 }
+@media (max-width: 415px) {
+  .messageList .msgsDialog li {
+    width: 150px;
+  }
+}
 .messageList .msgsDialog li .msgSentDay {
   display: flex;
   justify-content: center;
   position: relative;
-  width: 70vw;
+  width: 60vw;
   top: -20px;
   margin-top: 0px;
   margin-bottom: 30px;
@@ -130,7 +135,7 @@ body {
 }
 @media (max-width: 415px) {
   .messageList .msgsDialog li .msgSentDay {
-    width: 80vw;
+    width: 75vw;
     font-size: 1.1em;
   }
 }
@@ -144,7 +149,7 @@ body {
 }
 .messageList .msgsDialog li .message {
   position: relative;
-  word-break: break-all;
+  word-break: break-word;
 }
 .messageList .msgsDialog li .name, .messageList .msgsDialog li .time {
   left: 5px;
@@ -166,6 +171,11 @@ body {
 }
 .messageList .msgsDialog .senderMsg img {
   left: 305px;
+}
+@media (max-width: 415px) {
+  .messageList .msgsDialog .senderMsg img {
+    left: 155px;
+  }
 }
 .messageList .msgsDialog .senderMsg .text {
   background-color: #d32f2f;
@@ -202,12 +212,13 @@ body {
 }
 @media (max-width: 770px) {
   .messageBody .msgForm .msgInput {
+    width: 75%;
     margin-left: 5px;
   }
 }
 @media (max-width: 415px) {
   .messageBody .msgForm .msgInput {
-    width: 74%;
+    width: 70%;
   }
 }
 .messageBody .msgForm .emojiIcon {
@@ -236,9 +247,9 @@ body {
     right: 50px;
   }
 }
-@media (max-width: 415px) {
+@media (max-width: 770px) {
   .messageBody .msgForm .emojiIcon {
-    right: 10px;
+    right: -10px;
   }
 }
 .messageBody .msgForm .emojisWindow {
@@ -486,6 +497,11 @@ body {
   display: block;
   color: #000;
   font-weight: bold;
+}
+@media (max-width: 415px) {
+  .header .userName span {
+    font-size: 0.9em;
+  }
 }
 .header .userName img {
   position: absolute;
