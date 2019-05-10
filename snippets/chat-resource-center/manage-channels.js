@@ -1,8 +1,8 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
 
-const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
-const publishKey = process.env.PUBLISH_KEY || 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
+const publishKey = process.env.PUBLISH_KEY || 'demo';
 
 describe('Manage channels', () => {
   let observerPubNubClient = null;

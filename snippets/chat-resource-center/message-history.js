@@ -2,8 +2,8 @@
 import BigNumber from 'bignumber.js';
 import PubNub from 'pubnub';
 
-const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
-const publishKey = process.env.PUBLISH_KEY || 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
+const publishKey = process.env.PUBLISH_KEY || 'demo';
 
 const publishMessage = (pubnub, channel, completion) => {
   const message = {
