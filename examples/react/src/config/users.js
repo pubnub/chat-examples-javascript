@@ -2,7 +2,7 @@ import avatars from './avatars';
 
 export default [
     {
-        uuid: 'user-1',
+        uuid: 'forest-animal-1',
         firstName: 'Funky',
         lastName: 'Monkey',
         designation: 'Technical Specialist',
@@ -12,7 +12,7 @@ export default [
         }
     },
     {
-        uuid: 'user-2',
+        uuid: 'forest-animal-2',
         firstName: 'Parrot',
         lastName: 'Arra',
         designation: 'Personal Assistant',
@@ -22,7 +22,7 @@ export default [
         }
     },
     {
-        uuid: 'user-3',
+        uuid: 'forest-animal-3',
         firstName: 'Happy',
         lastName: 'Turtle',
         designation: 'Account Manager',
@@ -32,7 +32,7 @@ export default [
         }
     },
     {
-        uuid: 'user-4',
+        uuid: 'forest-animal-4',
         firstName: 'Sleeping',
         lastName: 'Cheetah',
         designation: 'Product Manager',
@@ -42,7 +42,7 @@ export default [
         }
     },
     {
-        uuid: 'user-5',
+        uuid: 'forest-animal-5',
         firstName: 'Happy',
         lastName: 'Chipmunk',
         designation: 'Dev-Ops Engineer',
@@ -52,7 +52,7 @@ export default [
         }
     },
     {
-        uuid: 'user-6',
+        uuid: 'forest-animal-6',
         firstName: 'Long',
         lastName: 'Giraffe',
         designation: 'Technical Specialist',
@@ -62,7 +62,7 @@ export default [
         }
     },
     {
-        uuid: 'user-7',
+        uuid: 'forest-animal-7',
         firstName: 'Little',
         lastName: 'Elephant',
         designation: 'Sales Director',
@@ -72,7 +72,7 @@ export default [
         }
     },
     {
-        uuid: 'user-8',
+        uuid: 'forest-animal-8',
         firstName: 'Blue',
         lastName: 'Bird',
         designation: 'VP Marketing',
@@ -82,7 +82,7 @@ export default [
         }
     },
     {
-        uuid: 'user-9',
+        uuid: 'forest-animal-9',
         firstName: 'Colorful',
         lastName: 'Rooster',
         designation: 'Network Engineer',
@@ -92,7 +92,7 @@ export default [
         }
     },
     {
-        uuid: 'user-10',
+        uuid: 'forest-animal-10',
         firstName: 'Tropical',
         lastName: 'Toucan',
         designation: 'Sales Manager',
@@ -102,7 +102,7 @@ export default [
         }
     },
     {
-        uuid: 'user-11',
+        uuid: 'forest-animal-11',
         firstName: 'Cute',
         lastName: 'Bear',
         designation: 'Designer',
@@ -112,7 +112,7 @@ export default [
         }
     },
     {
-        uuid: 'user-12',
+        uuid: 'forest-animal-12',
         firstName: 'White',
         lastName: 'Rabbit',
         designation: 'Network Engineer',
@@ -122,7 +122,7 @@ export default [
         }
     },
     {
-        uuid: 'user-13',
+        uuid: 'forest-animal-13',
         firstName: 'King',
         lastName: 'Lion',
         designation: 'Co-Founder',
@@ -132,7 +132,7 @@ export default [
         }
     },
     {
-        uuid: 'user-14',
+        uuid: 'forest-animal-14',
         firstName: 'Night',
         lastName: 'Owl',
         designation: 'VP Finance',
@@ -142,7 +142,7 @@ export default [
         }
     },
     {
-        uuid: 'user-15',
+        uuid: 'forest-animal-15',
         firstName: 'Forest',
         lastName: 'Cat',
         designation: 'Designer',
@@ -152,7 +152,7 @@ export default [
         }
     },
     {
-        uuid: 'user-16',
+        uuid: 'forest-animal-16',
         firstName: 'Striped',
         lastName: 'Zebra',
         designation: 'VP Sales',
@@ -162,7 +162,7 @@ export default [
         }
     },
     {
-        uuid: 'user-17',
+        uuid: 'forest-animal-17',
         firstName: 'Jungle',
         lastName: 'Tiger',
         designation: 'CEO',
@@ -172,7 +172,7 @@ export default [
         }
     },
     {
-        uuid: 'user-18',
+        uuid: 'forest-animal-18',
         firstName: 'Baby',
         lastName: 'Deer',
         designation: 'Marketing Specialist',
@@ -182,7 +182,7 @@ export default [
         }
     },
     {
-        uuid: 'user-19',
+        uuid: 'forest-animal-19',
         firstName: 'Wild',
         lastName: 'Eagle',
         designation: 'Support Rep',
@@ -192,7 +192,7 @@ export default [
         }
     },
     {
-        uuid: 'user-20',
+        uuid: 'forest-animal-20',
         firstName: 'Safari',
         lastName: 'Camel',
         designation: 'Solution Architect',
@@ -202,7 +202,7 @@ export default [
         }
     },
     {
-        uuid: 'user-21',
+        uuid: 'forest-animal-21',
         firstName: 'Honey',
         lastName: 'Bee',
         designation: 'Co-Founder',
@@ -212,7 +212,7 @@ export default [
         }
     },
     {
-        uuid: 'user-22',
+        uuid: 'forest-animal-22',
         firstName: 'Angry',
         lastName: 'Crocodile',
         designation: 'Solution Architect',
@@ -222,7 +222,7 @@ export default [
         }
     },
     {
-        uuid: 'user-23',
+        uuid: 'forest-animal-23',
         firstName: 'Mountain',
         lastName: 'Kangaroo',
         designation: 'Product Manager',
@@ -232,7 +232,7 @@ export default [
         }
     },
     {
-        uuid: 'user-24',
+        uuid: 'forest-animal-24',
         firstName: 'Scary',
         lastName: 'Snake',
         designation: 'Engineer',
@@ -242,7 +242,7 @@ export default [
         }
     },
     {
-        uuid: 'user-25',
+        uuid: 'forest-animal-25',
         firstName: 'Greenland',
         lastName: 'Reindeer',
         designation: 'Technician',
@@ -252,7 +252,7 @@ export default [
         }
     },
     {
-        uuid: 'user-26',
+        uuid: 'forest-animal-26',
         firstName: 'Crazy',
         lastName: 'Frog',
         designation: 'Receptionist',
@@ -262,7 +262,7 @@ export default [
         }
     },
     {
-        uuid: 'user-27',
+        uuid: 'forest-animal-27',
         firstName: 'Black',
         lastName: 'Pig',
         designation: 'Account Manager',
@@ -272,7 +272,7 @@ export default [
         }
     },
     {
-        uuid: 'user-28',
+        uuid: 'forest-animal-28',
         firstName: 'Red',
         lastName: 'Fox',
         designation: 'Support Rep',
@@ -282,7 +282,7 @@ export default [
         }
     },
     {
-        uuid: 'user-29',
+        uuid: 'forest-animal-29',
         firstName: 'Bamboo',
         lastName: 'Panda',
         designation: 'Dev-Ops Engineer',
@@ -292,7 +292,7 @@ export default [
         }
     },
     {
-        uuid: 'user-30',
+        uuid: 'forest-animal-30',
         firstName: 'Cuddly',
         lastName: 'Koala',
         designation: 'Network Engineer',
@@ -302,7 +302,7 @@ export default [
         }
     },
     {
-        uuid: 'user-31',
+        uuid: 'forest-animal-31',
         firstName: 'Fast',
         lastName: 'Ostrich',
         designation: 'Technician',
@@ -312,7 +312,7 @@ export default [
         }
     },
     {
-        uuid: 'user-32',
+        uuid: 'forest-animal-32',
         firstName: 'Brown',
         lastName: 'Meerkat',
         designation: 'Solution Architect',
