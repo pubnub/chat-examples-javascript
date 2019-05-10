@@ -66,19 +66,52 @@ export default class extends Component {
           this.setState({
             onlineUsers: users,
             onlineUsersNumber: this.state.onlineUsersNumber + 1
-          });         
+          });
         }
 
         if ((presence.action === 'leave') || (presence.action === 'timeout')) {
           var leftUsers = this.state.onlineUsers.filter(users => users.uuid !== presence.uuid);
           this.setState({
-            onlineUsers: leftUsers
+            onlineUsers: leftUsers,
           });
     
           const length = this.state.onlineUsers.length
           this.setState({        
             onlineUsersNumber: length
           });
+        }
+
+        if (presence.action === 'interval') {
+          if (presence.join || presence.leave) {
+            var onlineUsers = this.state.onlineUsers;
+            var onlineUsersNumber = this.state.onlineUsersNumber;
+            if (presence.join) {
+              presence.join.map(user => (
+                  user !== this.uuid &&
+                  onlineUsers.push({
+                    state: presence.state,
+                    uuid: user
+                  })
+              ));
+
+              onlineUsersNumber += presence.join.length;
+            }
+
+            if (presence.leave) {
+              presence.leave.map(leftUser => onlineUsers.splice(onlineUsers.indexOf(leftUser), 1));
+              onlineUsersNumber -= presence.leave.length;
+            }
+
+            if (presence.timeout) {
+              presence.timeout.map(timeoutUser => onlineUsers.splice(onlineUsers.indexOf(timeoutUser), 1));
+              onlineUsersNumber -= presence.timeout.length;
+            }
+
+            this.setState({
+              onlineUsers,
+              onlineUsersNumber
+            });
+          }
         }
       });
 
@@ -99,7 +132,7 @@ export default class extends Component {
                 });
 
                 var msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
-                this.setState({msgsSentDate})
+                this.setState({msgsSentDate});
             });
         }   
                  
@@ -108,6 +141,7 @@ export default class extends Component {
         if (status.category === 'PNNetworkUpCategory'){
             this.setState({networkErrorStatus: false});
             this.pubnub.reconnect();      
+            this.scrollToBottom();
         }
       });
 
@@ -152,7 +186,7 @@ export default class extends Component {
       this.pubnub.hereNow({
         channels: [forestChatChannel],
         includeUUIDs: true,
-        includeState: true
+        includeState: false
       }, (status, response) => {
          this.setState({
           onlineUsers: response.channels[forestChatChannel].occupants,
@@ -216,6 +250,14 @@ export default class extends Component {
     };
     // end::CHT-2.2[]
 
+    scrollToBottom = () => {
+      const elem = document.querySelector(".msgsDialog");
+
+      if(elem) {
+          elem.scrollTop = elem.scrollHeight;
+      }
+    };
+
     // tag::CHT-6[]
     render() {
         return (
@@ -234,7 +276,8 @@ export default class extends Component {
                 historyLoaded={this.state.historyLoaded}
                 historyMsgs={this.state.historyMsgs}
                 networkErrorStatus={this.state.networkErrorStatus}
-                networkErrorImg = {this.state.networkErrorImg}/>
+                networkErrorImg={this.state.networkErrorImg}
+                scrollToBottom={this.scrollToBottom}/>
               <MessageBody 
                 uuid={this.uuid}
                 pubnub={this.pubnub}

@@ -9,7 +9,6 @@ export default (props) => {
     const putLogedUserFirst = (arr) => { 
         if(arr.length) {
             const logedUserIndex = arr.map(elem => elem.uuid).indexOf(logedUser);
-            console.log(logedUserIndex)
             if(logedUserIndex !== -1) {
                 [arr[0], arr[logedUserIndex]] = [arr[logedUserIndex], arr[0]];
             }

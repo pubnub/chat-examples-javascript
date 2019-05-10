@@ -2,22 +2,13 @@
 import React from 'react';
 
 export default (props) => { 
-    const {uuid, sendersInfo, getTime, historyLoaded, historyMsgs, findById, getUserImage,getDate, networkErrorStatus, networkErrorImg} = props;
+    const {uuid, sendersInfo, getTime, historyLoaded, historyMsgs, findById,
+         getUserImage,getDate, networkErrorStatus, networkErrorImg, scrollToBottom} = props;
     // end::MSGS-1.1[]
 
     // tag::MSGS-2[]
     const styleForMessageSender = senderId => uuid === senderId ? 'senderMsg' : senderId;
     // end::MSGS-2[]
-    
-    // tag::MSGS-3[]
-    const scrollToBottom = () => {
-        const elem = document.querySelector(".msgsDialog");
-
-        if(elem) {
-            elem.scrollTop = elem.scrollHeight;
-        }
-    };
-    // end::MSGS-3[]
     
     // tag::MSGS-4.1[]
     return (
@@ -31,6 +22,7 @@ export default (props) => {
                 {historyMsgs.map( (m, index) =>
                     <li className={styleForMessageSender(m.entry.senderId)} key={m.timetoken}>
                         <div className='msgSentDay'>{getDate(m.timetoken, 'historyMsg', index)}</div>
+                        <div className='line'></div>
                         <div className='message'>
                             <div className='name'>{findById(m.entry.senderId)}</div>
                             <div className='time'>{getTime(m.timetoken)}</div>
@@ -42,7 +34,7 @@ export default (props) => {
                 {/*// tag::MSGS-6[]*/}
                 {sendersInfo.map( (m, index) =>
                     <li className={styleForMessageSender(m.senderId)} key={index}>
-                        <div className='msgSentDay'><span>{getDate(m.timetoken, 'senderMsg')}</span></div>
+                        <div className='msgSentDay'>{getDate(m.timetoken, 'senderMsg')}</div>
                         <div className='message'>
                             <div className='name'>{findById(m.senderId)}</div>
                             <div className='time'>{getTime(m.timetoken)}</div>
