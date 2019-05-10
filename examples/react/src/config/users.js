@@ -42,6 +42,16 @@ export default [
         }
     },
     {
+        uuid: 'user-4',
+        firstName: 'Sleeping',
+        lastName: 'Cheetah',
+        designation: 'Product Manager',
+        profileImage: {
+            lgImage: avatars.sleeping_cheetah_45px,
+            smImage: avatars.sleeping_cheetah_28px
+        }
+    },
+    {
         uuid: 'forest-animal-5',
         firstName: 'Happy',
         lastName: 'Chipmunk',
