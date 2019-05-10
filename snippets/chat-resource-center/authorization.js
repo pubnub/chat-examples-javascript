@@ -57,6 +57,10 @@ describe('Authorization', () => {
     const pubnub = pubNubClient;
 
     const handleGrant = (grantStatus) => {
+      if (grantStatus.error) {
+        console.log('#1 ERROR:', grantStatus);
+      }
+
       expect(grantStatus.error).toBeFalsy();
 
       observerPubNubClient.publish({
@@ -96,9 +100,6 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
-      if (status.error) {
-        console.log('#1 ERROR:', status);
-      }
       setTimeout(() => {
         handleGrant(status);
       }, 5000);
@@ -113,6 +114,10 @@ describe('Authorization', () => {
     const pubnub = pubNubClient;
 
     const handleGrant = (grantStatus) => {
+      if (grantStatus.error) {
+        console.log('#1 ERROR:', grantStatus);
+      }
+
       expect(grantStatus.error).toBeFalsy();
 
       observerPubNubClient.publish({
@@ -149,9 +154,6 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
-      if (status.error) {
-        console.log('#1 ERROR:', status);
-      }
       setTimeout(() => {
         handleGrant(status);
       }, 5000);
@@ -166,6 +168,10 @@ describe('Authorization', () => {
     const pubnub = pubNubClient;
 
     const handleGrant = (grantStatus) => {
+      if (grantStatus.error) {
+        console.log('#1 ERROR:', grantStatus);
+      }
+
       expect(grantStatus.error).toBeFalsy();
 
       observerPubNubClient.history({
@@ -198,9 +204,6 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
-      if (status.error) {
-        console.log('#1 ERROR:', status);
-      }
       setTimeout(() => {
         handleGrant(status);
       }, 5000);
@@ -221,10 +224,6 @@ describe('Authorization', () => {
         observerPubNubClient.history({
           channel: expectedChannel,
         }, (status, response) => {
-          if (status.error) {
-            console.log('#3 ERROR:', status);
-          }
-
           expect(status.error).toBeTruthy();
           expect(response).not.toBeDefined();
 
@@ -256,7 +255,7 @@ describe('Authorization', () => {
           expect(status.error).toBeFalsy();
           setTimeout(() => {
             handleGrant(true);
-          }, 5000);
+          }, 10000);
           // end::ignore[]
         });
         // end::PAM-5[]
@@ -269,6 +268,7 @@ describe('Authorization', () => {
       if (status.error) {
         console.log('#1 ERROR:', status);
       }
+
       expect(status.error).toBeFalsy();
 
       setTimeout(() => {
@@ -284,6 +284,10 @@ describe('Authorization', () => {
     const pubnub = pubNubClient;
 
     const handleGrant = (grantStatus) => {
+      if (grantStatus.error) {
+        console.log('#1 ERROR:', grantStatus);
+      }
+
       expect(grantStatus.error).toBeFalsy();
 
       observerPubNubClient.channelGroups.addChannels({
@@ -320,9 +324,6 @@ describe('Authorization', () => {
       // handle status
       // tag::ignore[]
 
-      if (status.error) {
-        console.log('#1 ERROR:', status);
-      }
       setTimeout(() => {
         handleGrant(status);
       }, 5000);
@@ -364,6 +365,10 @@ describe('Authorization', () => {
           text: 'Hello, hoomans!',
         },
       }, (status, response) => {
+        if (status.error) {
+          console.log('#2 ERROR:', status);
+        }
+
         expect(status.error).toBeFalsy();
         expect(response.timetoken).toBeDefined();
 
@@ -412,6 +417,10 @@ describe('Authorization', () => {
     pubNubClient.grant({
       channels, authKeys, ttl: 10, read: true, write: true,
     }, (status) => {
+      if (status.error) {
+        console.log('#1 ERROR:', status);
+      }
+
       expect(status.error).toBeFalsy();
 
       setTimeout(() => {

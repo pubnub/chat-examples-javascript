@@ -82,6 +82,10 @@ describe('Presence', () => {
       }, (status, response) => {
         // handle status, response
         // tag::ignore[]
+
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
         expect(status.error).toBeFalsy();
         expect(response.totalOccupancy).toEqual(1);
         expect(response.channels[expectedChannel]).toBeDefined();

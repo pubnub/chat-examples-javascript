@@ -172,6 +172,10 @@ describe('Manage channels', () => {
             channels: expectedChannels,
             channelGroup: expectedGroup,
           }, (status) => {
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
+
             expect(status.error).toBeFalsy();
 
             // tag::CHAN-4[]
@@ -277,6 +281,10 @@ describe('Manage channels', () => {
       channels: expectedChannels,
       channelGroup: expectedGroup,
     }, (addStatus) => {
+      if (addStatus.error) {
+        console.log('ERROR:', addStatus);
+      }
+
       expect(addStatus.error).toBeFalsy();
 
       // tag::CHAN-7[]
@@ -329,6 +337,10 @@ describe('Manage channels', () => {
             channels: expectedChannels,
             channelGroup: expectedGroup,
           }, (status) => {
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
+
             expect(status.error).toBeFalsy();
 
             pubnub.subscribe({

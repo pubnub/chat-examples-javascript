@@ -34,6 +34,10 @@ describe('Mobile Push Notifications', () => {
     const pubnub = pubNubClient;
 
     const handleChannelsAdd = (addStatus) => {
+      if (addStatus.error) {
+        console.log('ERROR:', addStatus);
+      }
+
       expect(addStatus.error).toBeFalsy();
 
       pubnub.push.listChannels({
@@ -79,6 +83,10 @@ describe('Mobile Push Notifications', () => {
     const pubnub = pubNubClient;
 
     const handleChannelsRemove = (removeStatus) => {
+      if (removeStatus.error) {
+        console.log('ERROR:', removeStatus);
+      }
+
       expect(removeStatus.error).toBeFalsy();
 
       pubnub.push.listChannels({
@@ -93,6 +101,10 @@ describe('Mobile Push Notifications', () => {
     pubnub.push.addChannels({
       channels: expectedChannels, device: expectedDevice, pushGateway: 'apns',
     }, (addStatus) => {
+      if (addStatus.error) {
+        console.log('ERROR:', addStatus);
+      }
+
       expect(addStatus.error).toBeFalsy();
 
       // tag::PUSH-2[]
@@ -165,6 +177,10 @@ describe('Mobile Push Notifications', () => {
           }, (status) => {
             // handle publish status.
             // tag::ignore[]
+
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
 
             expect(status.error).toBeFalsy();
             // end::ignore[]

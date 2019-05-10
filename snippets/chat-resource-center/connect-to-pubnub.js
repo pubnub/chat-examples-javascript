@@ -86,6 +86,10 @@ describe('Connect to PubNub', () => {
       // handle state setting response
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('ERROR:', status);
+      }
+
       expect(status).toBeDefined();
       expect(status.error).toBeFalsy();
       expect(response.state).toEqual(expectedState);
@@ -100,6 +104,10 @@ describe('Connect to PubNub', () => {
       }, (status, response) => {
         // handle state getting response
         // tag::ignore[]
+
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
 
         expect(status).toBeDefined();
         expect(status.error).toBeFalsy();

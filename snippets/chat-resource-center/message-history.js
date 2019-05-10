@@ -15,6 +15,10 @@ const publishMessage = (pubnub, channel, completion) => {
     message,
     channel,
   }, (status, response) => {
+    if (status.error) {
+      console.log('ERROR:', status);
+    }
+
     expect(status.error).toBeFalsy();
     expect(response.timetoken).toBeDefined();
 
@@ -104,12 +108,12 @@ describe('Message history', () => {
     };
 
     publishMessage(pubnub, expectedChannels[0], (messageTimetoken) => {
-      timetoken = BigNumber(messageTimetoken).minus(1).toFixed();
+      timetoken = BigNumber(messageTimetoken).minus(2).toFixed();
 
       publishMessage(pubnub, expectedChannels[1], () => {
         setTimeout(() => {
           fetchMessagesCount();
-        }, 5000);
+        }, 10000);
       });
     });
   });
@@ -139,6 +143,10 @@ describe('Message history', () => {
         // handle status, response
         // tag::ignore[]
 
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
+
         expect(status.error).toBeFalsy();
         expect(response.messages).toBeDefined();
         expect(response.messages.length).toEqual(2);
@@ -151,12 +159,12 @@ describe('Message history', () => {
 
     publishMessage(pubnub, expectedChannel, () => {
       publishMessage(pubnub, expectedChannel, (messageTimetoken) => {
-        timetoken = BigNumber(messageTimetoken).minus(1).toFixed();
+        timetoken = BigNumber(messageTimetoken).minus(2).toFixed();
 
         publishMessage(pubnub, expectedChannel, () => {
           setTimeout(() => {
             fetchMessagesHistory();
-          }, 5000);
+          }, 10000);
         });
       });
     });
@@ -167,7 +175,7 @@ describe('Message history', () => {
     const pubnub = pubNubClient;
     let historyCallsCount = 0;
 
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
 
     // tag::HIST-3[]
     const getAllMessages = (timetoken) => {
@@ -218,6 +226,7 @@ describe('Message history', () => {
     // end::HIST-3[]
 
     publishMultipleMessages(pubnub, expectedChannel, 150, () => {
+      console.log(`Published 150 messages to ${expectedChannel}`);
       getAllMessages(null);
     });
   });
@@ -252,6 +261,11 @@ describe('Message history', () => {
       }, (status, response) => {
         // handle status, response
         // tag::ignore[]
+
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
+
         const channelsList = Object.keys(response.channels);
         expect(status.error).toBeFalsy();
         expect(channelsList.length).toEqual(3);
