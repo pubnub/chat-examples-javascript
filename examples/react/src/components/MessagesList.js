@@ -22,7 +22,6 @@ export default (props) => {
                 {historyMsgs.map( (m, index) =>
                     <li className={styleForMessageSender(m.entry.senderId)} key={m.timetoken}>
                         <div className='msgSentDay'>{getDate(m.timetoken, 'historyMsg', index)}</div>
-                        <div className='line'></div>
                         <div className='message'>
                             <div className='name'>{findById(m.entry.senderId)}</div>
                             <div className='time'>{getTime(m.timetoken)}</div>
