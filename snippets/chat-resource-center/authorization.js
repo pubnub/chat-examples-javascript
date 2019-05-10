@@ -81,7 +81,7 @@ describe('Authorization', () => {
       // tag::ignore[]
       channels: [expectedChannel],
       authKeys: [expectedAuthKey],
-      ttl: 1,
+      ttl: 10,
       /**
       // end::ignore[]
       channels: ['room-1'],
@@ -101,7 +101,7 @@ describe('Authorization', () => {
       }
       setTimeout(() => {
         handleGrant(status);
-      }, 1000);
+      }, 5000);
       // end::ignore[]
     });
     // end::PAM-2[]
@@ -134,7 +134,7 @@ describe('Authorization', () => {
       // tag::ignore[]
       channels: [expectedChannel],
       authKeys: [expectedAuthKey],
-      ttl: 1,
+      ttl: 10,
       /**
       // end::ignore[]
       channels: ['room-1'],
@@ -154,7 +154,7 @@ describe('Authorization', () => {
       }
       setTimeout(() => {
         handleGrant(status);
-      }, 1000);
+      }, 5000);
       // end::ignore[]
     });
     // end::PAM-3[]
@@ -183,7 +183,7 @@ describe('Authorization', () => {
       // tag::ignore[]
       channels: [expectedChannel],
       authKeys: [expectedAuthKey],
-      ttl: 1,
+      ttl: 10,
       /**
       // end::ignore[]
       channels: ['room-1'],
@@ -203,7 +203,7 @@ describe('Authorization', () => {
       }
       setTimeout(() => {
         handleGrant(status);
-      }, 1000);
+      }, 5000);
       // end::ignore[]
     });
     // end::PAM-4[]
@@ -221,6 +221,10 @@ describe('Authorization', () => {
         observerPubNubClient.history({
           channel: expectedChannel,
         }, (status, response) => {
+          if (status.error) {
+            console.log('#3 ERROR:', status);
+          }
+
           expect(status.error).toBeTruthy();
           expect(response).not.toBeDefined();
 
@@ -248,10 +252,11 @@ describe('Authorization', () => {
           if (status.error) {
             console.log('#2 ERROR:', status);
           }
+
           expect(status.error).toBeFalsy();
           setTimeout(() => {
             handleGrant(true);
-          }, 1000);
+          }, 5000);
           // end::ignore[]
         });
         // end::PAM-5[]
@@ -259,7 +264,7 @@ describe('Authorization', () => {
     };
 
     pubnub.grant({
-      channels, authKeys, ttl: 1, read: true, write: true,
+      channels, authKeys, ttl: 10, read: true, write: true,
     }, (status) => {
       if (status.error) {
         console.log('#1 ERROR:', status);
@@ -268,7 +273,7 @@ describe('Authorization', () => {
 
       setTimeout(() => {
         handleGrant(false);
-      }, 1000);
+      }, 5000);
     });
   });
 
@@ -299,7 +304,7 @@ describe('Authorization', () => {
       // tag::ignore[]
       channelGroups: [expectedChannelGroup],
       authKeys: [expectedAuthKey],
-      ttl: 1,
+      ttl: 10,
       /**
       // end::ignore[]
       channelGroups: ['family'],
@@ -320,7 +325,7 @@ describe('Authorization', () => {
       }
       setTimeout(() => {
         handleGrant(status);
-      }, 1000);
+      }, 5000);
       // end::ignore[]
     });
     // end::PAM-6[]
@@ -405,13 +410,13 @@ describe('Authorization', () => {
     };
 
     pubNubClient.grant({
-      channels, authKeys, ttl: 1, read: true, write: true,
+      channels, authKeys, ttl: 10, read: true, write: true,
     }, (status) => {
       expect(status.error).toBeFalsy();
 
       setTimeout(() => {
         handleGrant();
-      }, 1000);
+      }, 5000);
     });
   });
 });
