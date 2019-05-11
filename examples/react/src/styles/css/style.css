@@ -86,9 +86,7 @@ body {
 .messageList .msgsDialog {
   height: inherit;
   position: relative;
-  display: flex;
   margin-top: 0;
-  flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
@@ -163,25 +161,29 @@ body {
 .messageList .msgsDialog li .text {
   background-color: rgba(128, 128, 128, 0.164);
 }
-.messageList .msgsDialog .senderMsg {
+.messageList .msgsDialog .senderMsgsDialog {
+  display: flex;
+  flex-direction: column;
+}
+.messageList .msgsDialog .senderMsgsDialog .senderMsg {
   align-self: flex-end;
   margin-right: 50px;
   color: #fff;
   text-align: right;
 }
-.messageList .msgsDialog .senderMsg img {
+.messageList .msgsDialog .senderMsgsDialog .senderMsg img {
   left: 305px;
 }
 @media (max-width: 415px) {
-  .messageList .msgsDialog .senderMsg img {
+  .messageList .msgsDialog .senderMsgsDialog .senderMsg img {
     left: 155px;
   }
 }
-.messageList .msgsDialog .senderMsg .text {
+.messageList .msgsDialog .senderMsgsDialog .senderMsg .text {
   background-color: #d32f2f;
   text-align: left;
 }
-.messageList .msgsDialog .senderMsg .name, .messageList .msgsDialog .senderMsg .time {
+.messageList .msgsDialog .senderMsgsDialog .senderMsg .name, .messageList .msgsDialog .senderMsgsDialog .senderMsg .time {
   left: unset;
   right: 5px;
 }
@@ -200,30 +202,44 @@ body {
     bottom: 0;
   }
 }
+@media (max-width: 320px) {
+  .messageBody .msgForm {
+    bottom: 10px;
+  }
+}
 .messageBody .msgForm .msgInput {
   width: 82%;
   height: 35px;
   margin-top: 30px;
   border: none;
-  font-size: 17px;
+  font-size: 15px;
 }
 .messageBody .msgForm .msgInput:focus {
   outline: none;
 }
-@media (max-width: 770px) {
+@media (max-width: 1024px) {
   .messageBody .msgForm .msgInput {
     width: 75%;
+  }
+}
+@media (max-width: 770px) {
+  .messageBody .msgForm .msgInput {
     margin-left: 5px;
+  }
+}
+@media (max-width: 500px) {
+  .messageBody .msgForm .msgInput {
+    width: 72%;
   }
 }
 @media (max-width: 415px) {
   .messageBody .msgForm .msgInput {
-    width: 70%;
+    width: 60%;
   }
 }
 .messageBody .msgForm .emojiIcon {
   position: relative;
-  top: 7px;
+  top: 8px;
   right: 10px;
   cursor: pointer;
 }
@@ -244,12 +260,17 @@ body {
 }
 @media (max-width: 1024px) {
   .messageBody .msgForm .emojiIcon {
-    right: 50px;
+    right: -2px;
   }
 }
 @media (max-width: 770px) {
   .messageBody .msgForm .emojiIcon {
     right: -10px;
+  }
+}
+@media (max-width: 320px) {
+  .messageBody .msgForm .emojiIcon {
+    right: -5px;
   }
 }
 .messageBody .msgForm .emojisWindow {
@@ -325,9 +346,14 @@ body {
     right: 22px;
   }
 }
+@media (max-width: 770px) {
+  .messageBody .msgForm .submitBtn {
+    width: 12%;
+  }
+}
 @media (max-width: 415px) {
   .messageBody .msgForm .submitBtn {
-    width: 11%;
+    width: 18%;
     padding-left: 1px;
     padding-right: 2px;
   }
@@ -443,6 +469,12 @@ body {
     left: 50px;
   }
 }
+@media (max-width: 320px) {
+  .header h1 {
+    top: 8px;
+    width: 50px;
+  }
+}
 .header h2 {
   font-weight: normal;
   font-size: 15px;
@@ -476,6 +508,11 @@ body {
     left: 50px;
   }
 }
+@media (max-width: 320px) {
+  .header h2 {
+    display: none;
+  }
+}
 .header .userName {
   position: absolute;
   top: 12px;
@@ -493,20 +530,46 @@ body {
     right: 5px;
   }
 }
-.header .userName span {
+@media (max-width: 320px) {
+  .header .userName {
+    position: relative;
+    left: 60%;
+  }
+}
+@media (max-width: 320px) {
+  .header .userName .hello {
+    position: absolute;
+    left: 74px;
+  }
+}
+.header .userName .user {
   display: block;
   color: #000;
   font-weight: bold;
 }
 @media (max-width: 415px) {
-  .header .userName span {
+  .header .userName .user {
     font-size: 0.9em;
+  }
+}
+@media (max-width: 320px) {
+  .header .userName .user {
+    width: 73px;
+    text-align: right;
+    position: absolute;
+    left: 41px;
+    top: 20px;
   }
 }
 .header .userName img {
   position: absolute;
   top: 0;
   left: -50px;
+}
+@media (max-width: 320px) {
+  .header .userName img {
+    left: 0px;
+  }
 }
 
 .onlineUsers {

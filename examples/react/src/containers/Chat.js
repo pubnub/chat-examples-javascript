@@ -134,6 +134,8 @@ export default class extends Component {
                 var msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
                 this.setState({msgsSentDate});
             });
+
+            this.scrollToBottom();
         }   
                  
         if (status.category === 'PNNetworkDownCategory') 
@@ -152,9 +154,8 @@ export default class extends Component {
           text: m.message.text,
           timetoken: m.timetoken,
         });
-        this.setState(this.state);
-
-
+        this.setState(this.state);       
+        
         const lastMsgWeekday = this.getWeekday(m.timetoken)
         this.setState({
           sendersInfo,
@@ -213,9 +214,10 @@ export default class extends Component {
       const date = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {day: 'numeric', month: 'long'});
       switch (msgType) {
         case 'historyMsg':
-            if (this.state.msgsSentDate[index - 1] !== msgWeekday)
+            if (this.state.msgsSentDate[index - 1] !== msgWeekday) {
               return `${date}, ${msgWeekday}`; 
-              break;
+            }
+            break;
         case 'senderMsg':
           if (this.state.lastMsgWeekday !== msgWeekday)
           return `${date}, ${msgWeekday}`;
@@ -272,6 +274,7 @@ export default class extends Component {
                 findById={this.findById}
                 getUserImage={this.getUserImage}
                 getTime={this.getTime}
+                msgsSentDate={this.state.msgsSentDate}
                 getDate={this.getDate}
                 historyLoaded={this.state.historyLoaded}
                 historyMsgs={this.state.historyMsgs}

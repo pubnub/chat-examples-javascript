@@ -10,30 +10,41 @@
         @include breakpoint ($tablet_desktop) {
             bottom: 0;
         }
+
+        @include breakpoint ($iframe_mobile) {
+            bottom: 10px;
+        }
         
         .msgInput {
             @include size (82%, 35px); 
             margin-top: 30px;
             border: none;
-            font-size: 17px;
+            font-size: 15px;
 
             &:focus {
                 outline: none;
             }
+
+            @include breakpoint ($desktop) {
+                width: 75%;
+            }
             
             @include breakpoint ($tablet) {
-                width: 75%;
                 margin-left: 5px;
+            }
+
+            @include breakpoint (500px) {
+                width: 72%;
             }
             
             @include breakpoint ($mobile) {
-                width: 70%;
+                width: 60%;
             }
         }
 
         .emojiIcon {
             position: relative;
-            top: 7px;
+            top: 8px;
             right: 10px;
             cursor: pointer;
 
@@ -50,11 +61,15 @@
             }
 
             @include breakpoint ($desktop) {
-                right: 50px;
+                right: -2px;
             }
 
             @include breakpoint ($tablet) {
                 right: -10px;
+            }
+
+            @include breakpoint ($iframe_mobile) {
+                right: -5px;
             }
         }
 
@@ -128,8 +143,12 @@
                 right: 22px;
             }
 
+            @include breakpoint ($tablet) {
+                width: 12%;
+            }
+
             @include breakpoint ($mobile) {
-                width: 11%;
+                width: 18%;
                 padding-left: 1px;
                 padding-right: 2px;
             }

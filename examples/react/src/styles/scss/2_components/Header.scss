@@ -100,6 +100,11 @@
             top: 5px;
             left: 50px;
         }
+
+        @include breakpoint ($iframe_mobile) {
+            top: 8px;
+            width: 50px;
+        }
     }
 
     h2 {
@@ -130,6 +135,10 @@
             top: 23px;
             left: 50px;
         }
+
+        @include breakpoint ($iframe_mobile) {
+            display: none;
+        }
     }
 
     .userName {
@@ -147,7 +156,19 @@
             right: 5px;
         }
 
-        span {
+        @include breakpoint ($iframe_mobile) {
+            position: relative;
+            left: 60%;
+        }
+
+        .hello {
+            @include breakpoint ($iframe_mobile) {
+                position: absolute;
+                left: 74px;
+            }
+        }
+
+        .user {
             display: block;
             color: #000;
             font-weight: bold;
@@ -155,12 +176,24 @@
             @include breakpoint ($mobile) {
                 font-size: 0.9em;
             }
+
+            @include breakpoint ($iframe_mobile) {
+                width: 73px;
+                text-align: right;
+                position: absolute;
+                left: 41px;
+                top: 20px;
+            }
         }
 
         img {
             position: absolute;
             top: 0;
             left: -50px;
+
+            @include breakpoint ($iframe_mobile) {
+                left: 0px;
+            }
         }
     }
 }
