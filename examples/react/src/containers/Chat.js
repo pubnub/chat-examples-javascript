@@ -287,6 +287,7 @@ export default class extends Component {
           findById={this.findById}
           getUserImage={this.getUserImage}
           getTime={this.getTime}
+          msgsSentDate={this.state.msgsSentDate}
           getDate={this.getDate}
           historyLoaded={this.state.historyLoaded}
           historyMsgs={this.state.historyMsgs}
