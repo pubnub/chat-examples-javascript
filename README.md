@@ -1,4 +1,4 @@
-# PubNub Javascript Chat
+# PubNub JavaScript Chat
 
 [![Build Status](https://travis-ci.com/pubnub/chat-examples-javascript.svg?token=ey6rVJnpqsBKpxXy2fYF&branch=master)](https://travis-ci.com/pubnub/chat-examples-javascript)
 
@@ -10,8 +10,8 @@ samples live here.
 | Directory  | Description |
 |:----------:| ----------- |
 | `examples` | Location where gathered applications which explain how to solve tasks related to _chat_ using PubNub SDK. |
-| `examples > react` | Location where the animal chat application is stored. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/javascript/)|
-| `snippets` | Location where verified and tested code snippets are stored.<br>Snippets from `chat-resource-center` can be found inside of [Chat Resource Center](https://pubnub.github.io/chat-resource-center/). |
+| `examples > react` | Location where the animal chat application is stored. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/)|
+| `snippets` | Location where verified and tested code snippets are stored.<br>Snippets from `chat-resource-center` can be found inside of [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/). |
 
 
 # Animal Forest Chat Application
@@ -63,4 +63,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Further Information
 
-For more information about this project, or how to create your own chat app using PubNub, please check out our [tutorial](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/javascript/).
+For more information about this project, or how to create your own chat app using PubNub, please check out our [tutorial](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/).
