@@ -2,8 +2,8 @@
 import PubNub from 'pubnub';
 import https from 'https';
 
-const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
-const publishKey = process.env.PUBLISH_KEY || 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
+const publishKey = process.env.PUBLISH_KEY || 'demo';
 
 describe('Connect to PubNub', () => {
   let observerPubNubClient = null;
@@ -86,6 +86,10 @@ describe('Connect to PubNub', () => {
       // handle state setting response
       // tag::ignore[]
 
+      if (status.error) {
+        console.log('ERROR:', status);
+      }
+
       expect(status).toBeDefined();
       expect(status.error).toBeFalsy();
       expect(response.state).toEqual(expectedState);
@@ -100,6 +104,10 @@ describe('Connect to PubNub', () => {
       }, (status, response) => {
         // handle state getting response
         // tag::ignore[]
+
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
 
         expect(status).toBeDefined();
         expect(status.error).toBeFalsy();

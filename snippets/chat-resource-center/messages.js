@@ -1,8 +1,8 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
 
-const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo-36';
-const publishKey = process.env.PUBLISH_KEY || 'demo-36';
+const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
+const publishKey = process.env.PUBLISH_KEY || 'demo';
 
 describe('Messages', () => {
   let observerPubNubClient = null;
@@ -59,6 +59,10 @@ describe('Messages', () => {
             // handle status, response
             // tag::ignore[]
 
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
+
             expect(status.error).toBeFalsy();
             expect(response.timetoken).toBeDefined();
             // end::ignore[]
@@ -112,6 +116,10 @@ describe('Messages', () => {
         },
         channel: expectedChannel,
       }, (status, response) => {
+        if (status.error) {
+          console.log('ERROR:', status);
+        }
+
         expect(status.error).toBeFalsy();
         expect(response.timetoken).toBeDefined();
       });
@@ -214,6 +222,10 @@ describe('Messages', () => {
         observerPubNubClient.history({
           channel: expectedChannel,
         }, (status, response) => {
+          if (status.error) {
+            console.log('#2 ERROR:', status);
+          }
+
           expect(status.error).toBeFalsy();
           expect(response.messages.length).toEqual(0);
           done();
@@ -240,6 +252,10 @@ describe('Messages', () => {
       }, (status, response) => {
         // handle status, response
         // tag::ignore[]
+
+        if (status.error) {
+          console.log('#1 ERROR:', status);
+        }
 
         expect(status.error).toBeFalsy();
         expect(response.timetoken).toBeDefined();
@@ -285,6 +301,10 @@ describe('Messages', () => {
             },
             channel: expectedChannel,
           }, (status, response) => {
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
+
             expect(status.error).toBeFalsy();
             expect(response.timetoken).toBeDefined();
           });
@@ -374,6 +394,11 @@ describe('Messages', () => {
         }, (status, response) => {
           // handle status, response
           // tag::ignore[]
+
+          if (status.error) {
+            console.log('#2 ERROR:', status);
+          }
+
           expect(status.error).toBeFalsy();
           expect(response.timetoken).toBeDefined();
           // end::ignore[]
@@ -414,6 +439,10 @@ describe('Messages', () => {
           }, (status, response) => {
             // handle status, response
             // tag::ignore[]
+
+            if (status.error) {
+              console.log('#1 ERROR:', status);
+            }
 
             expect(status.error).toBeFalsy();
             expect(response.timetoken).toBeDefined();
@@ -457,6 +486,10 @@ describe('Messages', () => {
           }, (status, response) => {
             // handle status, response
             // tag::ignore[]
+
+            if (status.error) {
+              console.log('ERROR:', status);
+            }
 
             expect(status.error).toBeFalsy();
             expect(response.timetoken).toBeDefined();
