@@ -84,7 +84,7 @@ export default class extends Component {
       }
 
       if (presence.action === 'interval') {
-        if (presence.join || presence.leave) {
+        if (presence.join || presence.leave || presence.timeout) {
           let onlineUsers = this.state.onlineUsers;
           let onlineUsersNumber = this.state.onlineUsersNumber;
  
@@ -287,6 +287,7 @@ export default class extends Component {
           findById={this.findById}
           getUserImage={this.getUserImage}
           getTime={this.getTime}
+          msgsSentDate={this.state.msgsSentDate}
           getDate={this.getDate}
           historyLoaded={this.state.historyLoaded}
           historyMsgs={this.state.historyMsgs}
