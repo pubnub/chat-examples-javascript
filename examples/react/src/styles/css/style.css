@@ -99,7 +99,7 @@ body {
   border-radius: 10px;
 }
 .messageList .msgsDialog .name, .messageList .msgsDialog .time {
-  font-size: 15px;
+  font-size: 12px;
   color: #808080;
   font-weight: bold;
   position: absolute;
