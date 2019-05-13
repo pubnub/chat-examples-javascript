@@ -4,7 +4,7 @@ import appLogo from '../styles/avatars/45px/logo.png';
 import onlineLogo from '../styles/avatars/45px/onlineUsersLogo.png';
 
 export default (props) => {
-    const {userName, profileImage, usersNumber} = props;
+  const {userName, profileImage, usersNumber} = props;
 
     return (
         <div className='header'>
@@ -33,5 +33,4 @@ export default (props) => {
         </div>
     );
 }
-
 // end::HEAD-1.2[]

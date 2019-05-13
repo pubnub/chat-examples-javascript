@@ -225,6 +225,7 @@ body {
 }
 @media (max-width: 770px) {
   .messageBody .msgForm .msgInput {
+    width: 75%;
     margin-left: 5px;
   }
 }

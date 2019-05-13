@@ -47,6 +47,4 @@ export default (props) => {
     // end::MSGS-4.6[]
    // tag::MSGS-1.2[]
 }
-
 // end::MSGS-1.2[]
-

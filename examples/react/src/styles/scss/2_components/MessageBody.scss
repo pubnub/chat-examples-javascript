@@ -30,6 +30,7 @@
             }
             
             @include breakpoint ($tablet) {
+                width: 75%;
                 margin-left: 5px;
             }
 
