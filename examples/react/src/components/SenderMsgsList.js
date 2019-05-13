@@ -12,7 +12,6 @@ export default (props) => {
       {/*// tag::SMSG-3[]*/}
       {sendersInfo.map( (m, index) =>
         <li className={styleForMessageSender(m.senderId)} key={index}>
-          {console.log('renderam sender msgs')}
           <div className='msgSentDay'>{getDate(m.timetoken, 'senderMsg')}</div>
           <div className='message'>
             <div className='name'>{findById(m.senderId)}</div>
