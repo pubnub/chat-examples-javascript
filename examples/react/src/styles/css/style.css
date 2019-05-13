@@ -148,6 +148,7 @@ body {
 .messageList .msgsDialog li .message {
   position: relative;
   word-break: break-word;
+  word-wrap: break-word;
 }
 .messageList .msgsDialog li .name, .messageList .msgsDialog li .time {
   left: 5px;
