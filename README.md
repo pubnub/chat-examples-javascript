@@ -2,16 +2,15 @@
 
 [![Build Status](https://travis-ci.com/pubnub/chat-examples-javascript.svg?token=ey6rVJnpqsBKpxXy2fYF&branch=master)](https://travis-ci.com/pubnub/chat-examples-javascript)
 
-Source files for JavaScript based chat example apps and document code 
-samples live here.
+This repository contains sample code from the [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/).
 
 ## Repository structure
 
 | Directory  | Description |
 |:----------:| ----------- |
-| `examples` | Location where gathered applications which explain how to solve tasks related to _chat_ using PubNub SDK. |
-| `examples > react` | Location where the animal chat application is stored. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/)|
-| `snippets` | Location where verified and tested code snippets are stored.<br>Snippets from `chat-resource-center` can be found inside of [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/). |
+| `examples` | Sample applications which show how to implement chat functionality using the PubNub SDK. |
+| `examples > react` | Source files for the Animal Forest Chat application. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/).|
+| `snippets` | Verified and tested code snippets used in documentation.<br>Snippets from `chat-resource-center/` are used in the [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/). |
 
 
 # Animal Forest Chat Application
@@ -27,18 +26,25 @@ samples live here.
 
 If you don't already have an account, you can create one for free [here](https://dashboard.pubnub.com/).
 
-* Login to your PubNub Account
-* Select Your Project > Your Key. Click on Key Info and copy your `Publish Key` and `Subscribe Key`
-* Enable the following add-on features on your key: Presence, Storage & Playback, Stream Controller
+1. Sign in to your PubNub [Admin Dashboard](https://dashboard.pubnub.com/), click Create New App, and give your app a name.
+
+1. Select your new app, then click its keyset. Copy the Publish and Subscribe keys. You'll need these keys to include in this project.
+
+1. Scroll down on the Key Options page and enable the following add-on features: [Presence](https://www.pubnub.com/products/presence/), [Storage & Playback](https://www.pubnub.com/products/realtime-messaging/), and [Stream Controller](https://www.pubnub.com/products/realtime-messaging/).
+
+1. Click Save Changes, and you're done!
 
 ### Using your PubNub keys
 
-Add your PubNub keys to the keys file in the config folder.
+Add your PubNub keys to the keys file in the config folder:
+
 ```bash
 cd examples/react/
 vi src/config/keys.js
 ```
-The file should look as below:
+
+The file should look like the following:
+
 ```js
 var publishKey = 'YOUR_PUBLISH_KEY';
 var subscribeKey = 'YOUR_SUBSCRIBE_KEY';
@@ -48,13 +54,15 @@ export { publishKey, subscribeKey }
 
 ## Building the project
 
-1. Navigate to the react project directory
+1. Navigate to the react project directory:
+
 ```bash
 cd examples/react/
 npm install
 ```
 
-2. Run the app in development mode.
+2. Run the app in development mode:
+
 ```bash
 $ npm start
 ```
@@ -63,4 +71,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Further Information
 
-For more information about this project, or how to create your own chat app using PubNub, please check out our [tutorial](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/).
+For more information about this project, or how to create your own chat app using PubNub, please check out the [React tutorial](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/) in the [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/).
+
