@@ -124,6 +124,7 @@ export default class extends Component {
 
         this.pubnub.history({
           channel: forestChatChannel,
+          count:25,
           reverse: false,
           stringifiedTimeToken: true
         }, (status, response) => {
