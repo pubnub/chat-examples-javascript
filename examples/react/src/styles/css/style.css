@@ -267,11 +267,6 @@ body {
 }
 @media (max-width: 770px) {
   .messageBody .msgForm .emojiIcon {
-    right: -10px;
-  }
-}
-@media (max-width: 320px) {
-  .messageBody .msgForm .emojiIcon {
     right: -5px;
   }
 }
@@ -334,7 +329,7 @@ body {
 }
 @media (max-width: 3000px) {
   .messageBody .msgForm .submitBtn {
-    width: 7%;
+    width: 5%;
   }
 }
 @media (max-width: 2000px) {
