@@ -99,7 +99,7 @@ body {
   border-radius: 10px;
 }
 .messageList .msgsDialog .name, .messageList .msgsDialog .time {
-  font-size: 12px;
+  font-size: 15px;
   color: #808080;
   font-weight: bold;
   position: absolute;
@@ -473,8 +473,9 @@ body {
 }
 @media (max-width: 320px) {
   .header h1 {
-    top: 8px;
+    top: 18px;
     width: 50px;
+    font-size: 11px;
   }
 }
 .header h2 {
@@ -505,7 +506,7 @@ body {
 @media (max-width: 415px) {
   .header h2 {
     width: 130px;
-    font-size: 0.8em;
+    font-size: 13px;
     top: 23px;
     left: 50px;
   }
@@ -515,62 +516,45 @@ body {
     display: none;
   }
 }
-.header .userName {
+.header .logedUser {
   position: absolute;
   top: 12px;
   right: 20px;
   color: grey;
 }
 @media (max-width: 850px) {
-  .header .userName {
+  .header .logedUser {
     top: 20px;
   }
 }
 @media (max-width: 415px) {
-  .header .userName {
-    top: 18px;
+  .header .logedUser {
+    top: 25px;
     right: 5px;
+    font-size: 11px;
   }
 }
 @media (max-width: 320px) {
-  .header .userName {
-    position: relative;
-    left: 60%;
+  .header .logedUser {
+    top: 25px;
+    right: 0px;
+    height: 50px;
+    letter-spacing: -1px;
   }
 }
-@media (max-width: 320px) {
-  .header .userName .hello {
-    position: absolute;
-    left: 74px;
-  }
-}
-.header .userName .user {
+.header .logedUser .userName .user {
   display: block;
   color: #000;
   font-weight: bold;
 }
-@media (max-width: 415px) {
-  .header .userName .user {
-    font-size: 0.9em;
-  }
-}
-@media (max-width: 320px) {
-  .header .userName .user {
-    width: 73px;
-    text-align: right;
-    position: absolute;
-    left: 41px;
-    top: 20px;
-  }
-}
-.header .userName img {
+.header .logedUser img {
   position: absolute;
   top: 0;
   left: -50px;
 }
-@media (max-width: 320px) {
-  .header .userName img {
-    left: 0px;
+@media (max-width: 415px) {
+  .header .logedUser img {
+    top: -5px;
   }
 }
 
