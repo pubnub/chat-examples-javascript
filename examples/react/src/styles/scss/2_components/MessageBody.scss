@@ -11,7 +11,7 @@
             bottom: 0;
         }
 
-        @include breakpoint ($iframe_mobile) {
+        @include breakpoint ($mobile) {
             bottom: 10px;
         }
         
@@ -66,10 +66,6 @@
             }
 
             @include breakpoint ($tablet) {
-                right: -10px;
-            }
-
-            @include breakpoint ($iframe_mobile) {
                 right: -5px;
             }
         }
@@ -132,7 +128,7 @@
             }
 
             @include breakpoint ($Xlarge_screens) {
-                width: 7%;
+                width: 5%;
             }
 
             @include breakpoint ($large_screens) {

@@ -154,13 +154,12 @@
 
         @include breakpoint ($mobile) {
             top: 25px;
-            right: 5px;
-            font-size: 11px;
+            right: 15px;
+            font-size: 12px;
         }
 
         @include breakpoint ($iframe_mobile) {
             top: 25px;
-            right: 0px;
             height: 50px;
             letter-spacing: -1px;
         }
