@@ -11,7 +11,7 @@
             bottom: 0;
         }
 
-        @include breakpoint ($iframe_mobile) {
+        @include breakpoint ($mobile) {
             bottom: 10px;
         }
         
