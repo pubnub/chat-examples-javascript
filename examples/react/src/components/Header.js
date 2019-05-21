@@ -23,9 +23,11 @@ export default (props) => {
       <h2>A group to chat with all your fuzzy friends</h2>
       {/*// end::HEAD-3[]*/}
       {/*// tag::HEAD-4[]*/}
-      <div className='userName'>
-        <span className='hello'>Hello, </span>
-        <span className='user'>{userName}</span>
+      <div className='logedUser'>
+        <div className='userName'>
+          <span className='hello'>Hello, </span>
+          <span className='user'>{userName}</span>
+        </div>
         <img width='45' height='45' alt='profileImage' src={profileImage}/>
       </div>
       {/*// end::HEAD-4[]*/}
