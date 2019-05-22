@@ -7,8 +7,8 @@ $colors: (
     @return map-get($colors, $color_name);
 }
 
-$iframe_mobile: 320px;
-$mobile: 415px;
+$iframe_mobile: 350px;
+$mobile: 440px;
 $tablet: 770px;
 $tablet_desktop: 850px;
 $desktop: 1024px;
