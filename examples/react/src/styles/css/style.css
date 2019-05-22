@@ -203,7 +203,7 @@ body {
     bottom: 0;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 415px) {
   .messageBody .msgForm {
     bottom: 10px;
   }
@@ -267,11 +267,6 @@ body {
 }
 @media (max-width: 770px) {
   .messageBody .msgForm .emojiIcon {
-    right: -10px;
-  }
-}
-@media (max-width: 320px) {
-  .messageBody .msgForm .emojiIcon {
     right: -5px;
   }
 }
@@ -334,7 +329,7 @@ body {
 }
 @media (max-width: 3000px) {
   .messageBody .msgForm .submitBtn {
-    width: 7%;
+    width: 5%;
   }
 }
 @media (max-width: 2000px) {
@@ -530,14 +525,13 @@ body {
 @media (max-width: 415px) {
   .header .logedUser {
     top: 25px;
-    right: 5px;
-    font-size: 11px;
+    right: 15px;
+    font-size: 12px;
   }
 }
 @media (max-width: 320px) {
   .header .logedUser {
     top: 25px;
-    right: 0px;
     height: 50px;
     letter-spacing: -1px;
   }
