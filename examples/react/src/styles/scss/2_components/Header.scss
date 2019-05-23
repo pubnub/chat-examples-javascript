@@ -102,9 +102,9 @@
         }
 
         @include breakpoint ($iframe_mobile) {
-            top: 18px;
+            top: 15px;
             width: 50px;
-            font-size: 11px;
+            font-size: 13px;
         }
     }
 
@@ -154,8 +154,8 @@
 
         @include breakpoint ($mobile) {
             top: 25px;
-            right: 15px;
-            font-size: 12px;
+            right: 5px;
+            font-size: 13px;
         }
 
         @include breakpoint ($iframe_mobile) {
