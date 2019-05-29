@@ -3,7 +3,7 @@
     position: relative;
     border: 1px solid rgba(128, 128, 128, 0.164);
 
-    .onlineUsersCount {
+    .onlineUsersInfo {
         @include size(278px, $height:70px);
         position: relative;
         font-size: 17px;
@@ -24,7 +24,7 @@
             }
         }
 
-        .members {
+        .onlineUsersCount {
             position: relative;
             top: 14px;
             left: 70px;
@@ -47,7 +47,7 @@
             }
         }
 
-        .onlineCircle {
+        .onlineIndicator {
             @include size(8px, 8px);
             position: absolute;
             top: 38px;
@@ -61,7 +61,7 @@
         }
     }
 
-    .logo {
+    .appLogo {
         position: absolute;
         top: 12px;
         left: 290px;
@@ -142,7 +142,7 @@
         }
     }
 
-    .logedUser {
+    .logedInUser {
         position: absolute;
         top: 12px;
         right: 20px;
@@ -164,7 +164,7 @@
             letter-spacing: -1px;
         }
 
-        .userName {
+        .userWelcome {
     
             .user {
                 display: block;
