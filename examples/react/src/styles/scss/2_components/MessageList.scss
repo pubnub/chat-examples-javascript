@@ -20,7 +20,7 @@
         }
     }
 
-    .msgsDialog {
+    .messageDialog {
         height: inherit;
         position: relative;
         margin-top: 0;
@@ -53,7 +53,7 @@
                 @include size (150px);
             }
 
-            .msgSentDay {
+            .messageSentDay {
                 display: flex;
                 justify-content: center;
                 position: relative;
@@ -107,11 +107,11 @@
             }                              
         }
 
-        .senderMsgsDialog {
+        .senderMessageDialog {
             display: flex;
             flex-direction: column;
 
-            .senderMsg {
+            .senderMessage {
                 align-self: flex-end;
                 margin-right: 50px;
                 color: #fff;

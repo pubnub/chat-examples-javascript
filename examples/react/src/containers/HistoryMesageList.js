@@ -1,18 +1,18 @@
 // tag::HMSG-1.1[]
 import React, {Component} from 'react';
 
-export default class HistoryMsgsList extends Component {
+export default class HistoryMesageList extends Component {
   // end::HMSG-1.1[]
   // tag::HMSG-2[]
   shouldComponentUpdate(nextProps) {
-    return (this.props.historyMsgs !== nextProps.historyMsgs)
+    return (this.props.historyMessage !== nextProps.historyMessage)
   }
   // end::HMSG-2[]
 
   // tag::HMSG-1.2[]
   render() {
-    const {historyMsgs, historyLoaded, networkErrorImg, networkErrorStatus,
-      findById, getTime, getDate, getUserImage, styleForMessageSender} = this.props;
+    const {historyMessage, historyLoaded, networkErrorImg, networkErrorStatus,
+      getUserName, getTime, getDate, getUserImage} = this.props;
     // end::HMSG-1.2[]
 
     // tag::HMSG-3.1[]
@@ -24,14 +24,14 @@ export default class HistoryMsgsList extends Component {
           <div>
             {/*// end::HMSG-3.1[]*/}
             {/*// tag::HMSG-4[]*/}
-            {historyMsgs.map( (m, index) =>
-              <li className={styleForMessageSender(m.entry.senderId)} key={m.timetoken}>
-                <div className='msgSentDay'>{getDate(m.timetoken, 'historyMsg', index)}</div>
+            {historyMessage.map( (m, index) =>
+              <li key={m.timetoken}>
+                <div className='messageSentDay'>{getDate(m.timetoken, 'historyMessage', index)}</div>
                 <div className='message'>
-                  <div className='name'>{findById(m.entry.senderId)}</div>
+                  <div className='name'>{getUserName(m.entry.senderId)}</div>
                   <div className='time'>{getTime(m.timetoken)}</div>
                   <div className='text'>{m.entry.text}</div>
-                  <img width='28' height='28' alt='' src={getUserImage(m.entry.senderId, 'smImage')}/>
+                  <img width='28' height='28' alt='Sender logo' src={getUserImage(m.entry.senderId, 'smImage')}/>
                 </div>
               </li>
             )}

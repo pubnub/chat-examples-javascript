@@ -2,29 +2,28 @@
 import React from 'react';
 
 export default (props) => {
-  const {sendersInfo, findById, getTime, getDate, getUserImage, styleForMessageSender, scrollToBottom} = props;
+  const {sendersInfo, getUserName, getTime, getDate, getUserImage, styleForMessageSender} = props;
   // end::SMSG-1.1[]
 
   // tag::SMSG-2.1[]
   return (
-    <div className='senderMsgsDialog'>
+    <div className='senderMessageDialog'>
       {/*// end::SMSG-2.1[]*/}
       {/*// tag::SMSG-3[]*/}
       {sendersInfo.map( (m, index) =>
         <li className={styleForMessageSender(m.senderId)} key={index}>
-          <div className='msgSentDay'>{getDate(m.timetoken, 'senderMsg')}</div>
+          <div className='messageSentDay'>{getDate(m.timetoken, 'senderMessage')}</div>
           <div className='message'>
-            <div className='name'>{findById(m.senderId)}</div>
+            <div className='name'>{getUserName(m.senderId)}</div>
             <div className='time'>{getTime(m.timetoken)}</div>
             <div className='text'>{m.text}</div>
-            <img width='28' height='28' alt='' src={getUserImage(m.senderId, 'smImage')}/>
+            <img width='28' height='28' alt='Sender logo' src={getUserImage(m.senderId, 'smImage')}/>
           </div>
         </li>
       )}
       {/*// end::SMSG-3[]*/}
 
       {/*// tag::SMSG-2.2[]*/}
-      {scrollToBottom()}
       {/*// end::SMSG-2.2[]*/}
     {/*// tag::SMSG-2.3[]*/}
     </div>

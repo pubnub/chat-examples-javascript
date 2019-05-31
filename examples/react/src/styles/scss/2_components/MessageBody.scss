@@ -1,7 +1,7 @@
 .messageBody {
     position: relative;
 
-    .msgForm {
+    .messageForm {
         @include size(100%);
         position: absolute;
         left: 5px;
@@ -15,7 +15,7 @@
             bottom: 10px;
         }
         
-        .msgInput {
+        .messageInput {
             @include size (82%, 35px); 
             margin-top: 30px;
             border: none;
