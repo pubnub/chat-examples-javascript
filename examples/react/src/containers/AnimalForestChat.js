@@ -138,6 +138,7 @@ export default class extends Component {
 
           let messageSentDate = this.state.historyMessage.map(message => this.getWeekday(message.timetoken));
           this.setState({messageSentDate});
+          this.scrollToBottom();
         });
       }
                  
@@ -200,10 +201,6 @@ export default class extends Component {
         onlineUsers: response.channels[forestChatChannel].occupants,
         onlineUsersCount: response.channels[forestChatChannel].occupancy
       });
-
-      if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1) {
-        this.hereNow();
-      }
     });
   };
 
