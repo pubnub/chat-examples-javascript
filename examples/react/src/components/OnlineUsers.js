@@ -1,17 +1,18 @@
 // tag::ONLN-1.1[]
 import React from 'react';
+import User from './User';
 
 export default (props) => {
-  const {logedUser, findById, onlineUsers, getUserImage, getUserDesignation} = props;
+  const {loggedInUser, getUserName, onlineUsers, getUserImage, getUserDesignation} = props;
   // end::ONLN-1.1[]
   
   // tag::ONLN-2[]
-  const putLogedUserFirst = (arr) => { 
+  const putLoggedUserFirst = (arr) => { 
     if(arr.length) {
-      const logedUserIndex = arr.map(elem => elem.uuid).indexOf(logedUser);
+      const loggedInUserIndex = arr.map(elem => elem.uuid).indexOf(loggedInUser);
       
-      if(logedUserIndex !== -1) {
-        [arr[0], arr[logedUserIndex]] = [arr[logedUserIndex], arr[0]];
+      if(loggedInUserIndex !== -1) {
+        [arr[0], arr[loggedInUserIndex]] = [arr[loggedInUserIndex], arr[0]];
       }
     }    
   };
@@ -20,18 +21,18 @@ export default (props) => {
   // tag::ONLN-3.1[]  
   return (
     <div className='onlineUsers'>
-      {putLogedUserFirst(onlineUsers)}
+      {putLoggedUserFirst(onlineUsers)}
       {/*// end::ONLN-3.1[]*/}
       {/*// tag::ONLN-4[]*/}
-      <ul className='onlineUsersList'>
+      <ul className='onlineUserList'>
         {onlineUsers.map((user, index) => 
-          <li key={index}>
-            <div className='name'>{findById(user.uuid)}
-              {user.uuid === logedUser && <div className='youSign'>(You)</div>}                   
-            </div>
-            <div className='designation'>{getUserDesignation(user.uuid)}</div>
-            <img width='45' height='45' alt='onlineUser' src={getUserImage(user.uuid, 'lgImage')}/>                  
-          </li>
+          <User
+            key={index}
+            user={user}
+            getUserName={getUserName}
+            loggedInUser={loggedInUser}
+            getUserDesignation={getUserDesignation}
+            getUserImage={getUserImage}/>
         )}                 
       </ul>
       {/*// end::ONLN-4[]*/}

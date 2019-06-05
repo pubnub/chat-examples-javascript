@@ -77,13 +77,13 @@ body {
     bottom: -100px;
   }
 }
-@media (max-width: 415px) {
+@media (max-width: 440px) {
   .messageList .networkErrorImg {
     width: 120%;
     left: -20px;
   }
 }
-.messageList .msgsDialog {
+.messageList .messageDialog {
   height: inherit;
   position: relative;
   margin-top: 0;
@@ -92,30 +92,30 @@ body {
   position: relative;
   list-style: none;
 }
-.messageList .msgsDialog .text {
+.messageList .messageDialog .text {
   max-width: 270px;
   padding: 15px;
   display: inline-block;
   border-radius: 10px;
 }
-.messageList .msgsDialog .name, .messageList .msgsDialog .time {
+.messageList .messageDialog .name, .messageList .messageDialog .time {
   font-size: 15px;
   color: #808080;
   font-weight: bold;
   position: absolute;
 }
-.messageList .msgsDialog li {
+.messageList .messageDialog li {
   width: 300px;
   position: relative;
   margin-top: 40px;
   margin-left: 8px;
 }
-@media (max-width: 415px) {
-  .messageList .msgsDialog li {
+@media (max-width: 440px) {
+  .messageList .messageDialog li {
     width: 150px;
   }
 }
-.messageList .msgsDialog li .msgSentDay {
+.messageList .messageDialog li .messageSentDay {
   display: flex;
   justify-content: center;
   position: relative;
@@ -127,64 +127,64 @@ body {
   font-size: 1.2em;
 }
 @media (max-width: 770px) {
-  .messageList .msgsDialog li .msgSentDay {
+  .messageList .messageDialog li .messageSentDay {
     width: 90vw;
   }
 }
-@media (max-width: 415px) {
-  .messageList .msgsDialog li .msgSentDay {
+@media (max-width: 440px) {
+  .messageList .messageDialog li .messageSentDay {
     width: 75vw;
     font-size: 1.1em;
   }
 }
-.messageList .msgsDialog li .msgSentDay:empty {
+.messageList .messageDialog li .messageSentDay:empty {
   display: none;
 }
-.messageList .msgsDialog li img {
+.messageList .messageDialog li img {
   position: absolute;
   bottom: 0;
   left: -30px;
 }
-.messageList .msgsDialog li .message {
+.messageList .messageDialog li .message {
   position: relative;
   word-break: break-word;
   word-wrap: break-word;
 }
-.messageList .msgsDialog li .name, .messageList .msgsDialog li .time {
+.messageList .messageDialog li .name, .messageList .messageDialog li .time {
   left: 5px;
 }
-.messageList .msgsDialog li .name {
+.messageList .messageDialog li .name {
   top: -18px;
 }
-.messageList .msgsDialog li .time {
+.messageList .messageDialog li .time {
   bottom: -18px;
 }
-.messageList .msgsDialog li .text {
+.messageList .messageDialog li .text {
   background-color: rgba(128, 128, 128, 0.164);
 }
-.messageList .msgsDialog .senderMsgsDialog {
+.messageList .messageDialog .senderMessageDialog {
   display: flex;
   flex-direction: column;
 }
-.messageList .msgsDialog .senderMsgsDialog .senderMsg {
+.messageList .messageDialog .senderMessageDialog .senderMessage {
   align-self: flex-end;
   margin-right: 50px;
   color: #fff;
   text-align: right;
 }
-.messageList .msgsDialog .senderMsgsDialog .senderMsg img {
+.messageList .messageDialog .senderMessageDialog .senderMessage img {
   left: 305px;
 }
-@media (max-width: 415px) {
-  .messageList .msgsDialog .senderMsgsDialog .senderMsg img {
+@media (max-width: 440px) {
+  .messageList .messageDialog .senderMessageDialog .senderMessage img {
     left: 155px;
   }
 }
-.messageList .msgsDialog .senderMsgsDialog .senderMsg .text {
+.messageList .messageDialog .senderMessageDialog .senderMessage .text {
   background-color: #d32f2f;
   text-align: left;
 }
-.messageList .msgsDialog .senderMsgsDialog .senderMsg .name, .messageList .msgsDialog .senderMsgsDialog .senderMsg .time {
+.messageList .messageDialog .senderMessageDialog .senderMessage .name, .messageList .messageDialog .senderMessageDialog .senderMessage .time {
   left: unset;
   right: 5px;
 }
@@ -192,90 +192,85 @@ body {
 .messageBody {
   position: relative;
 }
-.messageBody .msgForm {
+.messageBody .messageForm {
   width: 100%;
   position: absolute;
   left: 5px;
   bottom: 12px;
 }
 @media (max-width: 850px) {
-  .messageBody .msgForm {
+  .messageBody .messageForm {
     bottom: 0;
   }
 }
-@media (max-width: 320px) {
-  .messageBody .msgForm {
+@media (max-width: 440px) {
+  .messageBody .messageForm {
     bottom: 10px;
   }
 }
-.messageBody .msgForm .msgInput {
+.messageBody .messageForm .messageInput {
   width: 82%;
   height: 35px;
   margin-top: 30px;
   border: none;
   font-size: 15px;
 }
-.messageBody .msgForm .msgInput:focus {
+.messageBody .messageForm .messageInput:focus {
   outline: none;
 }
 @media (max-width: 1024px) {
-  .messageBody .msgForm .msgInput {
+  .messageBody .messageForm .messageInput {
     width: 75%;
   }
 }
 @media (max-width: 770px) {
-  .messageBody .msgForm .msgInput {
+  .messageBody .messageForm .messageInput {
     width: 75%;
     margin-left: 5px;
   }
 }
 @media (max-width: 500px) {
-  .messageBody .msgForm .msgInput {
+  .messageBody .messageForm .messageInput {
     width: 72%;
   }
 }
-@media (max-width: 415px) {
-  .messageBody .msgForm .msgInput {
+@media (max-width: 440px) {
+  .messageBody .messageForm .messageInput {
     width: 60%;
   }
 }
-.messageBody .msgForm .emojiIcon {
+.messageBody .messageForm .emojiIcon {
   position: relative;
   top: 8px;
   right: 10px;
   cursor: pointer;
 }
 @media (max-width: 3000px) {
-  .messageBody .msgForm .emojiIcon {
+  .messageBody .messageForm .emojiIcon {
     right: -100px;
   }
 }
 @media (max-width: 2000px) {
-  .messageBody .msgForm .emojiIcon {
+  .messageBody .messageForm .emojiIcon {
     right: -30px;
   }
 }
 @media (max-width: 1300px) {
-  .messageBody .msgForm .emojiIcon {
+  .messageBody .messageForm .emojiIcon {
     right: 0;
   }
 }
 @media (max-width: 1024px) {
-  .messageBody .msgForm .emojiIcon {
+  .messageBody .messageForm .emojiIcon {
     right: -2px;
   }
 }
 @media (max-width: 770px) {
-  .messageBody .msgForm .emojiIcon {
-    right: -10px;
-  }
-}
-@media (max-width: 320px) {
-  .messageBody .msgForm .emojiIcon {
+  .messageBody .messageForm .emojiIcon {
     right: -5px;
   }
 }
-.messageBody .msgForm .emojisWindow {
+.messageBody .messageForm .emojisWindow {
   width: 250px;
   height: 200px;
   position: absolute;
@@ -284,25 +279,25 @@ body {
   background-color: white;
 }
 @media (max-width: 1024px) {
-  .messageBody .msgForm .emojisWindow {
+  .messageBody .messageForm .emojisWindow {
     right: 10px;
   }
 }
-@media (max-width: 415px) {
-  .messageBody .msgForm .emojisWindow {
+@media (max-width: 440px) {
+  .messageBody .messageForm .emojisWindow {
     width: 220px;
   }
 }
-.messageBody .msgForm .emojisWindow .emoji {
+.messageBody .messageForm .emojisWindow .emoji {
   margin: 1px 6px -1px 7px;
   cursor: pointer;
 }
-@media (max-width: 415px) {
-  .messageBody .msgForm .emojisWindow .emoji {
+@media (max-width: 440px) {
+  .messageBody .messageForm .emojisWindow .emoji {
     margin: 1px 3px 0 5px;
   }
 }
-.messageBody .msgForm .emojisWindow .closeBtn {
+.messageBody .messageForm .emojisWindow .closeBtn {
   position: absolute;
   bottom: 5px;
   left: 5px;
@@ -312,10 +307,10 @@ body {
   font-size: 1.1em;
   cursor: pointer;
 }
-.messageBody .msgForm .emojisWindow .closeBtn:focus {
+.messageBody .messageForm .emojisWindow .closeBtn:focus {
   outline: none;
 }
-.messageBody .msgForm .submitBtn {
+.messageBody .messageForm .submitBtn {
   width: 12%;
   height: 30px;
   background-color: #d32f2f;
@@ -329,32 +324,32 @@ body {
   z-index: 1;
   cursor: pointer;
 }
-.messageBody .msgForm .submitBtn:focus {
+.messageBody .messageForm .submitBtn:focus {
   outline: none;
 }
 @media (max-width: 3000px) {
-  .messageBody .msgForm .submitBtn {
-    width: 7%;
+  .messageBody .messageForm .submitBtn {
+    width: 5%;
   }
 }
 @media (max-width: 2000px) {
-  .messageBody .msgForm .submitBtn {
+  .messageBody .messageForm .submitBtn {
     width: 9%;
   }
 }
 @media (max-width: 1024px) {
-  .messageBody .msgForm .submitBtn {
+  .messageBody .messageForm .submitBtn {
     width: 15%;
     right: 22px;
   }
 }
 @media (max-width: 770px) {
-  .messageBody .msgForm .submitBtn {
+  .messageBody .messageForm .submitBtn {
     width: 12%;
   }
 }
-@media (max-width: 415px) {
-  .messageBody .msgForm .submitBtn {
+@media (max-width: 440px) {
+  .messageBody .messageForm .submitBtn {
     width: 18%;
     padding-left: 1px;
     padding-right: 2px;
@@ -366,7 +361,7 @@ body {
   position: relative;
   border: 1px solid rgba(128, 128, 128, 0.164);
 }
-.header .onlineUsersCount {
+.header .onlineUsersInfo {
   width: 278px;
   height: 70px;
   position: relative;
@@ -375,31 +370,31 @@ body {
   border-right: 1px solid rgba(128, 128, 128, 0.164);
 }
 @media (max-width: 770px) {
-  .header .onlineUsersCount {
+  .header .onlineUsersInfo {
     display: none;
   }
 }
-.header .onlineUsersCount .onlineUsersLogo {
+.header .onlineUsersInfo .onlineUsersLogo {
   position: absolute;
   top: 10px;
   left: 15px;
 }
 @media (max-width: 850px) {
-  .header .onlineUsersCount .onlineUsersLogo {
+  .header .onlineUsersInfo .onlineUsersLogo {
     top: 20px;
   }
 }
-.header .onlineUsersCount .members {
+.header .onlineUsersInfo .onlineUsersCount {
   position: relative;
   top: 14px;
   left: 70px;
 }
 @media (max-width: 850px) {
-  .header .onlineUsersCount .members {
+  .header .onlineUsersInfo .onlineUsersCount {
     top: 20px;
   }
 }
-.header .onlineUsersCount span {
+.header .onlineUsersInfo span {
   position: absolute;
   top: 30px;
   left: 86px;
@@ -408,11 +403,11 @@ body {
   display: block;
 }
 @media (max-width: 850px) {
-  .header .onlineUsersCount span {
+  .header .onlineUsersInfo span {
     top: 40px;
   }
 }
-.header .onlineUsersCount .onlineCircle {
+.header .onlineUsersInfo .onlineIndicator {
   width: 8px;
   height: 8px;
   position: absolute;
@@ -422,27 +417,27 @@ body {
   background-color: #0ccc0c;
 }
 @media (max-width: 850px) {
-  .header .onlineUsersCount .onlineCircle {
+  .header .onlineUsersInfo .onlineIndicator {
     top: 50px;
   }
 }
-.header .logo {
+.header .appLogo {
   position: absolute;
   top: 12px;
   left: 290px;
 }
 @media (max-width: 850px) {
-  .header .logo {
+  .header .appLogo {
     top: 20px;
   }
 }
 @media (max-width: 770px) {
-  .header .logo {
+  .header .appLogo {
     left: 10px;
   }
 }
-@media (max-width: 415px) {
-  .header .logo {
+@media (max-width: 440px) {
+  .header .appLogo {
     top: 18px;
     left: 2px;
   }
@@ -464,18 +459,18 @@ body {
     left: 70px;
   }
 }
-@media (max-width: 415px) {
+@media (max-width: 440px) {
   .header h1 {
     font-size: 1em;
     top: 5px;
     left: 50px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 350px) {
   .header h1 {
-    top: 18px;
+    top: 15px;
     width: 50px;
-    font-size: 11px;
+    font-size: 13px;
   }
 }
 .header h2 {
@@ -503,7 +498,7 @@ body {
     width: 150px;
   }
 }
-@media (max-width: 415px) {
+@media (max-width: 440px) {
   .header h2 {
     width: 130px;
     font-size: 13px;
@@ -511,49 +506,48 @@ body {
     left: 50px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 350px) {
   .header h2 {
     display: none;
   }
 }
-.header .logedUser {
+.header .logedInUser {
   position: absolute;
   top: 12px;
   right: 20px;
   color: grey;
 }
 @media (max-width: 850px) {
-  .header .logedUser {
+  .header .logedInUser {
     top: 20px;
   }
 }
-@media (max-width: 415px) {
-  .header .logedUser {
+@media (max-width: 440px) {
+  .header .logedInUser {
     top: 25px;
     right: 5px;
-    font-size: 11px;
+    font-size: 13px;
   }
 }
-@media (max-width: 320px) {
-  .header .logedUser {
+@media (max-width: 350px) {
+  .header .logedInUser {
     top: 25px;
-    right: 0px;
     height: 50px;
     letter-spacing: -1px;
   }
 }
-.header .logedUser .userName .user {
+.header .logedInUser .userWelcome .user {
   display: block;
   color: #000;
   font-weight: bold;
 }
-.header .logedUser img {
+.header .logedInUser img {
   position: absolute;
   top: 0;
   left: -50px;
 }
-@media (max-width: 415px) {
-  .header .logedUser img {
+@media (max-width: 440px) {
+  .header .logedInUser img {
     top: -5px;
   }
 }
@@ -571,20 +565,20 @@ body {
     display: none;
   }
 }
-.onlineUsers .onlineUsersList {
+.onlineUsers .onlineUserList {
   list-style: none;
   position: relative;
   left: -30px;
 }
-.onlineUsers .onlineUsersList li {
+.onlineUsers .onlineUserList li {
   margin-bottom: 40px;
   position: relative;
 }
-.onlineUsers .onlineUsersList li img {
+.onlineUsers .onlineUserList li img {
   position: absolute;
   left: 0;
 }
-.onlineUsers .onlineUsersList li .name {
+.onlineUsers .onlineUserList li .userName {
   position: relative;
   display: inline;
   top: 0;
@@ -592,13 +586,13 @@ body {
   font-size: 0.9em;
   font-weight: bold;
 }
-.onlineUsers .onlineUsersList li .name .youSign {
+.onlineUsers .onlineUserList li .userName .youSign {
   position: absolute;
   top: 0;
   right: -40px;
   font-weight: bold;
 }
-.onlineUsers .onlineUsersList li .designation {
+.onlineUsers .onlineUserList li .designation {
   position: absolute;
   top: 20px;
   left: 60px;

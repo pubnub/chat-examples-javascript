@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PubNubReact from 'pubnub-react';
 import OnlineUsers from '../components/OnlineUsers';
 import MessageBody from './MessageBody';
-import MessagesList from '../components/MessagesList';
+import MessageList from '../components/MessageList';
 import Header from '../components/Header';
 import users from '../config/users';
 import {publishKey, subscribeKey} from '../config/keys';
@@ -18,7 +18,7 @@ export default class extends Component {
     this.uuid = randomUser.uuid;
     this.designation = randomUser.designation;
     this.userName = randomUser.firstName + ' ' +  randomUser.lastName;
-    this.profileImage = randomUser.profileImage.lgImage;
+    this.userProfileImage = randomUser.profileImage.lgImage;
     this.pubnub = new PubNubReact({
       publishKey,    //publishKey: 'Enter your key . . .'
       subscribeKey,  //subscribeKey: 'Enter your key . . .'
@@ -28,12 +28,12 @@ export default class extends Component {
     });
     this.state = {
       sendersInfo: [],
-      lastMsgWeekday: '',
-      msgsSentDate: [],
+      lastMessageWeekday: '',
+      messageSentDate: [],
       historyLoaded: false,
-      historyMsgs: [],
+      historyMessage: [],
       onlineUsers: [],
-      onlineUsersNumber: '',
+      onlineUsersCount: '',
       networkErrorStatus: false,
       networkErrorImg: null
     };
@@ -66,7 +66,7 @@ export default class extends Component {
 
         this.setState({
           onlineUsers: users,
-          onlineUsersNumber: this.state.onlineUsersNumber + 1
+          onlineUsersCount: this.state.onlineUsersCount + 1
         });
       }
 
@@ -79,14 +79,14 @@ export default class extends Component {
    
         const length = this.state.onlineUsers.length;
         this.setState({
-          onlineUsersNumber: length
+          onlineUsersCount: length
         });
       }
 
       if (presence.action === 'interval') {
         if (presence.join || presence.leave || presence.timeout) {
           let onlineUsers = this.state.onlineUsers;
-          let onlineUsersNumber = this.state.onlineUsersNumber;
+          let onlineUsersCount = this.state.onlineUsersCount;
  
           if (presence.join) {
             presence.join.map(user => (
@@ -97,22 +97,22 @@ export default class extends Component {
               })
             ));
 
-            onlineUsersNumber += presence.join.length;
+            onlineUsersCount += presence.join.length;
           }
 
           if (presence.leave) {
             presence.leave.map(leftUser => onlineUsers.splice(onlineUsers.indexOf(leftUser), 1));
-            onlineUsersNumber -= presence.leave.length;
+            onlineUsersCount -= presence.leave.length;
           }
 
           if (presence.timeout) {
             presence.timeout.map(timeoutUser => onlineUsers.splice(onlineUsers.indexOf(timeoutUser), 1));
-            onlineUsersNumber -= presence.timeout.length;
+            onlineUsersCount -= presence.timeout.length;
           }
 
           this.setState({
             onlineUsers,
-            onlineUsersNumber
+            onlineUsersCount
           });
         }
       }
@@ -128,16 +128,16 @@ export default class extends Component {
           reverse: false,
           stringifiedTimeToken: true
         }, (status, response) => {
-          const lastMsgWeekday = this.getWeekday(response.endTimeToken);
+          const lastMessageWeekday = this.getWeekday(response.endTimeToken);
 
           this.setState({
             historyLoaded: true,
-            historyMsgs: response.messages,
-            lastMsgWeekday
+            historyMessage: response.messages,
+            lastMessageWeekday
           });
 
-          let msgsSentDate = this.state.historyMsgs.map(msg => this.getWeekday(msg.timetoken));
-          this.setState({msgsSentDate});
+          let messageSentDate = this.state.historyMessage.map(message => this.getWeekday(message.timetoken));
+          this.setState({messageSentDate});
         });
       }
                  
@@ -163,11 +163,13 @@ export default class extends Component {
       
       this.setState(this.state);
 
-      const lastMsgWeekday = this.getWeekday(m.timetoken);
+      const lastMessageWeekday = this.getWeekday(m.timetoken);
       this.setState({
         sendersInfo,
-        lastMsgWeekday
+        lastMessageWeekday
       });
+
+      this.scrollToBottom();
     });
 
     window.addEventListener('beforeunload', this.leaveChat);
@@ -196,7 +198,7 @@ export default class extends Component {
     }, (status, response) => {
       this.setState({
         onlineUsers: response.channels[forestChatChannel].occupants,
-        onlineUsersNumber: response.channels[forestChatChannel].occupancy
+        onlineUsersCount: response.channels[forestChatChannel].occupancy
       });
 
       if (this.state.onlineUsers.map(user => user.uuid).indexOf(this.uuid) === -1) {
@@ -215,20 +217,20 @@ export default class extends Component {
     return new Date(parseInt(timetoken.substring(0, 13))).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' })
   };
 
-  getDate = (timetoken, msgType, index = 0) => {
-    const msgWeekday = this.getWeekday(timetoken);
+  getDate = (timetoken, messageType, index = 0) => {
+    const messageWeekday = this.getWeekday(timetoken);
     const date = new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {day: 'numeric', month: 'long'});
     
-    switch (msgType) {
-      case 'historyMsg':
-        if (this.state.msgsSentDate[index - 1] !== msgWeekday) {
-          return `${date}, ${msgWeekday}`; 
+    switch (messageType) {
+      case 'historyMessage':
+        if (this.state.messageSentDate[index - 1] !== messageWeekday) {
+          return `${date}, ${messageWeekday}`; 
         }
         
         break;
-      case 'senderMsg':
-        if (this.state.lastMsgWeekday !== msgWeekday) {
-          return `${date}, ${msgWeekday}`;
+      case 'senderMessage':
+        if (this.state.lastMessageWeekday !== messageWeekday) {
+          return `${date}, ${messageWeekday}`;
         }
         
         break;
@@ -241,8 +243,13 @@ export default class extends Component {
     return new Date(parseInt(timetoken.substring(0, 13))).toLocaleDateString('en-US', {weekday: 'long'});
   };
 
-  findById = (uuid) => {
-    const user = users.find( element => element.uuid === uuid );
+  
+  getUser = (uuid) => {
+    return users.find( element => element.uuid === uuid);
+  };
+  
+  getUserName = (uuid) => {
+    const user = this.getUser(uuid);
   
     if (user) {
       return user.firstName + ' ' + user.lastName;
@@ -250,23 +257,23 @@ export default class extends Component {
   };
 
   getUserDesignation = (uuid) => {
-    const designation = users.find(element => element.uuid === uuid);
+    const user = this.getUser(uuid);
   
-    if (designation) {
-      return designation.designation;
+    if (user) {
+      return user.designation;
     }
   };
 
   getUserImage = (uuid, size) => {
-    const image = users.find(element => element.uuid === uuid);
+    const user = this.getUser(uuid);
   
-    if (image) {
-        return image.profileImage[size];
+    if (user) {
+        return user.profileImage[size];
     }
   };
 
   scrollToBottom = () => {
-    const elem = document.querySelector(".msgsDialog");
+    const elem = document.querySelector(".messageDialog");
 
     if(elem) {
         elem.scrollTop = elem.scrollHeight;
@@ -280,31 +287,29 @@ export default class extends Component {
       <div className='grid'>
         <Header 
           userName={this.userName}
-          profileImage={this.profileImage}
-          usersNumber={this.state.onlineUsersNumber}/>                
-        <MessagesList 
+          userProfileImage={this.userProfileImage}
+          onlineUsersCount={this.state.onlineUsersCount}/>                
+        <MessageList 
           uuid={this.uuid}
           sendersInfo={this.state.sendersInfo}
-          findById={this.findById}
+          getUserName={this.getUserName}
           getUserImage={this.getUserImage}
           getTime={this.getTime}
-          msgsSentDate={this.state.msgsSentDate}
+          messageSentDate={this.state.messageSentDate}
           getDate={this.getDate}
           historyLoaded={this.state.historyLoaded}
-          historyMsgs={this.state.historyMsgs}
+          historyMessage={this.state.historyMessage}
           networkErrorStatus={this.state.networkErrorStatus}
-          networkErrorImg={this.state.networkErrorImg}
-          scrollToBottom={this.scrollToBottom}/>
+          networkErrorImg={this.state.networkErrorImg}/>
         <MessageBody 
           uuid={this.uuid}
           pubnub={this.pubnub}
-          findById={this.findById}
           chatName={forestChatChannel}/>
         <OnlineUsers 
           users={users}
           getUserImage={this.getUserImage}
-          logedUser={this.uuid}
-          findById={this.findById}
+          loggedInUser={this.uuid}
+          getUserName={this.getUserName}
           getUserDesignation={this.getUserDesignation}
           onlineUsers={this.state.onlineUsers}/>
         </div>

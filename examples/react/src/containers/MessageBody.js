@@ -7,7 +7,7 @@ export default class MessageBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      msgContent: '',
+      messageContent: '',
       emojisWindowState: false
     }
   }
@@ -16,7 +16,7 @@ export default class MessageBody extends Component {
   // tag::MSGB-2[]
   onChange = (e) => {
     this.setState({
-      msgContent: e.target.value,
+      messageContent: e.target.value,
     });
   };
   // end::MSGB-2[]
@@ -25,20 +25,20 @@ export default class MessageBody extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    if (!this.state.msgContent.length) {
+    if (!this.state.messageContent.length) {
       return;
     }
 
     this.props.pubnub.publish({
       message: {
         senderId: this.props.uuid,
-        text: this.state.msgContent,
+        text: this.state.messageContent,
       },
       channel: this.props.chatName
     });
 
     this.setState({
-      msgContent: '',
+      messageContent: '',
       emojisWindowState: false
     })
   };
@@ -53,7 +53,7 @@ export default class MessageBody extends Component {
 
   addEmoji = (code) => {
     this.setState({
-      msgContent: this.state.msgContent + String.fromCodePoint(code)
+      messageContent: this.state.messageContent + String.fromCodePoint(code)
     })
   };
   // end::MSGB-4[]
@@ -62,12 +62,12 @@ export default class MessageBody extends Component {
   render() {
     return (
       <div className='messageBody'>
-        <form className='msgForm'>
+        <form className='messageForm'>
         {/*// end::MSGB-5.1[]*/}
           {/*// tag::MSGB-6[]*/}
           <input
-            className='msgInput'
-            value={this.state.msgContent}
+            className='messageInput'
+            value={this.state.messageContent}
             onChange={this.onChange}
             placeholder='Type your message here . . .'/>
           <img onClick={() => this.emojisWindowState(true)} className='emojiIcon' width='25' height='25' alt='emojiIcon' src={emojiIcon}/>

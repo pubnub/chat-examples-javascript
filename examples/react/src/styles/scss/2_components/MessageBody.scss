@@ -1,7 +1,7 @@
 .messageBody {
     position: relative;
 
-    .msgForm {
+    .messageForm {
         @include size(100%);
         position: absolute;
         left: 5px;
@@ -11,11 +11,11 @@
             bottom: 0;
         }
 
-        @include breakpoint ($iframe_mobile) {
+        @include breakpoint ($mobile) {
             bottom: 10px;
         }
         
-        .msgInput {
+        .messageInput {
             @include size (82%, 35px); 
             margin-top: 30px;
             border: none;
@@ -66,10 +66,6 @@
             }
 
             @include breakpoint ($tablet) {
-                right: -10px;
-            }
-
-            @include breakpoint ($iframe_mobile) {
                 right: -5px;
             }
         }
@@ -132,7 +128,7 @@
             }
 
             @include breakpoint ($Xlarge_screens) {
-                width: 7%;
+                width: 5%;
             }
 
             @include breakpoint ($large_screens) {
