@@ -1,7 +1,7 @@
 // tag::HMSG-1.1[]
 import React, {Component} from 'react';
 
-export default class HistoryMesageList extends Component {
+export default class HistoryMessageList extends Component {
   // end::HMSG-1.1[]
   // tag::HMSG-2[]
   shouldComponentUpdate(nextProps) {
@@ -11,8 +11,8 @@ export default class HistoryMesageList extends Component {
 
   // tag::HMSG-1.2[]
   render() {
-    const {historyMessage, historyLoaded, networkErrorImg, networkErrorStatus,
-      getUserName, getTime, getDate, getUserImage} = this.props;
+    const {historyMessages, historyLoaded, networkErrorImg, networkErrorStatus,
+      getUserName, getTime, getDate, getUserAvatarUrl} = this.props;
     // end::HMSG-1.2[]
 
     // tag::HMSG-3.1[]
@@ -24,14 +24,14 @@ export default class HistoryMesageList extends Component {
           <div>
             {/*// end::HMSG-3.1[]*/}
             {/*// tag::HMSG-4[]*/}
-            {historyMessage.map( (m, index) =>
+            {historyMessages.map( (m, index) =>
               <li key={m.timetoken}>
                 <div className='messageSentDay'>{getDate(m.timetoken, 'historyMessage', index)}</div>
                 <div className='message'>
                   <div className='name'>{getUserName(m.entry.senderId)}</div>
                   <div className='time'>{getTime(m.timetoken)}</div>
                   <div className='text'>{m.entry.text}</div>
-                  <img width='28' height='28' alt='Sender logo' src={getUserImage(m.entry.senderId, 'smImage')}/>
+                  <img width='28' height='28' alt='Sender avatar' src={getUserAvatarUrl(m.entry.senderId, 'smImage')}/>
                 </div>
               </li>
             )}

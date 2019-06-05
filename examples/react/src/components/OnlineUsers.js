@@ -3,11 +3,11 @@ import React from 'react';
 import User from './User';
 
 export default (props) => {
-  const {loggedInUser, getUserName, onlineUsers, getUserImage, getUserDesignation} = props;
+  const {loggedInUser, getUserName, onlineUsers, getUserAvatarUrl, getUserDesignation} = props;
   // end::ONLN-1.1[]
   
   // tag::ONLN-2[]
-  const putLoggedUserFirst = (arr) => { 
+  const putLoggedInUserFirst = (arr) => { 
     if(arr.length) {
       const loggedInUserIndex = arr.map(elem => elem.uuid).indexOf(loggedInUser);
       
@@ -21,7 +21,7 @@ export default (props) => {
   // tag::ONLN-3.1[]  
   return (
     <div className='onlineUsers'>
-      {putLoggedUserFirst(onlineUsers)}
+      {putLoggedInUserFirst(onlineUsers)}
       {/*// end::ONLN-3.1[]*/}
       {/*// tag::ONLN-4[]*/}
       <ul className='onlineUserList'>
@@ -32,7 +32,7 @@ export default (props) => {
             getUserName={getUserName}
             loggedInUser={loggedInUser}
             getUserDesignation={getUserDesignation}
-            getUserImage={getUserImage}/>
+            getUserAvatarUrl={getUserAvatarUrl}/>
         )}                 
       </ul>
       {/*// end::ONLN-4[]*/}
