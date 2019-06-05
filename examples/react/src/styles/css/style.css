@@ -162,29 +162,29 @@ body {
 .messageList .messageDialog li .text {
   background-color: rgba(128, 128, 128, 0.164);
 }
-.messageList .messageDialog .senderMessageDialog {
+.messageList .messageDialog .senderMessageDialog, .messageList .messageDialog .historyMessageDialog {
   display: flex;
   flex-direction: column;
 }
-.messageList .messageDialog .senderMessageDialog .senderMessage {
+.messageList .messageDialog .senderMessageDialog .senderMessage, .messageList .messageDialog .historyMessageDialog .senderMessage {
   align-self: flex-end;
   margin-right: 50px;
   color: #fff;
   text-align: right;
 }
-.messageList .messageDialog .senderMessageDialog .senderMessage img {
+.messageList .messageDialog .senderMessageDialog .senderMessage img, .messageList .messageDialog .historyMessageDialog .senderMessage img {
   left: 305px;
 }
 @media (max-width: 440px) {
-  .messageList .messageDialog .senderMessageDialog .senderMessage img {
+  .messageList .messageDialog .senderMessageDialog .senderMessage img, .messageList .messageDialog .historyMessageDialog .senderMessage img {
     left: 155px;
   }
 }
-.messageList .messageDialog .senderMessageDialog .senderMessage .text {
+.messageList .messageDialog .senderMessageDialog .senderMessage .text, .messageList .messageDialog .historyMessageDialog .senderMessage .text {
   background-color: #d32f2f;
   text-align: left;
 }
-.messageList .messageDialog .senderMessageDialog .senderMessage .name, .messageList .messageDialog .senderMessageDialog .senderMessage .time {
+.messageList .messageDialog .senderMessageDialog .senderMessage .name, .messageList .messageDialog .senderMessageDialog .senderMessage .time, .messageList .messageDialog .historyMessageDialog .senderMessage .name, .messageList .messageDialog .historyMessageDialog .senderMessage .time {
   left: unset;
   right: 5px;
 }

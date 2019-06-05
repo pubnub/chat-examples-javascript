@@ -9,7 +9,7 @@ export default (props) => {
   // end::MSGS-1.1[]
 
   // tag::MSGS-2[]
-  const styleForMessageSender = senderId => uuid === senderId && 'senderMessage';
+  const styleForMessageSender = senderId => uuid === senderId ? 'senderMessage' : senderId;
   // end::MSGS-2[]
 
   // tag::MSGS-3.1[]
@@ -27,7 +27,8 @@ export default (props) => {
             getDate={getDate}
             getUserName={getUserName}
             getTime={getTime}
-            getUserAvatarUrl={getUserAvatarUrl}/>
+            getUserAvatarUrl={getUserAvatarUrl}
+            styleForMessageSender={styleForMessageSender}/>
           {/*// end::MSGS-4[]*/}
           {/*// tag::MSGS-5[]*/}
           <SenderMessageList

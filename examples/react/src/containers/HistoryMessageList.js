@@ -12,7 +12,7 @@ export default class HistoryMessageList extends Component {
   // tag::HMSG-1.2[]
   render() {
     const {historyMessages, historyLoaded, networkErrorImg, networkErrorStatus,
-      getUserName, getTime, getDate, getUserAvatarUrl} = this.props;
+      getUserName, getTime, getDate, getUserAvatarUrl, styleForMessageSender} = this.props;
     // end::HMSG-1.2[]
 
     // tag::HMSG-3.1[]
@@ -21,11 +21,11 @@ export default class HistoryMessageList extends Component {
         {networkErrorStatus && networkErrorImg ? (
           <img referrerPolicy="no-referrer-when-downgrade" className='networkErrorImg' alt='Network error' src={networkErrorImg.src}/>
         ) : (historyLoaded &&
-          <div>
+          <div className='historyMessageDialog'>
             {/*// end::HMSG-3.1[]*/}
             {/*// tag::HMSG-4[]*/}
             {historyMessages.map( (m, index) =>
-              <li key={m.timetoken}>
+              <li className={styleForMessageSender(m.entry.senderId)} key={m.timetoken}>
                 <div className='messageSentDay'>{getDate(m.timetoken, 'historyMessage', index)}</div>
                 <div className='message'>
                   <div className='name'>{getUserName(m.entry.senderId)}</div>
