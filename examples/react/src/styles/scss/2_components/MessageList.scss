@@ -107,7 +107,7 @@
             }                              
         }
 
-        .senderMessageDialog {
+        .senderMessageDialog, .historyMessageDialog {
             display: flex;
             flex-direction: column;
 

@@ -1,15 +1,15 @@
 // tag::MSGS-1.1[]
 import React from 'react';
 import SenderMessageList from './SenderMessageList';
-import HistoryMesageList from '../containers/HistoryMesageList';
+import HistoryMessageList from '../containers/HistoryMessageList';
 
 export default (props) => {
-  const {uuid, sendersInfo, getTime, historyLoaded, historyMessage, getUserName,
-    getUserImage, networkErrorStatus, networkErrorImg, messageSentDate, getDate} = props;
+  const {uuid, sendersInfo, getTime, historyLoaded, historyMessages, getUserName,
+    getUserAvatarUrl, networkErrorStatus, networkErrorImg, messageSentDate, getDate} = props;
   // end::MSGS-1.1[]
 
   // tag::MSGS-2[]
-  const styleForMessageSender = senderId => uuid === senderId && 'senderMessage';
+  const styleForMessageSender = senderId => uuid === senderId ? 'senderMessage' : senderId;
   // end::MSGS-2[]
 
   // tag::MSGS-3.1[]
@@ -19,15 +19,16 @@ export default (props) => {
         <ul className='messageDialog'>
           {/*// end::MSGS-3.1[]*/}
           {/*// tag::MSGS-4[]*/}
-          <HistoryMesageList
-            historyMessage={historyMessage}
+          <HistoryMessageList
+            historyMessages={historyMessages}
             historyLoaded={historyLoaded}
             networkErrorImg={networkErrorImg}
             networkErrorStatus={networkErrorStatus}
             getDate={getDate}
             getUserName={getUserName}
             getTime={getTime}
-            getUserImage={getUserImage}/>
+            getUserAvatarUrl={getUserAvatarUrl}
+            styleForMessageSender={styleForMessageSender}/>
           {/*// end::MSGS-4[]*/}
           {/*// tag::MSGS-5[]*/}
           <SenderMessageList
@@ -35,7 +36,7 @@ export default (props) => {
             getDate={getDate}
             getUserName={getUserName}
             getTime={getTime}
-            getUserImage={getUserImage}
+            getUserAvatarUrl={getUserAvatarUrl}
             styleForMessageSender={styleForMessageSender}/>
           {/*// end::MSGS-5[]*/}
         {/*// tag::MSGS-3.2[]*/}
