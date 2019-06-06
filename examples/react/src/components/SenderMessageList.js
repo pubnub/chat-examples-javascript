@@ -2,7 +2,7 @@
 import React from 'react';
 
 export default (props) => {
-  const {sendersInfo, getUserName, getTime, getDate, getUserImage, styleForMessageSender} = props;
+  const {sendersInfo, getUserName, getTime, getDate, getUserAvatarUrl, styleForMessageSender} = props;
   // end::SMSG-1.1[]
 
   // tag::SMSG-2.1[]
@@ -17,7 +17,7 @@ export default (props) => {
             <div className='name'>{getUserName(m.senderId)}</div>
             <div className='time'>{getTime(m.timetoken)}</div>
             <div className='text'>{m.text}</div>
-            <img width='28' height='28' alt='Sender logo' src={getUserImage(m.senderId, 'smImage')}/>
+            <img width='28' height='28' alt='Sender avatar' src={getUserAvatarUrl(m.senderId, 'smImage')}/>
           </div>
         </li>
       )}

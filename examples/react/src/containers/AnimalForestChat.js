@@ -31,7 +31,7 @@ export default class extends Component {
       lastMessageWeekday: '',
       messageSentDate: [],
       historyLoaded: false,
-      historyMessage: [],
+      historyMessages: [],
       onlineUsers: [],
       onlineUsersCount: '',
       networkErrorStatus: false,
@@ -132,11 +132,11 @@ export default class extends Component {
 
           this.setState({
             historyLoaded: true,
-            historyMessage: response.messages,
+            historyMessages: response.messages,
             lastMessageWeekday
           });
 
-          let messageSentDate = this.state.historyMessage.map(message => this.getWeekday(message.timetoken));
+          let messageSentDate = this.state.historyMessages.map(message => this.getWeekday(message.timetoken));
           this.setState({messageSentDate});
           this.scrollToBottom();
         });
@@ -261,7 +261,7 @@ export default class extends Component {
     }
   };
 
-  getUserImage = (uuid, size) => {
+  getUserAvatarUrl = (uuid, size) => {
     const user = this.getUser(uuid);
   
     if (user) {
@@ -290,12 +290,12 @@ export default class extends Component {
           uuid={this.uuid}
           sendersInfo={this.state.sendersInfo}
           getUserName={this.getUserName}
-          getUserImage={this.getUserImage}
+          getUserAvatarUrl={this.getUserAvatarUrl}
           getTime={this.getTime}
           messageSentDate={this.state.messageSentDate}
           getDate={this.getDate}
           historyLoaded={this.state.historyLoaded}
-          historyMessage={this.state.historyMessage}
+          historyMessages={this.state.historyMessages}
           networkErrorStatus={this.state.networkErrorStatus}
           networkErrorImg={this.state.networkErrorImg}/>
         <MessageBody 
@@ -304,7 +304,7 @@ export default class extends Component {
           chatName={forestChatChannel}/>
         <OnlineUsers 
           users={users}
-          getUserImage={this.getUserImage}
+          getUserAvatarUrl={this.getUserAvatarUrl}
           loggedInUser={this.uuid}
           getUserName={this.getUserName}
           getUserDesignation={this.getUserDesignation}
