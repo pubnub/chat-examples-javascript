@@ -12,7 +12,6 @@ This repository contains sample code from the [Chat Resource Center](https://www
 | `examples > react` | Source files for the Animal Forest Chat application. The complete tutorial can be found [here](https://www.pubnub.com/developers/chat-resource-center/docs/getting-started/react/).|
 | `snippets` | Verified and tested code snippets used in documentation.<br>Snippets from `chat-resource-center/` are used in the [Chat Resource Center](https://www.pubnub.com/developers/chat-resource-center/). |
 
-
 # Animal Forest Chat Application
 
 ## Requirements
@@ -30,7 +29,7 @@ If you don't already have an account, you can create one for free [here](https:/
 
 1. Select your new app, then click its keyset. Copy the Publish and Subscribe keys. You'll need these keys to include in this project.
 
-1. Scroll down on the Key Options page and enable the following add-on features: [Presence](https://www.pubnub.com/products/presence/), [Storage & Playback](https://www.pubnub.com/products/realtime-messaging/), and [Stream Controller](https://www.pubnub.com/products/realtime-messaging/).
+1. Scroll down on the Key Options page and enable the [Presence](https://www.pubnub.com/products/presence/) and [Storage & Playback](https://www.pubnub.com/products/realtime-messaging/) add-on features.
 
 1. Click Save Changes, and you're done!
 
@@ -46,10 +45,10 @@ vi src/config/keys.js
 The file should look like the following:
 
 ```js
-var publishKey = 'YOUR_PUBLISH_KEY';
-var subscribeKey = 'YOUR_SUBSCRIBE_KEY';
-
-export { publishKey, subscribeKey }
+module.exports = {
+    publishKey: 'YOUR_PUBLISH_KEY',
+    subscribeKey: 'YOUR_SUBSCRIBE_KEY'
+  };
 ```
 
 ## Building the project
