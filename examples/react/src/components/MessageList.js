@@ -15,10 +15,10 @@ export default (props) => {
   // tag::MSGS-3.1[]
   return (
     <div className='messageList'>
-      {messageSentDate.length > 0 &&
         <ul className='messageDialog'>
           {/*// end::MSGS-3.1[]*/}
           {/*// tag::MSGS-4[]*/}
+        {messageSentDate.length > 0 &&
           <HistoryMessageList
             historyMessages={historyMessages}
             historyLoaded={historyLoaded}
@@ -29,6 +29,7 @@ export default (props) => {
             getTime={getTime}
             getUserAvatarUrl={getUserAvatarUrl}
             styleForMessageSender={styleForMessageSender}/>
+        }
           {/*// end::MSGS-4[]*/}
           {/*// tag::MSGS-5[]*/}
           <SenderMessageList
@@ -41,9 +42,8 @@ export default (props) => {
           {/*// end::MSGS-5[]*/}
         {/*// tag::MSGS-3.2[]*/}
         </ul>
-        // end::MSGS-3.2[]
-      // tag::MSGS-3.3[]
-      }
+        {/* // end::MSGS-3.2[] */}
+      {/* // tag::MSGS-3.3[] */}
       {/*// end::MSGS-3.3[]*/}
     {/*// tag::MSGS-3.4[]*/}
     </div>
