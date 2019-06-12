@@ -7,10 +7,6 @@
         left: 5px;
         bottom: 12px;
 
-        @include breakpoint ($tablet_desktop) {
-            bottom: 0;
-        }
-
         @include breakpoint ($mobile) {
             bottom: 10px;
         }
