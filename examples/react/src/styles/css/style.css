@@ -98,6 +98,11 @@ body {
   display: inline-block;
   border-radius: 10px;
 }
+@media (max-width: 240px) {
+  .messageList .messageDialog .text {
+    max-width: 80px;
+  }
+}
 .messageList .messageDialog .name, .messageList .messageDialog .time {
   font-size: 15px;
   color: #808080;
@@ -137,6 +142,12 @@ body {
     font-size: 1.1em;
   }
 }
+@media (max-width: 240px) {
+  .messageList .messageDialog li .messageSentDay {
+    width: 100vw;
+    left: -45px;
+  }
+}
 .messageList .messageDialog li .messageSentDay:empty {
   display: none;
 }
@@ -172,6 +183,11 @@ body {
   color: #fff;
   text-align: right;
 }
+@media (max-width: 240px) {
+  .messageList .messageDialog .senderMessageDialog .senderMessage, .messageList .messageDialog .historyMessageDialog .senderMessage {
+    margin-right: 95px;
+  }
+}
 .messageList .messageDialog .senderMessageDialog .senderMessage img, .messageList .messageDialog .historyMessageDialog .senderMessage img {
   left: 305px;
 }
@@ -197,11 +213,6 @@ body {
   position: absolute;
   left: 5px;
   bottom: 12px;
-}
-@media (max-width: 850px) {
-  .messageBody .messageForm {
-    bottom: 0;
-  }
 }
 @media (max-width: 440px) {
   .messageBody .messageForm {
@@ -237,6 +248,11 @@ body {
 @media (max-width: 440px) {
   .messageBody .messageForm .messageInput {
     width: 60%;
+  }
+}
+@media (max-width: 240px) {
+  .messageBody .messageForm .messageInput {
+    width: 47%;
   }
 }
 .messageBody .messageForm .emojiIcon {
@@ -353,6 +369,11 @@ body {
     width: 18%;
     padding-left: 1px;
     padding-right: 2px;
+  }
+}
+@media (max-width: 240px) {
+  .messageBody .messageForm .submitBtn {
+    right: 60px;
   }
 }
 
@@ -525,7 +546,7 @@ body {
 @media (max-width: 440px) {
   .header .loggedInUser {
     top: 25px;
-    right: 5px;
+    right: 7px;
     font-size: 13px;
   }
 }
@@ -534,6 +555,11 @@ body {
     top: 25px;
     height: 50px;
     letter-spacing: -1px;
+  }
+}
+@media (max-width: 240px) {
+  .header .loggedInUser {
+    right: 50px;
   }
 }
 .header .loggedInUser .userWelcome .user {
