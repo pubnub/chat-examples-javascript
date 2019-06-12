@@ -34,6 +34,10 @@
             padding: 15px;
             display: inline-block;
             border-radius: 10px;
+
+            @include breakpoint ($Xsmall_screens) {
+                max-width: 80px;
+            }
         }
     
         .name, .time {
@@ -71,6 +75,11 @@
                 @include breakpoint ($mobile) {
                     width: 75vw;
                     font-size: 1.1em;
+                }
+
+                @include breakpoint ($Xsmall_screens) {
+                    width: 100vw;
+                    left: -45px;
                 }
 
                 &:empty {
@@ -116,6 +125,10 @@
                 margin-right: 50px;
                 color: #fff;
                 text-align: right;
+
+                @include breakpoint ($Xsmall_screens) {
+                    margin-right: 95px;
+                }
                 
                 img {
                     left: 305px;

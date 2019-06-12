@@ -164,12 +164,20 @@
             letter-spacing: -1px;
         }
 
+        @include breakpoint ($Xsmall_screens) {
+            right: 50px;
+        }
+
         .userWelcome {
     
             .user {
                 display: block;
                 color: #000;
                 font-weight: bold;
+            }
+
+            @include breakpoint ($Xsmall_screens) {
+                width: 55px;
             }
         }
 

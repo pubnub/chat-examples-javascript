@@ -37,6 +37,10 @@
             @include breakpoint ($mobile) {
                 width: 60%;
             }
+
+            @include breakpoint ($Xsmall_screens) {
+                width: 47%;
+            }
         }
 
         .emojiIcon {
@@ -144,6 +148,10 @@
                 width: 18%;
                 padding-left: 1px;
                 padding-right: 2px;
+            }
+
+            @include breakpoint ($Xsmall_screens) {
+                right: 60px;
             }
         }
     }
