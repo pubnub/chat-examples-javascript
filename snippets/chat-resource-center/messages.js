@@ -333,14 +333,14 @@ describe('Messages', () => {
     let messageUpdateSent = false;
     const pubnub = pubNubClient;
     let messageTimetoken = null;
-    const messagesList = {};
+    const messageList = {};
     const messageIDs = {};
 
     const handleMessage = (message) => {
       const messageId = message.timetoken;
 
-      if (!messagesList[message.channel]) {
-        messagesList[message.channel] = {};
+      if (!messageList[message.channel]) {
+        messageList[message.channel] = {};
       }
 
       if (!messageIDs[message.channel]) {
@@ -348,19 +348,19 @@ describe('Messages', () => {
       }
 
       if (messageIDs[message.channel].indexOf(messageId) < 0) {
-        messagesList[message.channel][messageId] = message;
+        messageList[message.channel][messageId] = message;
         messageIDs[message.channel].push(messageId);
       } else if (message.message.deleted) {
         const messageIdIdx = messageIDs[message.channel].indexOf(messageId);
 
         if (messageIdIdx >= 0) {
-          delete messagesList[message.channel][messageId];
+          delete messageList[message.channel][messageId];
           messageIDs[message.channel].splice(messageIdIdx, 1);
         } else {
           return;
         }
       } else {
-        messagesList[message.channel][messageId] = message;
+        messageList[message.channel][messageId] = message;
       }
 
       // update UI, update display content
@@ -405,7 +405,7 @@ describe('Messages', () => {
         });
         // end::MSG-6.2[]
       } else {
-        const storedMessage = messagesList[message.channel][messageId];
+        const storedMessage = messageList[message.channel][messageId];
         expect(storedMessage).toBeDefined();
         expect(storedMessage.message.timetoken).toEqual(messageTimetoken);
         expect(storedMessage.message.text).toEqual(expectedText);

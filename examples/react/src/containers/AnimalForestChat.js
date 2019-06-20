@@ -17,8 +17,10 @@ export default class extends Component {
     const randomUser = this.getRandomUser();
     this.uuid = randomUser.uuid;
     this.designation = randomUser.designation;
-    this.userName = randomUser.firstName + ' ' +  randomUser.lastName;
-    this.userProfileImage = randomUser.profileImage.lgImage;
+    this.userProfile = {
+      name: randomUser.firstName + ' ' +  randomUser.lastName,
+      image: randomUser.profileImage.lgImage
+    };
     this.pubnub = new PubNubReact({
       publishKey,    //publishKey: 'Enter your key . . .'
       subscribeKey,  //subscribeKey: 'Enter your key . . .'
@@ -283,8 +285,7 @@ export default class extends Component {
     return (
       <div className='grid'>
         <Header 
-          userName={this.userName}
-          userProfileImage={this.userProfileImage}
+          userProfile={this.userProfile}
           onlineUsersCount={this.state.onlineUsersCount}/>                
         <MessageList 
           uuid={this.uuid}
