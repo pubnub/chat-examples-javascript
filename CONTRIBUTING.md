@@ -13,7 +13,7 @@ improvement.
 When you create your PR, please tag _Craig Baumgarten_ or 
 _Serhii Mamontov_ as a reviewer.
 
-> **NOTE** The pull-request process makes things efficient, and allows 
+> **NOTE** The pull request process makes things efficient, and allows 
 the whole team to participate. If a pull request doesn’t work for you,
 just email Craig or Serhii and they will create one for you.
 
@@ -22,7 +22,7 @@ just email Craig or Serhii and they will create one for you.
 The repository is bundled with an ESLint configuration (`.eslintrc`) which will
 warn you of any coding style inconsistency with standards defined by
 Airbnb's shared configuration.  
-Make sure to resolve all warnings before opening a merge pull request.
+Make sure to resolve all warnings before opening a pull request.
 
 You can use one of the following commands to check your changes for errors with eslint at any time.
 ```
@@ -42,9 +42,9 @@ rebased often.
 ### After you're Done
 
 Please, make sure to follow these [commit message guidelines](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
-when committing changes which should be pushed with merge pull request. 
+when committing changes as part of a pull request. 
 
-If changing the snippets, make sure to [run the tests](#testing-snippets) before committing.
+If editing the snippets, make sure to [run the tests](#testing-snippets) before committing.
 
 ### Content
 
@@ -52,7 +52,7 @@ If changing the snippets, make sure to [run the tests](#testing-snippets) before
 
 Snippets are organized in the form of _integration tests_, where each example 
 should be tested to work.  
-Snippets used by the Docusaurus `include` plugin which will render them 
+Snippets are used by the Docusaurus `include` plugin, which will render them 
 instead of placeholders. Each `include` directive relies on _tag_ names
 which should be placed around snippet code:  
 
@@ -98,7 +98,7 @@ pubnub.addListener({
 ```
 
 #### Testing Snippets
-Before you can run the integration tests, you'll need to setup a set of PubNub keys for testing.
+Before you can run the integration tests, you'll need a set of PubNub keys for testing.
 
 1. Login to your [admin dashboard](https://admin.pubnub.com) and create a _new_ app.
 
@@ -123,14 +123,13 @@ SUBSCRIBE_KEY=sub-c-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
 1. For the default `Demo Keyset`, enable Presence, Storage & Playback, and Stream Controller, then save the changes.
    Replace `PUBLISH_KEY` and `SUBSCRIBE_KEY`, in `.env` with the Publish Key and Subscribe Key from the admin dashboard.
 
-To run the integration tests, 
 ```
 npm run test-snippets
 ```
 This will run the integration tests for the snippets with Jest. 
-In the local environment, tests for push notifications _will_ be skipped so 
-that you do not have to provision certificates yourself, but they will run 
-on Travis when you make your pull request.
+When testing locally, tests for push notifications _will_ be skipped so 
+that you do not have to provide push certificates.
+These tests will run normally on Travis when you make your pull request.
 
 > **Note** There is a known issue where some tests unexpectedly fail after 
 a timeout. When this occurs, re-running the tests should resolve the issue.
