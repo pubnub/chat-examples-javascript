@@ -22,9 +22,11 @@ just email Craig or Serhii and they will create one for you.
 The repository is bundled with an ESLint configuration (`.eslintrc`) which will
 warn you of any coding style inconsistency with standards defined by
 Airbnb's shared configuration.  
+
 Make sure to resolve all warnings before opening a pull request.
 
 You can use one of the following commands to check your changes for errors with eslint at any time.
+
 ```
 npm run lint # lints all the files
 npm run lint-examples # only lint files in /examples
