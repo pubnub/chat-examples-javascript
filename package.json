@@ -16,7 +16,10 @@
   "scripts": {
     "test": "jest --ci --forceExit",
     "test-examples": "jest --bail --ci --forceExit --runInBand --passWithNoTests --config=examples/jest-config.json",
-    "test-snippets": "jest --bail --ci --forceExit --runInBand --config=snippets/jest-config.json"
+    "test-snippets": "jest --bail --ci --forceExit --runInBand --config=snippets/jest-config.json",
+    "lint": "gulp lint_all",
+    "lint-snippets": "gulp lint_snippets",
+    "lint-examples": "gulp lint_examples"
   },
   "dependencies": {
     "bignumber.js": "^8.1.1",
@@ -32,11 +35,12 @@
     "babel-jest": "^24.7.1",
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "dotenv": "^8.0.0",
     "eslint": "^5.15.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-react-app": "^3.0.8",
-    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-flowtype": "^3.6.1",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "gulp": "^4.0.0",

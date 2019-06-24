@@ -8,6 +8,7 @@
     "<rootDir>/.idea",
     "<rootDir>/examples/",
     "<rootDir>/node_modules/",
+    "/load-env.js",
     "/node_modules/"
   ],
   "testMatch": [

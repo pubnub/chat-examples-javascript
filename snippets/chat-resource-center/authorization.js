@@ -1,5 +1,8 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
+import loadEnvironment from '../load-env';
+
+loadEnvironment();
 
 const subscribeKey = process.env.PAM_SUBSCRIBE_KEY || 'demo';
 const publishKey = process.env.PAM_PUBLISH_KEY || 'demo';

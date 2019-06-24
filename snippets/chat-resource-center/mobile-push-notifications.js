@@ -1,5 +1,8 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
+import loadEnvironment from '../load-env';
+
+loadEnvironment();
 
 // only runs on Travis
 const describeTravis = process.env.CI ? describe : describe.skip;
