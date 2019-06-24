@@ -16,9 +16,7 @@ const handleResults = (results) => {
   }
 };
 
-const ignoreNodeModules = {
-  ignorePattern: '**/node_modules/*',
-};
+const ignoreNodeModules = !process.env.CI ? { ignorePattern: '**/node_modules/*' } : {};
 
 gulp.task('lint_examples', () => gulp.src(['examples/**/*.js'])
   .pipe(eslint(ignoreNodeModules))
