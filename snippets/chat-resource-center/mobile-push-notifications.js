@@ -1,10 +1,16 @@
 /* global test, describe, expect, jasmine, beforeEach, afterEach */
 import PubNub from 'pubnub';
+import loadEnvironment from '../load-env';
+
+loadEnvironment();
+
+// only runs on Travis
+const describeTravis = process.env.CI ? describe : describe.skip;
 
 const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
 const publishKey = process.env.PUBLISH_KEY || 'demo';
 
-describe('Mobile Push Notifications', () => {
+describeTravis('Mobile Push Notifications', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
 

@@ -16,13 +16,15 @@ const handleResults = (results) => {
   }
 };
 
+const ignoreNodeModules = !process.env.CI ? { ignorePattern: '**/node_modules/*' } : {};
+
 gulp.task('lint_examples', () => gulp.src(['examples/**/*.js'])
-  .pipe(eslint())
+  .pipe(eslint(ignoreNodeModules))
   .pipe(eslint.format())
   .pipe(eslint.results(handleResults))
   .pipe(eslint.failAfterError()));
 gulp.task('lint_snippets', () => gulp.src(['snippets/**/*.js'])
-  .pipe(eslint())
+  .pipe(eslint(ignoreNodeModules))
   .pipe(eslint.format())
   .pipe(eslint.results(handleResults))
   .pipe(eslint.failAfterError()));
