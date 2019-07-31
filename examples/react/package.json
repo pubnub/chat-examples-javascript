@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"npm run sass-watch\" \"react-scripts start\"",
-    "build": "react-scripts build",
+    "build": "sass src/styles/scss/style.scss:src/styles/css/style.css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass-watch": "cd src/styles && sass --watch scss/style.scss:css/style.css"
