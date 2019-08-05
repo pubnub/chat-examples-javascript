@@ -2,42 +2,36 @@ language: node_js
 node_js: node
 sudo: false
 cache: yarn
-
 stages:
-  - examples
-  - snippets
-  - name: submodule
-    if: branch = master AND (type IN (api, cron, push))
-
-before_install:
-  - openssl aes-256-cbc -K $encrypted_fcab1ebfd5c4_key -iv $encrypted_fcab1ebfd5c4_iv -in crc_javascript_examples_deploy_key.enc -out crc_javascript_examples_deploy_key -d
-
+- examples
+- snippets
+- name: submodule
+  if: branch = master AND (type IN (api, cron, push))
 jobs:
   include:
-    - stage: examples
-      name: "Code lint"
-      install: npm install
-      script: gulp lint_examples
-    - name: "Integration tests"
-      install: npm install
-      script: gulp examples_tests
-
-    - stage: snippets
-      name: "Code lint"
-      install: npm install
-      script: gulp lint_snippets
-    - name: "Integration tests"
-      install: npm install
-      script: gulp snippets_tests
-
-    - stage: submodule
-      name: "Update reference"
-      install: npm init --force && npm install chalk fancy-log simple-git
-      before_script:
-        - git config --global user.name "${GH_NAME}"
-        - git config --global user.email "${GH_EMAIL}"
-        - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}"  > ~/.netrc
-      script: node .travis.docs.js
-
+  - stage: examples
+    name: Code lint
+    install: npm install
+    script: gulp lint_examples
+  - name: Integration tests
+    install: npm install
+    script: gulp examples_tests
+  - stage: snippets
+    name: Code lint
+    install: npm install
+    script: gulp lint_snippets
+  - name: Integration tests
+    install: npm install
+    script: gulp snippets_tests
+  - stage: submodule
+    name: Update reference
+    install: npm init --force && npm install chalk fancy-log simple-git
+    before_script:
+    - git config --global user.name "${GH_NAME}"
+    - git config --global user.email "${GH_EMAIL}"
+    - echo "machine github.com login ${GH_NAME} password ${GH_TOKEN}"  > ~/.netrc
+    script: node .travis.docs.js
 install: true
 script: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_fcab1ebfd5c4_key -iv $encrypted_fcab1ebfd5c4_iv -in crc_javascript_examples_deploy_key.enc -out crc_javascript_examples_deploy_key -d
