@@ -47,7 +47,7 @@ after_success:
        openssl aes-256-cbc \
          -K $encrypted_fcab1ebfd5c4_key \
          -iv $encrypted_fcab1ebfd5c4_iv \
-         -in ".travis/crc_javascript_examples_deploy_key.enc" \
+         -in "crc_javascript_examples_deploy_key.enc" \
          -out "$SSH_FILE" -d
 
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
