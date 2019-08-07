@@ -38,7 +38,9 @@ script: true
 after_success:
   - set -x
   - |
-       declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/fcab1ebfd5c4)"
+       mv crc_javascript_examples_deploy_key $HOME/.ssh/crc_javascript_examples_deploy_key
+
+       declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/crc_javascript_examples_deploy_key)"
 
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
