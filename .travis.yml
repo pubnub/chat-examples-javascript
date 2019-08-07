@@ -40,7 +40,7 @@ after_success:
   - |
        mv crc_javascript_examples_deploy_key $HOME/.ssh/crc_javascript_examples_deploy_key
 
-       declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/crc_javascript_examples_deploy_key)"
+       SSH_FILE="$HOME/.ssh/crc_javascript_examples_deploy_key"
 
        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
