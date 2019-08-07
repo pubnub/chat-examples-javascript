@@ -6,7 +6,7 @@ stages:
 - examples
 - snippets
 - name: submodule
-  if: branch = master AND (type IN (api, cron, push))
+  if: branch = master AND (type IN (api, cron, push)) OR branch = CRC-15/restore-submodule-token-push-to-crc AND (type IN (api, cron, push))
 before_install:
   - openssl aes-256-cbc -K $encrypted_fcab1ebfd5c4_key -iv $encrypted_fcab1ebfd5c4_iv -in crc_javascript_examples_deploy_key.enc -out crc_javascript_examples_deploy_key -d
 jobs:
