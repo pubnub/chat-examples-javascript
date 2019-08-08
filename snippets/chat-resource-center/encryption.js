@@ -7,7 +7,6 @@ loadEnvironment();
 const subscribeKey = process.env.SUBSCRIBE_KEY || 'demo';
 const publishKey = process.env.PUBLISH_KEY || 'demo';
 
-
 describe('Encryption', () => {
   let observerPubNubClient = null;
   let pubNubClient = null;
